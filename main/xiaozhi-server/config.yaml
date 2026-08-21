@@ -84,6 +84,10 @@ tts_audio_send_delay: 0
 exit_commands:
   - "退出"
   - "关闭"
+  # English exit commands (Phase 1: additive — device must detect these in a later phase)
+  - "exit"
+  - "goodbye"
+  - "bye"
 
 xiaozhi:
   type: hello
@@ -116,6 +120,10 @@ wakeup_words:
   - "喵喵同学"
   - "小滨小滨"
   - "小冰小冰"
+  # English wake words (Phase 1: additive — device must detect these in a later phase)
+  - "hey xiaozhi"
+  - "hello xiaozhi"
+  - "hi xiaozhi"
 # MCP endpoint address, format: ws://your-mcp-endpoint-ip-or-domain:port/mcp/?token=your-token
 # Detailed tutorial: docs/mcp-endpoint-integration.md
 mcp_endpoint: YOUR_MCP_ENDPOINT_WEBSOCKET_URL

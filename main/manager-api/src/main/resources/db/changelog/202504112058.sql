@@ -36,7 +36,7 @@ INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, r
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (305, 'enable_greeting', 'true', 'boolean', 1, 'Whether to enable opening greeting');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (306, 'enable_stop_tts_notify', 'false', 'boolean', 1, 'Whether to enable end notification sound');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (307, 'stop_tts_notify_voice', 'config/assets/tts_notify.mp3', 'string', 1, 'End notification sound file path');
-INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (308, 'exit_commands', '退出;关闭', 'array', 1, 'Exit command list');
+INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (308, 'exit_commands', '退出;关闭;exit;goodbye;bye', 'array', 1, 'Exit command list (Chinese + English)');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (309, 'xiaozhi', '{
   "type": "hello",
   "version": 1,
@@ -48,7 +48,7 @@ INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, r
     "frame_duration": 60
   }
 }', 'json', 1, 'Xiaozhi type');
-INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (310, 'wakeup_words', '你好小智;你好小志;小爱同学;你好小鑫;你好小新;小美同学;小龙小龙;喵喵同学;小滨小滨;小冰小冰', 'array', 1, 'Wake word list, used to recognize wake words');
+INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (310, 'wakeup_words', '你好小智;你好小志;小爱同学;你好小鑫;你好小新;小美同学;小龙小龙;喵喵同学;小滨小滨;小冰小冰;hey xiaozhi;hello xiaozhi;hi xiaozhi', 'array', 1, 'Wake word list (Chinese + English), used to recognize wake words');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (400, 'plugins.get_weather.api_key', '', 'string', 1, 'Weather plugin API key (unused - uses Open-Meteo)');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (401, 'plugins.get_weather.default_location', 'Guangzhou', 'string', 1, 'Weather plugin default city');
 INSERT INTO `sys_params` (id, param_code, param_value, value_type, param_type, remark) VALUES (410, 'plugins.get_news.default_rss_url', 'https://www.chinanews.com.cn/rss/society.xml', 'string', 1, 'News plugin default RSS URL');
