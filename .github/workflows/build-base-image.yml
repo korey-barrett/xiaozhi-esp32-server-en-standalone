@@ -1,5 +1,8 @@
 name: Build Base Image
 
+# Lockfile (SHA-pinning) requirement was removed in repo Actions settings
+# (sha_pinning_required=false) so this workflow can run without a lockfile.
+
 on:
   push:
     branches:
