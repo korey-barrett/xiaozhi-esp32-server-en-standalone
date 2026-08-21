@@ -18,6 +18,7 @@ import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
+import me.zhyd.oauth.request.AuthAppleRequest;
 import me.zhyd.oauth.request.AuthGithubRequest;
 import me.zhyd.oauth.request.AuthGoogleRequest;
 import me.zhyd.oauth.request.AuthMicrosoftRequest;
@@ -60,7 +61,7 @@ public class SsoServiceImpl implements SsoService {
      */
     private static final long SSO_PENDING_EXPIRE = 60 * 10L;
 
-    private static final String[] PROVIDERS = { "google", "microsoft", "github" };
+    private static final String[] PROVIDERS = { "google", "apple", "microsoft", "github" };
 
     @Override
     public List<String> getEnabledProviders() {
@@ -165,6 +166,10 @@ public class SsoServiceImpl implements SsoService {
             case "google" -> new AuthGoogleRequest(builder.build());
             case "github" -> new AuthGithubRequest(builder.build());
             case "microsoft" -> new AuthMicrosoftRequest(builder.build());
+            case "apple" -> new AuthAppleRequest(builder
+                    .teamId(cfg.getTeamId())
+                    .kid(cfg.getKeyId())
+                    .build());
             default -> throw new RenException(ErrorCode.SSO_PROVIDER_NOT_SUPPORTED);
         };
     }

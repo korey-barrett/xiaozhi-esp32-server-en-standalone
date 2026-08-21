@@ -77,8 +77,7 @@ An **English-first, standalone fork** of the open-source project
 ### Roadmap (documented in `docs/FULL-ENGLISH-CONVERSION-CHECKLIST.md` §8)
 - **Future feature:** automatic en-UK → en-US correction (e.g. `Colour → Color`) with a user popup.
 - **Future feature:** **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
-  - ✅ **Implemented:** Google, Microsoft, GitHub (JustAuth) + passcode second factor. See section 10.
-  - ⏳ **Follow-up:** Apple ("Sign in with Apple") — requires the JustAuth `justauth-oauth2` module (not available at 1.16.6) plus ES256 JWT client-secret setup.
+  - ✅ **Implemented:** Google, Apple, Microsoft, GitHub (JustAuth 1.16.7) + passcode second factor. See section 10.
 - **Future major change:** production localization into EN-UK, zh-CN, zh-TW, ja, ko, es, de, fr *(optional)* via i18n **without touching server code**.
 - **Side project:** step-by-step third-party setup instructions (Gemini key, Tavily key, etc.).
 
@@ -180,8 +179,8 @@ change/update without asking for approval.
 
 ## 10. SSO login (OAuth2/OIDC) with passcode
 
-Users can log in to the admin console with a third-party account (**Google, Microsoft, GitHub**; Apple is a
-follow-up) plus a **passcode** second factor.
+Users can log in to the admin console with a third-party account (**Google, Apple, Microsoft, GitHub**) plus a
+**passcode** second factor.
 
 ### How it works
 1. The login page shows SSO buttons for the enabled providers.
@@ -196,8 +195,9 @@ follow-up) plus a **passcode** second factor.
 - `enabled` — master switch.
 - `passcode` — the required second factor.
 - `frontend-redirect-url` — base URL the callback redirects back to (e.g. `http://192.168.0.195:8002`).
-- `providers.<google|microsoft|github>` — `client-id`, `client-secret`, `redirect-uri`. A provider is
-  enabled only when its `client-id` is set.
+- `providers.<google|apple|microsoft|github>` — `client-id`, `client-secret`, `redirect-uri`. A provider is
+  enabled only when its `client-id` is set. **Apple** additionally needs `team-id` and `key-id` (the private
+  key goes in `client-secret`).
 
 ### Backend files
 - `SsoController` (`/user/sso/providers`, `/render`, `/callback`, `/verify`)
@@ -213,4 +213,3 @@ follow-up) plus a **passcode** second factor.
 - SSO alone is not enough — the **passcode** is always required to complete login.
 - A brand-new SSO identity auto-creates a local user; the same provider identity always maps to the same
   local user (unique `(provider, provider_user_id)`).
-- **Apple** is not yet wired up (needs the JustAuth `justauth-oauth2` module + ES256 JWT client secret).
