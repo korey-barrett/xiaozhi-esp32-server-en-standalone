@@ -75,7 +75,7 @@ Doing server-only would not help — the device would still detect "你好小智
 - Add English **exit commands** (e.g. `"exit"`, `"goodbye"`) alongside `退出`/`关闭`.
 - Test: Chinese still wakes; no regressions.
 
-### Phase 2 — Device-side English wake model (concrete steps)
+### Phase 2 — Device-side English wake model (concrete steps) — ✅ DONE (willow working)
 
 The device runs the **`xiaozhi-esp32` firmware** (a separate repo). Configure it to wake on an English word.
 

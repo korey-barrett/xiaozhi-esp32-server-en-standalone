@@ -22,8 +22,8 @@ An **English-first, standalone fork** of the open-source project
 
 ## 2. Local environment / repo location
 
-- **Working directory (new clone):** `D:\DEV\Projects\xiaozhi-server-en-standalone\xiaozhi-esp32-server-en-standalone`
-  (cloned via GitHub Desktop; `origin` = the standalone repo, at commit `936d0ac`).
+- **Working directory (new clone):** `D:\DEV\Projects\xiaozhi-esp32-server-en-standalone`
+  (cloned via GitHub Desktop; `origin` = the standalone repo).
 - **Old working directory (previous repo, still on disk):** `D:\DEV\Projects\xiaozhi-server\xiaozhi-server`
   — the old fork was **deleted from GitHub**; its full history is preserved locally on the `history-backup` branch there.
 - **Git identity:** `Korey Paul Barrett <184138352+korey-barrett@users.noreply.github.com>` (GitHub noreply email — required).
@@ -61,6 +61,20 @@ An **English-first, standalone fork** of the open-source project
 - **Fresh deploy done:** DB reset + re-seeded with English defaults; `server.secret` synced; all containers healthy.
 - Console: `http://192.168.0.195:8002` (HTTP 200). Server websocket: `ws://172.18.0.4:8000/xiaozhi/v1/` (internal).
 
+### Wake word / Phase 2 (DONE)
+- **`willow`** custom wake word is set up and **working** on the Quandong-S3 device (Phase 2 complete).
+- Server `wakeup_words` includes `willow`/`Willow` + English wake/exit, applied via a **new** changelog
+  (`202608260000.sql`) — the earlier `202504112058.sql` was restored to keep its Liquibase checksum valid.
+- Next: **Phase 3** — switch the server default to English (see `docs/ENGLISH-VOICES-WAKE-WORD-PLAN.md`).
+
+### Branch protection (DONE)
+- Branch ruleset on `main`: **require a pull request before merging**; **only the owner can bypass**.
+- Redundant tag ruleset removed. CodeQL default setup disabled.
+
+### Backend note
+- A Liquibase checksum conflict (from editing an applied changelog) was resolved by **resetting the DB**
+  and re-seeding with the current changelogs. The backend now starts cleanly.
+
 ---
 
 ## 4. ⚠️ REMAINING / NEXT STEPS (do these first in the new session)
@@ -73,6 +87,11 @@ An **English-first, standalone fork** of the open-source project
 3. **Model Configuration** (Models): add **Gemini API key** for LLM and VLLM (defaults are Gemini; ASR=FunASR local, TTS=Edge English — no keys).
 4. **Provider Management**: set Web Search to **Tavily** + add **Tavily API key** (if web search is wanted).
 5. **Weather**: Open-Meteo — no key needed.
+
+### GitHub Actions (CI) note
+- **"Workflows must use a lock file"** is a repo **Actions** setting (Settings → Actions → General), not a
+  ruleset — it can't be changed via the API. `manager-web/package-lock.json` is committed; the **Python** side
+  has no lock file. If CI is blocked, toggle that setting off in the UI (or add a Python lock file).
 
 ### Roadmap (documented in `docs/FULL-ENGLISH-CONVERSION-CHECKLIST.md` §8)
 - **Future feature:** automatic en-UK → en-US correction (e.g. `Colour → Color`) with a user popup.
