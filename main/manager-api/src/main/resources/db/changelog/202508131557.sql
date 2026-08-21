@@ -16,7 +16,7 @@ UPDATE `ai_model_config` SET
 `doc_link` = 'https://github.com/PaddlePaddle/PaddleSpeech',
 `remark` = 'PaddleSpeechTTS Configuration Guide:
 1. PaddleSpeech is a speech synthesis toolkit open-sourced by Baidu PaddlePaddle, supporting local offline deployment and model training. PaddlePaddle framework URL: https://www.paddlepaddle.org.cn/
-2. Supports WebSocket and HTTP protocols, using WebSocket for streaming transmission by default (see deployment doc: https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/paddlespeech-deploy.md).
+2. Supports WebSocket and HTTP protocols, using WebSocket for streaming transmission by default (see deployment doc: docs/paddlespeech-deploy.md).
 3. Before use, deploy the paddlespeech service locally; the service runs on ws://127.0.0.1:8092/paddlespeech/tts/streaming by default
 4. Supports custom speaker, speed, volume and sample rate.
 ' WHERE `id` = 'TTS_PaddleSpeechTTS';

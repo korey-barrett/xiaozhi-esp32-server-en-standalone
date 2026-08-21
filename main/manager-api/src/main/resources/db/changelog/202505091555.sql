@@ -16,10 +16,10 @@ The above uses CPU inference. For GPU, see: https://github.com/modelscope/FunASR
 
 -- FishSpeech configuration notes
 UPDATE `ai_model_config` SET 
-`doc_link` = 'https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/fish-speech-integration.md',
+`doc_link` = 'docs/fish-speech-integration.md',
 `remark` = 'FishSpeech configuration notes:
 1. Deploy the FishSpeech service locally
 2. Supports custom voices
 3. Local inference, no network connection required
 4. Output files are saved in the tmp/ directory
-5. You can follow the tutorial https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/fish-speech-integration.md' WHERE `id` = 'TTS_FishSpeech';
+5. You can follow the tutorial docs/fish-speech-integration.md' WHERE `id` = 'TTS_FishSpeech';

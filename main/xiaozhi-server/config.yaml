@@ -117,7 +117,7 @@ wakeup_words:
   - "小滨小滨"
   - "小冰小冰"
 # MCP endpoint address, format: ws://your-mcp-endpoint-ip-or-domain:port/mcp/?token=your-token
-# Detailed tutorial: https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mcp-endpoint-integration.md
+# Detailed tutorial: docs/mcp-endpoint-integration.md
 mcp_endpoint: YOUR_MCP_ENDPOINT_WEBSOCKET_URL
 
 # Context provider configuration
@@ -892,7 +892,7 @@ TTS:
     output_dir: tmp/
     # language: "zh"  # Output language, e.g. Chinese, English, Japanese, Korean, etc.; set according to the voice's supported languages. Leave empty to default to Chinese
   FishSpeech:
-    # See the tutorial: https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/fish-speech-integration.md
+    # See the tutorial: docs/fish-speech-integration.md
     type: fishspeech
     output_dir: tmp/
     response_format: wav

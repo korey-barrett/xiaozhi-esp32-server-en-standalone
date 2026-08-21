@@ -183,8 +183,10 @@ if check_installed; then
         fi
         
         # Download the latest configuration files
-        check_and_download "/opt/xiaozhi-server/docker-compose_all.yml" "https://ghfast.top/https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/docker-compose_all.yml"
-        check_and_download "/opt/xiaozhi-server/data/.config.yaml" "https://ghfast.top/https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/config_from_api.yaml"
+        # Note: The config files are not downloaded from the original repository in this fork.
+        # Use the files from this repository instead:
+        #   main/xiaozhi-server/docker-compose_all.yml
+        #   main/xiaozhi-server/config.yaml
         
         # Start the Docker service
         echo "Starting the latest version services..."
@@ -341,8 +343,10 @@ fi
 
 # Only download if the upgrade was not completed
 if [ -z "$UPGRADE_COMPLETED" ]; then
-    check_and_download "/opt/xiaozhi-server/docker-compose_all.yml" "https://ghfast.top/https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/docker-compose_all.yml"
-    check_and_download "/opt/xiaozhi-server/data/.config.yaml" "https://ghfast.top/https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/config_from_api.yaml"
+    # Note: The config files are not downloaded from the original repository in this fork.
+    # Use the files from this repository instead:
+    #   main/xiaozhi-server/docker-compose_all.yml
+    #   main/xiaozhi-server/config.yaml
 fi
 
 # Start the Docker service
