@@ -1,0 +1,4 @@
+# Force LF for shell scripts and nginx config so Docker builds don't break
+# on `exec /start.sh` / `set -euo pipefail` when checked out on Windows.
+*.sh text eol=lf
+nginx.conf text eol=lf
