@@ -293,6 +293,8 @@ The boot log contains the 6-digit setup code used to install the device in the a
 
 ### In Development 🚧
 
+- **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
+
 To learn about the specific development plan progress, [click here](https://github.com/users/xinnan-tech/projects/3). For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 
 If you are a software developer, here is an [Open Letter to Developers](docs/contributor_open_letter.md). Welcome aboard!

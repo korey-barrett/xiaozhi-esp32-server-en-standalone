@@ -76,6 +76,7 @@ An **English-first, standalone fork** of the open-source project
 
 ### Roadmap (documented in `docs/FULL-ENGLISH-CONVERSION-CHECKLIST.md` §8)
 - **Future feature:** automatic en-UK → en-US correction (e.g. `Colour → Color`) with a user popup.
+- **Future feature:** **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
 - **Future major change:** production localization into EN-UK, zh-CN, zh-TW, ja, ko, es, de, fr *(optional)* via i18n **without touching server code**.
 - **Side project:** step-by-step third-party setup instructions (Gemini key, Tavily key, etc.).
 
