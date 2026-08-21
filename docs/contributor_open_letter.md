@@ -8,6 +8,11 @@
 
 Dear developer,
 
+Before anything else, we honor the work that made this possible. This project is built on the shoulders of the
+Chinese developers of `xiaozhi-esp32-server` — 承前启后 (chéng qián qǐ hòu), *"carry on the past, open the way
+for the future."* We hold that principle close: we do not claim their work as ours; we carry it forward with
+gratitude and open a new path in our own words.
+
 This project exists for one simple reason: the most capable open-source voice-AI backend we know of —
 `xiaozhi-esp32-server` — was written entirely in Chinese. Its code, comments, documentation, admin console,
 and user-facing strings all assume a Chinese-speaking audience, and its default providers send data to
@@ -65,6 +70,9 @@ an English-first Jarvis anyone can run — we'd love to have you.
 
 Fork the repo, submit a PR, translate a doc, add a feature, fix a bug. The project is only as good as the
 community that builds it.
+
+承前启后 — carry on the past, open the way for the future. We carry forward what the original contributors
+began, and together we open the way for what comes next.
 
 Let's create the future together.
 
