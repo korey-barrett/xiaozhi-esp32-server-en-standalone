@@ -78,7 +78,7 @@ Let's create the future together.
 
 — The maintainer of `xiaozhi-esp32-server-en-standalone`
 
-Korey B, 22 August 2026 ('Add Lunar date here')
+Korey B, 22 August 2026 (农历丙午年七月初十 · 10th day, 7th lunar month, Year of the Horse)
 New South Wales, Australia
 
 ---
