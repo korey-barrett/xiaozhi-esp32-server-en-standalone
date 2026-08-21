@@ -67,6 +67,24 @@ Developed by Professor Siyuan Liu's Team (South China University of Technology)
 
 ---
 
+## Quick Start 🚀
+
+The fastest way to get a full working stack (server + admin console + DB + Redis) is **Docker (full module)**:
+
+```bash
+cd main/xiaozhi-server
+docker compose -f docker-compose_all.yml up -d
+```
+
+Then open the admin console at `http://<LAN-IP>:8002`, register the first account (becomes super-admin),
+and set `server.websocket` / `server.ota` in **Parameter Management**.
+
+> 📘 **All install methods** (Docker minimal/full, one-click script, source, local images, WSL2) plus new
+> commands for **SSO login**, **headless device onboarding**, and **dependency install/update** are in
+> [docs/INSTALLATION.md](./docs/INSTALLATION.md).
+
+---
+
 ## Who This Is For 👥
 
 This project requires ESP32 hardware devices. If you have purchased ESP32-related hardware, have successfully connected to the backend service deployed by Xiaoge, and want to independently build your own
