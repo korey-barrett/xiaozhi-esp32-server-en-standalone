@@ -124,6 +124,9 @@ wakeup_words:
   - "hey xiaozhi"
   - "hello xiaozhi"
   - "hi xiaozhi"
+  # Custom wake word for the Quandong-S3 board
+  - "willow"
+  - "Willow"
 # MCP endpoint address, format: ws://your-mcp-endpoint-ip-or-domain:port/mcp/?token=your-token
 # Detailed tutorial: docs/mcp-endpoint-integration.md
 mcp_endpoint: YOUR_MCP_ENDPOINT_WEBSOCKET_URL
