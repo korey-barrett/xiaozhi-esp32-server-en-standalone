@@ -78,6 +78,9 @@ Let's create the future together.
 
 — The maintainer of `xiaozhi-esp32-server-en-standalone`
 
+Korey B, 22 August 2026 ('Add Lunar date here')
+New South Wales, Australia
+
 ---
 
 # Reference: Original Letter
