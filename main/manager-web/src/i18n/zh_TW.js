@@ -422,6 +422,24 @@ export default {
   'login.privacyPolicy': 'Privacy Policy',
   'login.registerAccount': 'Register Account',
 
+  // SSO login page text
+  'sso.title': '輸入通行碼',
+  'sso.subtitle': 'SSO 認證成功，請輸入通行碼以繼續。',
+  'sso.passcodePlaceholder': '請輸入通行碼',
+  'sso.verify': '驗證並登入',
+  'sso.backToLogin': '返回登入',
+  'sso.orLoginWith': '或使用以下方式登入',
+  'sso.google': '使用 Google 登入',
+  'sso.apple': '使用 Apple 登入',
+  'sso.microsoft': '使用 Microsoft 登入',
+  'sso.github': '使用 GitHub 登入',
+  'sso.loginSuccess': '登入成功！',
+  'sso.verifyFailed': '通行碼驗證失敗',
+  'sso.invalidState': 'SSO 工作階段無效或缺失',
+  'sso.passcodeRequired': '通行碼不能為空',
+  'sso.redirectFailed': '啟動 SSO 登入失敗',
+  'sso.userInfoFailed': '取得使用者資訊失敗',
+
   // Retrieve password page text
   'retrievePassword.title': 'Reset Password',
   'retrievePassword.welcome': 'PASSWORD RETRIEVE',

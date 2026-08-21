@@ -121,6 +121,20 @@
           </div>
           <div class="login-btn" @click="login">{{ $t("login.login") }}</div>
 
+          <!-- SSO login buttons -->
+          <div class="sso-section" v-if="ssoEnabled && ssoProviders.length">
+            <div class="sso-divider">
+              <span>{{ $t("sso.orLoginWith") }}</span>
+            </div>
+            <div class="sso-buttons">
+              <el-tooltip v-for="p in ssoProviders" :key="p" :content="providerLabel(p)" placement="top">
+                <div class="sso-button" :class="`sso-${p}`" @click="ssoLogin(p)">
+                  <span class="sso-icon">{{ providerIcon(p) }}</span>
+                </div>
+              </el-tooltip>
+            </div>
+          </div>
+
           <!-- Login type switch buttons -->
           <div class="login-type-container" v-if="enableMobileRegister">
             <div style="display: flex; gap: 10px">
@@ -231,6 +245,8 @@ export default {
       captchaUrl: "",
       isMobileLogin: false,
       languageDropdownVisible: false,
+      ssoEnabled: false,
+      ssoProviders: [],
     };
   },
   mounted() {
@@ -239,6 +255,7 @@ export default {
       // Determine the default login method based on the config
       this.isMobileLogin = this.enableMobileRegister;
     });
+    this.fetchSsoConfig();
   },
   methods: {
     openPage(url) {
@@ -388,7 +405,57 @@ export default {
     },
     goToForgetPassword() {
       goToPage("/retrieve-password");
-    }
+    },
+    // Fetch the SSO public configuration (enabled providers)
+    fetchSsoConfig() {
+      Api.user.getSsoConfig(
+        ({ data }) => {
+          if (data.code === 0 && data.data) {
+            this.ssoEnabled = !!data.data.enabled;
+            this.ssoProviders = data.data.providers || [];
+          }
+        },
+        () => {
+          // SSO disabled or unavailable — hide the buttons
+          this.ssoEnabled = false;
+          this.ssoProviders = [];
+        }
+      );
+    },
+    // Start an SSO login: get the provider authorization URL and redirect
+    ssoLogin(provider) {
+      Api.user.getSsoAuthorizeUrl(
+        provider,
+        ({ data }) => {
+          if (data.code === 0 && data.data && data.data.url) {
+            window.location.href = data.data.url;
+          } else {
+            showDanger(data.msg || this.$t("sso.redirectFailed"));
+          }
+        },
+        (err) => {
+          showDanger((err.data && err.data.msg) || this.$t("sso.redirectFailed"));
+        }
+      );
+    },
+    providerLabel(provider) {
+      const labels = {
+        google: this.$t("sso.google"),
+        apple: this.$t("sso.apple"),
+        microsoft: this.$t("sso.microsoft"),
+        github: this.$t("sso.github"),
+      };
+      return labels[provider] || provider;
+    },
+    providerIcon(provider) {
+      const icons = {
+        google: "G",
+        apple: "",
+        microsoft: "",
+        github: "",
+      };
+      return icons[provider] || provider.charAt(0).toUpperCase();
+    },
   },
 };
 </script>
@@ -439,5 +506,64 @@ export default {
     background-color: #3d5cd6;
     border-color: #3d5cd6;
   }
+}
+
+.sso-section {
+  margin: 18px 30px 0;
+}
+.sso-divider {
+  display: flex;
+  align-items: center;
+  color: #979db1;
+  font-size: 12px;
+  margin-bottom: 14px;
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e8f2;
+  }
+  span {
+    padding: 0 12px;
+  }
+}
+.sso-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.sso-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #e5e8f2;
+  background: #fff;
+  transition: all 0.2s;
+  &:hover {
+    border-color: #5778ff;
+    box-shadow: 0 2px 8px rgba(87, 120, 255, 0.2);
+  }
+}
+.sso-icon {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3d4566;
+}
+.sso-google .sso-icon {
+  color: #4285f4;
+}
+.sso-apple .sso-icon {
+  color: #000;
+}
+.sso-microsoft .sso-icon {
+  color: #00a4ef;
+}
+.sso-github .sso-icon {
+  color: #24292e;
 }
 </style>

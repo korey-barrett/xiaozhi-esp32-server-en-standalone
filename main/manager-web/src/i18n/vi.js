@@ -422,6 +422,24 @@ export default {
   'login.privacyPolicy': 'Chính sách bảo mật',
   'login.registerAccount': 'Đăng ký tài khoản',
 
+  // Văn bản trang đăng nhập SSO
+  'sso.title': 'Nhập mã truy cập',
+  'sso.subtitle': 'Xác thực SSO thành công. Nhập mã truy cập để tiếp tục.',
+  'sso.passcodePlaceholder': 'Vui lòng nhập mã truy cập',
+  'sso.verify': 'Xác minh và đăng nhập',
+  'sso.backToLogin': 'Quay lại đăng nhập',
+  'sso.orLoginWith': 'hoặc đăng nhập bằng',
+  'sso.google': 'Đăng nhập bằng Google',
+  'sso.apple': 'Đăng nhập bằng Apple',
+  'sso.microsoft': 'Đăng nhập bằng Microsoft',
+  'sso.github': 'Đăng nhập bằng GitHub',
+  'sso.loginSuccess': 'Đăng nhập thành công!',
+  'sso.verifyFailed': 'Xác minh mã truy cập thất bại',
+  'sso.invalidState': 'Phiên SSO không hợp lệ hoặc bị thiếu',
+  'sso.passcodeRequired': 'Mã truy cập không được để trống',
+  'sso.redirectFailed': 'Không thể bắt đầu đăng nhập SSO',
+  'sso.userInfoFailed': 'Không thể lấy thông tin người dùng',
+
   // Retrieve password page text
   'retrievePassword.title': 'Đặt lại mật khẩu',
   'retrievePassword.welcome': 'KHÔI PHỤC MẬT KHẨU',

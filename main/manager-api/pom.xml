@@ -32,6 +32,7 @@
         <liquibase-core.version>4.20.0</liquibase-core.version>
         <aliyun-sms-version>4.1.0</aliyun-sms-version>
         <okio-version>3.4.0</okio-version>
+        <justauth-version>1.16.6</justauth-version>
         <skipTests>true</skipTests>
         <argLine></argLine>
     </properties>
@@ -239,6 +240,12 @@
             <groupId>com.squareup.okio</groupId>
             <artifactId>okio</artifactId>
             <version>${okio-version}</version>
+        </dependency>
+        <!-- JustAuth: OAuth2/OIDC SSO login (Google, Microsoft, GitHub, etc.) -->
+        <dependency>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
+            <version>${justauth-version}</version>
         </dependency>
     </dependencies>
 

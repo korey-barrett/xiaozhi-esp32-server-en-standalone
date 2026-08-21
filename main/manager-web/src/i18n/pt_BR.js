@@ -422,6 +422,24 @@ export default {
   'login.privacyPolicy': 'Política de Privacidade',
   'login.registerAccount': 'Registrar Conta',
 
+  // Texto da página de login SSO
+  'sso.title': 'Digite o código de acesso',
+  'sso.subtitle': 'Autenticação SSO bem-sucedida. Digite o código de acesso para continuar.',
+  'sso.passcodePlaceholder': 'Digite o código de acesso',
+  'sso.verify': 'Verificar e entrar',
+  'sso.backToLogin': 'Voltar ao login',
+  'sso.orLoginWith': 'ou entre com',
+  'sso.google': 'Entrar com Google',
+  'sso.apple': 'Entrar com Apple',
+  'sso.microsoft': 'Entrar com Microsoft',
+  'sso.github': 'Entrar com GitHub',
+  'sso.loginSuccess': 'Login bem-sucedido!',
+  'sso.verifyFailed': 'Falha na verificação do código de acesso',
+  'sso.invalidState': 'Sessão SSO inválida ou ausente',
+  'sso.passcodeRequired': 'O código de acesso não pode estar vazio',
+  'sso.redirectFailed': 'Falha ao iniciar o login SSO',
+  'sso.userInfoFailed': 'Falha ao obter informações do usuário',
+
   // Página de recuperação de senha
   'retrievePassword.title': 'Redefinir Senha',
   'retrievePassword.welcome': 'RECUPERAÇÃO DE SENHA',

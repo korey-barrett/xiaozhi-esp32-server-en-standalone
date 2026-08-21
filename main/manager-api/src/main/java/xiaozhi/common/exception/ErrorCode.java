@@ -260,4 +260,15 @@ public interface ErrorCode {
     // Replacement word related error codes
     int CORRECT_WORD_FILE_NAME_EXISTS = 10203; // File name already exists
     int FILE_SIZE_OVER_LIMIT = 10204; // File size exceeds the limit
+
+    // SSO (OAuth2/OIDC) related error codes
+    int SSO_DISABLED = 10205; // SSO login is not enabled
+    int SSO_PROVIDER_NOT_SUPPORTED = 10206; // Unsupported SSO provider
+    int SSO_PROVIDER_NOT_CONFIGURED = 10207; // SSO provider is not configured
+    int SSO_AUTH_FAILED = 10208; // SSO authentication failed
+    int SSO_PASSCODE_REQUIRED = 10209; // Passcode is required
+    int SSO_PASSCODE_ERROR = 10210; // Incorrect passcode
+    int SSO_STATE_EXPIRED = 10211; // SSO session has expired or is invalid
+    int SSO_FRONTEND_NOT_CONFIGURED = 10212; // SSO frontend redirect URL is not configured
+    int SSO_USER_CREATE_FAILED = 10213; // Failed to create the SSO user
 }

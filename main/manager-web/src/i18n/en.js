@@ -422,6 +422,24 @@ export default {
   'login.privacyPolicy': 'Privacy Policy',
   'login.registerAccount': 'Register Account',
 
+  // SSO login page text
+  'sso.title': 'Enter Passcode',
+  'sso.subtitle': 'SSO authentication successful. Enter the passcode to continue.',
+  'sso.passcodePlaceholder': 'Please enter passcode',
+  'sso.verify': 'Verify & Login',
+  'sso.backToLogin': 'Back to login',
+  'sso.orLoginWith': 'or login with',
+  'sso.google': 'Sign in with Google',
+  'sso.apple': 'Sign in with Apple',
+  'sso.microsoft': 'Sign in with Microsoft',
+  'sso.github': 'Sign in with GitHub',
+  'sso.loginSuccess': 'Login successful!',
+  'sso.verifyFailed': 'Passcode verification failed',
+  'sso.invalidState': 'Invalid or missing SSO session',
+  'sso.passcodeRequired': 'Passcode cannot be empty',
+  'sso.redirectFailed': 'Failed to start SSO login',
+  'sso.userInfoFailed': 'Failed to fetch user info',
+
   // Retrieve password page text
   'retrievePassword.title': 'Reset Password',
   'retrievePassword.welcome': 'PASSWORD RETRIEVE',

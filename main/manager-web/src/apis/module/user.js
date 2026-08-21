@@ -200,5 +200,66 @@ export default {
                 });
             }).send()
     },
+    // Get the SSO public configuration (enabled providers, passcode required)
+    getSsoConfig(callback, failCallback) {
+        RequestService.sendRequest()
+            .url(`${getServiceUrl()}/user/sso/providers`)
+            .method('GET')
+            .success((res) => {
+                RequestService.clearRequestTime();
+                callback(res);
+            })
+            .fail((err) => {
+                RequestService.clearRequestTime();
+                if (failCallback) failCallback(err);
+            })
+            .networkFail((err) => {
+                console.error('Failed to get the SSO configuration:', err);
+                RequestService.reAjaxFun(() => {
+                    this.getSsoConfig(callback, failCallback);
+                });
+            }).send()
+    },
+    // Get the provider authorization URL
+    getSsoAuthorizeUrl(provider, callback, failCallback) {
+        RequestService.sendRequest()
+            .url(`${getServiceUrl()}/user/sso/render?provider=${provider}`)
+            .method('GET')
+            .success((res) => {
+                RequestService.clearRequestTime();
+                callback(res);
+            })
+            .fail((err) => {
+                RequestService.clearRequestTime();
+                if (failCallback) failCallback(err);
+            })
+            .networkFail((err) => {
+                console.error('Failed to get the SSO authorization URL:', err);
+                RequestService.reAjaxFun(() => {
+                    this.getSsoAuthorizeUrl(provider, callback, failCallback);
+                });
+            }).send()
+    },
+    // Verify the SSO passcode and complete login
+    ssoVerify(ssoState, passcode, callback, failCallback) {
+        RequestService.sendRequest()
+            .url(`${getServiceUrl()}/user/sso/verify`)
+            .method('POST')
+            .data({ ssoState, passcode })
+            .success((res) => {
+                RequestService.clearRequestTime();
+                callback(res);
+            })
+            .fail((err) => {
+                RequestService.clearRequestTime();
+                if (failCallback) failCallback(err);
+            })
+            .networkFail((err) => {
+                console.error('Failed to verify the SSO passcode:', err);
+                RequestService.reAjaxFun(() => {
+                    this.ssoVerify(ssoState, passcode, callback, failCallback);
+                });
+            }).send()
+    },
 
 }

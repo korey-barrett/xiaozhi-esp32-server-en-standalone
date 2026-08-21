@@ -53,6 +53,13 @@ const routes = [
       return import('../views/retrievePassword.vue')
     }
   },
+  {
+    path: '/sso-callback',
+    name: 'SsoCallback',
+    component: function () {
+      return import('../views/ssoCallback.vue')
+    }
+  },
   // Device management page route
   {
     path: '/device-management',

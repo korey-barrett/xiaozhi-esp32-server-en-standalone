@@ -77,6 +77,8 @@ An **English-first, standalone fork** of the open-source project
 ### Roadmap (documented in `docs/FULL-ENGLISH-CONVERSION-CHECKLIST.md` §8)
 - **Future feature:** automatic en-UK → en-US correction (e.g. `Colour → Color`) with a user popup.
 - **Future feature:** **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
+  - ✅ **Implemented:** Google, Microsoft, GitHub (JustAuth) + passcode second factor. See section 10.
+  - ⏳ **Follow-up:** Apple ("Sign in with Apple") — requires the JustAuth `justauth-oauth2` module (not available at 1.16.6) plus ES256 JWT client-secret setup.
 - **Future major change:** production localization into EN-UK, zh-CN, zh-TW, ja, ko, es, de, fr *(optional)* via i18n **without touching server code**.
 - **Side project:** step-by-step third-party setup instructions (Gemini key, Tavily key, etc.).
 
@@ -173,3 +175,42 @@ The boot log contains the 6-digit setup code used to install the device in the a
 
 **Standing doc convention:** `README.md` and `PROJECT-HANDOFF.md` are auto-updated to reflect every new
 change/update without asking for approval.
+
+---
+
+## 10. SSO login (OAuth2/OIDC) with passcode
+
+Users can log in to the admin console with a third-party account (**Google, Microsoft, GitHub**; Apple is a
+follow-up) plus a **passcode** second factor.
+
+### How it works
+1. The login page shows SSO buttons for the enabled providers.
+2. Clicking a provider redirects to its OAuth2 authorization page.
+3. The provider redirects back to `/user/sso/callback`, which exchanges the code, stores a **pending SSO
+   session** in Redis (10-min expiry), and redirects the browser to `/sso-callback?sso_state=...`.
+4. The frontend prompts for the **passcode** and calls `POST /user/sso/verify`.
+5. On a correct passcode, the backend links/creates the local user (table `sys_user_oauth`) and issues a
+   normal session token.
+
+### Configuration (`application.yml` → `xiaozhi.sso`)
+- `enabled` — master switch.
+- `passcode` — the required second factor.
+- `frontend-redirect-url` — base URL the callback redirects back to (e.g. `http://192.168.0.195:8002`).
+- `providers.<google|microsoft|github>` — `client-id`, `client-secret`, `redirect-uri`. A provider is
+  enabled only when its `client-id` is set.
+
+### Backend files
+- `SsoController` (`/user/sso/providers`, `/render`, `/callback`, `/verify`)
+- `SsoService` / `SsoServiceImpl` (JustAuth flow + passcode + user linking)
+- `SsoProperties` (config), `SysUserOauthEntity`/`SysUserOauthDao` (identity link)
+- Liquibase `202608241100.sql` creates `sys_user_oauth`.
+
+### Frontend files
+- `login.vue` (SSO buttons), `ssoCallback.vue` (passcode dialog), router `/sso-callback`, `user.js` API,
+  i18n `sso.*` keys in all 6 languages.
+
+### Security
+- SSO alone is not enough — the **passcode** is always required to complete login.
+- A brand-new SSO identity auto-creates a local user; the same provider identity always maps to the same
+  local user (unique `(provider, provider_user_id)`).
+- **Apple** is not yet wired up (needs the JustAuth `justauth-oauth2` module + ES256 JWT client secret).

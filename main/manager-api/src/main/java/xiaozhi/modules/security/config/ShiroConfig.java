@@ -89,6 +89,7 @@ public class ShiroConfig {
         filterMap.put("/user/pub-config", "anon");
         filterMap.put("/user/register", "anon");
         filterMap.put("/user/retrieve-password", "anon");
+        filterMap.put("/user/sso/**", "anon");
         // use the server service filter for the config path
         filterMap.put("/config/**", "server");
         filterMap.put("/device/address-book/call", "server");

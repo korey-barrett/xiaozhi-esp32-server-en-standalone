@@ -43,6 +43,34 @@ renren:
     enabled: true
     exclude-urls:
 
+# SSO (OAuth2/OIDC) login — Google / Apple / Microsoft / GitHub.
+# Each provider is enabled by supplying its client-id, client-secret and redirect-uri.
+# The passcode is a required second factor the user must enter after SSO authentication.
+xiaozhi:
+  sso:
+    enabled: false
+    passcode: ""
+    frontend-redirect-url: ""
+    providers:
+      google:
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
+      apple:
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
+        team-id: ""
+        key-id: ""
+      microsoft:
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
+      github:
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
+
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml

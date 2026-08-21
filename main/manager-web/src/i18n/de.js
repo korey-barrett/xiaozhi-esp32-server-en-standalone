@@ -422,6 +422,24 @@ export default {
   'login.privacyPolicy': 'Datenschutzrichtlinie',
   'login.registerAccount': 'Konto registrieren',
 
+  // SSO login page text
+  'sso.title': 'Passcode eingeben',
+  'sso.subtitle': 'SSO-Authentifizierung erfolgreich. Geben Sie den Passcode ein, um fortzufahren.',
+  'sso.passcodePlaceholder': 'Bitte Passcode eingeben',
+  'sso.verify': 'Verifizieren & Anmelden',
+  'sso.backToLogin': 'Zurück zur Anmeldung',
+  'sso.orLoginWith': 'oder anmelden mit',
+  'sso.google': 'Mit Google anmelden',
+  'sso.apple': 'Mit Apple anmelden',
+  'sso.microsoft': 'Mit Microsoft anmelden',
+  'sso.github': 'Mit GitHub anmelden',
+  'sso.loginSuccess': 'Anmeldung erfolgreich!',
+  'sso.verifyFailed': 'Passcode-Verifizierung fehlgeschlagen',
+  'sso.invalidState': 'Ungültige oder fehlende SSO-Sitzung',
+  'sso.passcodeRequired': 'Passcode darf nicht leer sein',
+  'sso.redirectFailed': 'SSO-Anmeldung konnte nicht gestartet werden',
+  'sso.userInfoFailed': 'Benutzerinformationen konnten nicht abgerufen werden',
+
   // Retrieve password page text
   'retrievePassword.title': 'Passwort zurücksetzen',
   'retrievePassword.welcome': 'PASSWORTWIEDERHERSTELLUNG',
