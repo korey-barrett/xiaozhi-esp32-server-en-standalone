@@ -319,9 +319,10 @@ export default {
       });
     },
     handleGenertor(row) {
-      const pathname = window.location.pathname;
-      const basePath = pathname.split('/').slice(0, -1).join('/');
-      const url = `${window.location.origin}${basePath}/generator/?deviceId=${row.device_id}`;
+      // The generator is served at the web root (/generator/). Use an origin-absolute URL
+      // so it never inherits the console's current path (which caused a broken
+      // /docs/generator/... prefix).
+      const url = `${window.location.origin}/generator/?deviceId=${row.device_id}`;
       sessionStorage.setItem('devicePath', window.location.href);
       window.location.href = url;
     },
