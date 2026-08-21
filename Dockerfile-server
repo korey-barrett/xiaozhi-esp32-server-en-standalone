@@ -1,5 +1,6 @@
 # Production image, contains only the application code
-FROM ghcr.io/xinnan-tech/xiaozhi-esp32-server:server-base
+# Built from our own base image (Dockerfile-server-base) — no dependency on the upstream repo's images.
+FROM xiaozhi-local:server-base
 
 COPY main/xiaozhi-server .
 

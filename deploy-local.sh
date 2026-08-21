@@ -28,28 +28,31 @@ echo "deploy: $DEPLOY"
 echo "time  : $TS"
 echo
 
-echo "[1/6] Build server image from translated repo ..."
+echo "[1/7] Build server-base image (own base, no upstream dependency) ..."
 cd "$REPO"
+docker build -f Dockerfile-server-base -t xiaozhi-local:server-base .
+
+echo "[2/7] Build server image from translated repo ..."
 docker build -f Dockerfile-server -t xiaozhi-local:server_latest .
 
-echo "[2/6] Build web image from translated repo ..."
+echo "[3/7] Build web image from translated repo ..."
 docker build -f Dockerfile-web -t xiaozhi-local:web_latest .
 
-echo "[3/6] Backup current DB data ..."
+echo "[4/7] Backup current DB data ..."
 mkdir -p "$DEPLOY/backup/mysql-$TS"
 cp -a "$DEPLOY/mysql/data/." "$DEPLOY/backup/mysql-$TS/" 2>/dev/null || true
 echo "  DB backed up to $DEPLOY/backup/mysql-$TS"
 
-echo "[4/6] Stop the existing stack ..."
+echo "[5/7] Stop the existing stack ..."
 cd "$DEPLOY"
 docker-compose -f docker-compose_all.yml down || true
 
-echo "[5/6] Reset mysql data so Liquibase re-seeds English changelogs ..."
+echo "[6/7] Reset mysql data so Liquibase re-seeds English changelogs ..."
 rm -rf "$DEPLOY/mysql/data"
 mkdir -p "$DEPLOY/mysql/data"
 echo "  mysql data cleared"
 
-echo "[6/6] Deploy the translated stack ..."
+echo "[7/7] Deploy the translated stack ..."
 # Temporarily point compose at the local images, then restore.
 cp docker-compose_all.yml docker-compose_all.yml.bak-$TS
 sed -i \

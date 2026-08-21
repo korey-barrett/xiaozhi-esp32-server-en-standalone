@@ -24,7 +24,7 @@ Suporte ao protocolo MQTT+UDP, protocolo WebSocket, ponto de acesso MCP, reconhe
   <a href="./README_vi.md"><img alt="Tiếng Việt" src="https://img.shields.io/badge/Tiếng Việt-DFE0E5"></a>
   <a href="./README_de.md"><img alt="Deutsch" src="https://img.shields.io/badge/Deutsch-DFE0E5"></a>
   <a href="./README_pt_BR.md"><img alt="Português (Brasil)" src="https://img.shields.io/badge/Português (Brasil)-DBEDFA"></a>
-  <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/LICENSE">
+  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/blob/main/LICENSE">
     <img alt="GitHub pull requests" src="https://img.shields.io/badge/license-MIT-white?labelColor=black" />
   </a>
 </p>
@@ -344,4 +344,4 @@ Na verdade, qualquer VLLM que suporte chamadas via interface OpenAI pode ser int
 | <img src="../images/logo_junsen.png" width="160"> | [huangjunsen](https://github.com/huangjunsen0406) | Agradecimentos a [huangjunsen](https://github.com/huangjunsen0406) por contribuir com o módulo `Console de Controle Inteligente Mobile`, que permite controle eficiente e interação em tempo real em dispositivos móveis, melhorando significativamente a conveniência operacional e a eficiência de gerenciamento do sistema em cenários móveis. |
 | <img src="../images/logo_huiyuan.png" width="160"> | [Huiyuan Design](http://ui.kwd988.net/) | Agradecimentos à [Huiyuan Design](http://ui.kwd988.net/) por fornecer soluções visuais profissionais para este projeto, utilizando sua experiência prática de design atendendo mais de mil empresas para potencializar a experiência do usuário deste produto |
 | <img src="../images/logo_qinren.png" width="160"> | [Xi'an Qinren Information Technology](https://www.029app.com/) | Agradecimentos à [Xi'an Qinren Information Technology](https://www.029app.com/) por aprofundar o sistema visual deste projeto, garantindo consistência e extensibilidade do estilo de design geral em aplicações de múltiplos cenários |
-| <img src="../images/logo_contributors.png" width="160"> | [Contribuidores de Código](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors) | Agradecimentos a [todos os contribuidores de código](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors), seus esforços tornaram o projeto mais robusto e poderoso. |
+| <img src="../images/logo_contributors.png" width="160"> | [Contribuidores de Código](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/graphs/contributors) | Agradecimentos a [todos os contribuidores de código](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/graphs/contributors), seus esforços tornaram o projeto mais robusto e poderoso. |

@@ -24,7 +24,7 @@ Hỗ trợ giao thức MQTT+UDP, giao thức Websocket, điểm truy cập MCP, 
   <a href="./README_vi.md"><img alt="Tiếng Việt" src="https://img.shields.io/badge/Tiếng Việt-DBEDFA"></a>
   <a href="./README_de.md"><img alt="Deutsch" src="https://img.shields.io/badge/Deutsch-DFE0E5"></a>
   <a href="./README_pt_BR.md"><img alt="Português (Brasil)" src="https://img.shields.io/badge/Português (Brasil)-DFE0E5"></a>
-  <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/LICENSE">
+  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/blob/main/LICENSE">
     <img alt="GitHub pull requests" src="https://img.shields.io/badge/license-MIT-white?labelColor=black" />
   </a>
 </p>
@@ -345,4 +345,4 @@ Trên thực tế, bất kỳ VLLM nào hỗ trợ gọi giao diện openai đ�
 | <img src="../images/logo_junsen.png" width="160"> | [huangjunsen](https://github.com/huangjunsen0406) | Cảm ơn [huangjunsen](https://github.com/huangjunsen0406) đã đóng góp module `Bảng điều khiển thông minh di động`, thực hiện điều khiển hiệu quả và tương tác thời gian thực trên thiết bị di động đa nền tảng, cải thiện đáng kể sự tiện lợi vận hành và hiệu quả quản lý của hệ thống trong tình huống di động |
 | <img src="../images/logo_huiyuan.png" width="160"> | [Huiyuan Design](http://ui.kwd988.net/) | Cảm ơn [Huiyuan Design](http://ui.kwd988.net/) đã cung cấp giải pháp thị giác chuyên nghiệp cho dự án này, sử dụng kinh nghiệm thực tế thiết kế phục vụ hơn nghìn doanh nghiệp, trao quyền cho trải nghiệm người dùng sản phẩm của dự án này |
 | <img src="../images/logo_qinren.png" width="160"> | [Xi'an Qinren Information Technology](https://www.029app.com/) | Cảm ơn [Xi'an Qinren Information Technology](https://www.029app.com/) đã làm sâu sắc hệ thống thị giác của dự án này, đảm bảo tính nhất quán và khả năng mở rộng của phong cách thiết kế tổng thể trong ứng dụng đa tình huống |
-| <img src="../images/logo_contributors.png" width="160"> | [Người đóng góp mã](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors) | Cảm ơn [tất cả người đóng góp mã](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors), sự cống hiến của bạn khiến dự án mạnh mẽ và vững chắc hơn. |
+| <img src="../images/logo_contributors.png" width="160"> | [Người đóng góp mã](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/graphs/contributors) | Cảm ơn [tất cả người đóng góp mã](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/graphs/contributors), sự cống hiến của bạn khiến dự án mạnh mẽ và vững chắc hơn. |
