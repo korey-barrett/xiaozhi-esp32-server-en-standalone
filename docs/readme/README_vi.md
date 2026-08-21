@@ -1,6 +1,6 @@
 > **Lưu ý:** Đây là bản dịch của README. Bản README tiếng Anh chính thức nằm ở thư mục gốc của kho lưu trữ: [`README.md`](../../README.md).
 
-[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)
+[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone)
 
 <h1 align="center">Dịch vụ Backend Xiaozhi xiaozhi-esp32-server</h1>
 
@@ -13,9 +13,9 @@ Hỗ trợ giao thức MQTT+UDP, giao thức Websocket, điểm truy cập MCP, 
 
 <p align="center">
 <a href="../FAQ.md">Câu hỏi thường gặp</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/issues">Báo cáo vấn đề</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Báo cáo vấn đề</a>
 · <a href="../../README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Tài liệu triển khai</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/releases">Nhật ký cập nhật</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Nhật ký cập nhật</a>
 </p>
 
 <p align="center">
@@ -199,7 +199,7 @@ Công cụ kiểm tra dịch vụ: https://2662r3426b.vicp.fun/test/
 | Intent(Nhận dạng ý định) | function_call(Gọi hàm) | function_call(Gọi hàm) |
 | Memory(Chức năng bộ nhớ) | mem_local_short(Bộ nhớ ngắn hạn cục bộ) | mem_local_short(Bộ nhớ ngắn hạn cục bộ) |
 
-Nếu bạn quan tâm đến thời gian của từng thành phần, vui lòng xem [Báo cáo kiểm tra hiệu suất các thành phần Xiaozhi](https://github.com/xinnan-tech/xiaozhi-performance-research), có thể kiểm tra thực tế trong môi trường của bạn theo phương pháp kiểm tra trong báo cáo.
+Nếu bạn quan tâm đến thời gian của từng thành phần, vui lòng xem Báo cáo kiểm tra hiệu suất các thành phần Xiaozhi, có thể kiểm tra thực tế trong môi trường của bạn theo phương pháp kiểm tra trong báo cáo.
 
 #### 🔧 Công cụ kiểm tra
 Dự án này cung cấp các công cụ kiểm tra sau để giúp bạn xác minh hệ thống và chọn mô hình phù hợp:
@@ -217,7 +217,7 @@ Dự án này cung cấp các công cụ kiểm tra sau để giúp bạn xác m
 ![For reference - full-module installation architecture diagram — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](../images/deploy2.png)
 | Module chức năng | Mô tả |
 |:---:|:---|
-| Kiến trúc cốt lõi | Dựa trên [cổng MQTT+UDP](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mqtt-gateway-integration.md), WebSocket, máy chủ HTTP, cung cấp hệ thống quản lý bảng điều khiển và xác thực hoàn chỉnh |
+| Kiến trúc cốt lõi | Dựa trên cổng MQTT+UDP, WebSocket, máy chủ HTTP, cung cấp hệ thống quản lý bảng điều khiển và xác thực hoàn chỉnh |
 | Tương tác giọng nói | Hỗ trợ ASR streaming(Nhận dạng giọng nói), TTS streaming(Tổng hợp giọng nói), VAD(Phát hiện hoạt động giọng nói), hỗ trợ nhận dạng đa ngôn ngữ và xử lý giọng nói |
 | Nhận dạng vân giọng | Hỗ trợ đăng ký, quản lý và nhận dạng vân giọng đa người dùng, xử lý song song với ASR, nhận dạng danh tính người nói theo thời gian thực và truyền cho LLM để phản hồi cá nhân hóa |
 | Đối thoại thông minh | Hỗ trợ nhiều LLM(Mô hình ngôn ngữ lớn), thực hiện đối thoại thông minh |
@@ -234,7 +234,7 @@ Dự án này cung cấp các công cụ kiểm tra sau để giúp bạn xác m
 
 ### Đang phát triển 🚧
 
-Muốn hiểu tiến độ kế hoạch phát triển cụ thể, [vui lòng nhấp vào đây](https://github.com/users/xinnan-tech/projects/3). Câu hỏi thường gặp và hướng dẫn liên quan, vui lòng tham khảo [liên kết này](../FAQ.md)
+Muốn hiểu tiến độ kế hoạch phát triển cụ thể, vui lòng nhấp vào đây. Câu hỏi thường gặp và hướng dẫn liên quan, vui lòng tham khảo [liên kết này](../FAQ.md)
 
 Nếu bạn là một nhà phát triển phần mềm, đây có một [Lá thư mở gửi các nhà phát triển](../contributor_open_letter.md), chào mừng tham gia!
 

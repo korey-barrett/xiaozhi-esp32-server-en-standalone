@@ -1,6 +1,6 @@
 > **Note:** This is a translated copy of the README. The authoritative English README is at the repository root: [`README.md`](../../README.md).
 
-[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)
+[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone)
 
 <h1 align="center">Xiaozhi Backend Service xiaozhi-esp32-server</h1>
 
@@ -13,9 +13,9 @@ Support for MQTT+UDP protocol, Websocket protocol, MCP access point, voiceprint 
 
 <p align="center">
 <a href="../FAQ.md">FAQ</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/issues">Report Issues</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Report Issues</a>
 · <a href="../../README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Deployment Docs</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/releases">Release Notes</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Release Notes</a>
 </p>
 
 <p align="center">
@@ -198,7 +198,7 @@ Websocket Interface Address: wss://2662r3426b.vicp.fun/xiaozhi/v1/
 | Intent(Intent Recognition) | function_call(Function calling) | function_call(Function calling) |
 | Memory(Memory function) | mem_local_short(Local short-term memory) | mem_local_short(Local short-term memory) |
 
-If you are concerned about the latency of each component, please refer to the [Xiaozhi Component Performance Test Report](https://github.com/xinnan-tech/xiaozhi-performance-research), and test in your own environment following the test methods in the report.
+If you are concerned about the latency of each component, please refer to the Xiaozhi Component Performance Test Report, and test in your own environment following the test methods in the report.
 
 #### 🔧 Testing Tools
 This project provides the following testing tools to help you verify the system and choose suitable models:
@@ -216,7 +216,7 @@ This project provides the following testing tools to help you verify the system 
 ![Refer to the all-module installation architecture diagram — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](../images/deploy2.png)
 | Feature Module | Description |
 |:---:|:---|
-| Core Architecture | Based on [MQTT+UDP gateway](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mqtt-gateway-integration.md), WebSocket and HTTP servers, provides complete console management and authentication system |
+| Core Architecture | Based on MQTT+UDP gateway, WebSocket and HTTP servers, provides complete console management and authentication system |
 | Voice Interaction | Supports streaming ASR(speech recognition), streaming TTS(speech synthesis), VAD(voice activity detection), supports multi-language recognition and voice processing |
 | Voiceprint Recognition | Supports multi-user voiceprint registration, management, and recognition, processes in parallel with ASR, real-time speaker identity recognition and passes to LLM for personalized responses |
 | Intelligent Dialogue | Supports multiple LLM(large language models), implements intelligent dialogue |
@@ -233,7 +233,7 @@ This project provides the following testing tools to help you verify the system 
 
 ### Under Development 🚧
 
-To learn about specific development plan progress, [click here](https://github.com/users/xinnan-tech/projects/3). For frequently asked questions and related tutorials, please refer to [this link](../FAQ.md)
+To learn about specific development plan progress, click here. For frequently asked questions and related tutorials, please refer to [this link](../FAQ.md)
 
 If you are a software developer, here is an [Open Letter to Developers](../contributor_open_letter.md). Welcome to join!
 

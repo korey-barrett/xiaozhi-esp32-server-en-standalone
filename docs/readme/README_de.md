@@ -1,6 +1,6 @@
 > **Hinweis:** Dies ist eine übersetzte Kopie des README. Das maßgebliche englische README befindet sich im Stammverzeichnis des Repositorys: [`README.md`](../../README.md).
 
-[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)
+[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone)
 
 <h1 align="center">Xiaozhi Backend-Service xiaozhi-esp32-server</h1>
 
@@ -13,9 +13,9 @@ Unterstützt MQTT+UDP-Protokoll, Websocket-Protokoll, MCP-Endpunkte und Stimmabd
 
 <p align="center">
 <a href="../FAQ.md">Häufige Fragen</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/issues">Probleme melden</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Probleme melden</a>
 · <a href="../../README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Deployment-Dokumentation</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/releases">Release-Hinweise</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Release-Hinweise</a>
 </p>
 
 <p align="center">
@@ -198,7 +198,7 @@ Websocket-Schnittstellenadresse: wss://2662r3426b.vicp.fun/xiaozhi/v1/
 | Intent (Absichtserkennung) | function_call (Funktionsaufruf) | function_call (Funktionsaufruf) |
 | Memory (Gedächtnisfunktion) | mem_local_short (Lokales Kurzzeitgedächtnis) | mem_local_short (Lokales Kurzzeitgedächtnis) |
 
-Wenn Sie sich um die Latenz jeder Komponente kümmern, lesen Sie bitte den [Xiaozhi-Komponenten-Leistungstestbericht](https://github.com/xinnan-tech/xiaozhi-performance-research). Sie können gemäß den Testmethoden im Bericht in Ihrer Umgebung tatsächlich testen.
+Wenn Sie sich um die Latenz jeder Komponente kümmern, lesen Sie bitte den Xiaozhi-Komponenten-Leistungstestbericht. Sie können gemäß den Testmethoden im Bericht in Ihrer Umgebung tatsächlich testen.
 
 #### 🔧 Testwerkzeuge
 Dieses Projekt bietet die folgenden Testwerkzeuge, um Ihnen bei der Überprüfung des Systems und der Auswahl geeigneter Modelle zu helfen:
@@ -216,7 +216,7 @@ Dieses Projekt bietet die folgenden Testwerkzeuge, um Ihnen bei der Überprüfun
 ![For reference - full-module installation architecture diagram — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](../images/deploy2.png)
 | Funktionsmodul | Beschreibung |
 |:---:|:---|
-| Kernarchitektur | Basierend auf [MQTT+UDP-Gateway](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mqtt-gateway-integration.md), WebSocket und HTTP-Servern, bietet vollständiges Konsolenverwaltungs- und Authentifizierungssystem |
+| Kernarchitektur | Basierend auf MQTT+UDP-Gateway, WebSocket und HTTP-Servern, bietet vollständiges Konsolenverwaltungs- und Authentifizierungssystem |
 | Sprachinteraktion | Unterstützt Streaming-ASR (Spracherkennung), Streaming-TTS (Sprachsynthese), VAD (Sprachaktivitätserkennung), unterstützt mehrsprachige Erkennung und Sprachverarbeitung |
 | Stimmabdruckerkennung | Unterstützt Mehrbenutzer-Stimmabdruckregistrierung, -verwaltung und -erkennung, verarbeitet parallel mit ASR, Echtzeit-Sprecheridentitätserkennung und Weitergabe an LLM für personalisierte Antworten |
 | Intelligenter Dialog | Unterstützt mehrere LLM (große Sprachmodelle), implementiert intelligenten Dialog |
@@ -233,7 +233,7 @@ Dieses Projekt bietet die folgenden Testwerkzeuge, um Ihnen bei der Überprüfun
 
 ### In Entwicklung 🚧
 
-Um über spezifische Entwicklungsplanfortschritte zu erfahren, [klicken Sie hier](https://github.com/users/xinnan-tech/projects/3). Häufige Fragen und entsprechende Tutorials finden Sie unter [diesem Link](../FAQ.md)
+Um über spezifische Entwicklungsplanfortschritte zu erfahren, klicken Sie hier. Häufige Fragen und entsprechende Tutorials finden Sie unter [diesem Link](../FAQ.md)
 
 Wenn Sie ein Softwareentwickler sind, finden Sie hier einen [Offenen Brief an Entwickler](../contributor_open_letter.md). Willkommen beim Beitritt!
 

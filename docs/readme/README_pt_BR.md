@@ -1,6 +1,6 @@
 > **Nota:** Esta é uma cópia traduzida do README. O README em inglês autoritativo está na raiz do repositório: [`README.md`](../../README.md).
 
-[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)
+[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone)
 
 <h1 align="center">Serviço Backend Xiaozhi xiaozhi-esp32-server</h1>
 
@@ -13,9 +13,9 @@ Suporte ao protocolo MQTT+UDP, protocolo WebSocket, ponto de acesso MCP, reconhe
 
 <p align="center">
 <a href="../FAQ.md">Perguntas Frequentes</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/issues">Reportar Problemas</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Reportar Problemas</a>
 · <a href="../../README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Documentação de Implantação</a>
-· <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/releases">Notas de Lançamento</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Notas de Lançamento</a>
 </p>
 
 <p align="center">
@@ -198,7 +198,7 @@ Endereço da Interface WebSocket: wss://2662r3426b.vicp.fun/xiaozhi/v1/
 | Intent(Reconhecimento de Intenção) | function_call(Chamada de função) | function_call(Chamada de função) |
 | Memory(Função de Memória) | mem_local_short(Memória local de curto prazo) | mem_local_short(Memória local de curto prazo) |
 
-Se você está preocupado com o tempo de resposta de cada componente, consulte o [Relatório de Teste de Desempenho dos Componentes Xiaozhi](https://github.com/xinnan-tech/xiaozhi-performance-research), e teste em seu próprio ambiente seguindo os métodos de teste do relatório.
+Se você está preocupado com o tempo de resposta de cada componente, consulte o Relatório de Teste de Desempenho dos Componentes Xiaozhi, e teste em seu próprio ambiente seguindo os métodos de teste do relatório.
 
 #### 🔧 Ferramentas de Teste
 Este projeto fornece as seguintes ferramentas de teste para ajudá-lo a verificar o sistema e escolher modelos adequados:
@@ -216,7 +216,7 @@ Este projeto fornece as seguintes ferramentas de teste para ajudá-lo a verifica
 ![For reference - full-module installation architecture diagram — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](../images/deploy2.png)
 | Módulo de Funcionalidade | Descrição |
 |:---:|:---|
-| Arquitetura Principal | Baseado em [gateway MQTT+UDP](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mqtt-gateway-integration.md), servidores WebSocket e HTTP, fornece sistema completo de gerenciamento de console e autenticação |
+| Arquitetura Principal | Baseado em gateway MQTT+UDP, servidores WebSocket e HTTP, fornece sistema completo de gerenciamento de console e autenticação |
 | Interação por Voz | Suporta ASR em streaming (reconhecimento de fala), TTS em streaming (síntese de voz), VAD (detecção de atividade vocal), suporta reconhecimento multilíngue e processamento de voz |
 | Reconhecimento de Impressão Vocal | Suporta registro, gerenciamento e reconhecimento de impressão vocal de múltiplos usuários, processa em paralelo com o ASR, reconhecimento de identidade do falante em tempo real e repassa ao LLM para respostas personalizadas |
 | Diálogo Inteligente | Suporta múltiplos LLM (modelos de linguagem de grande porte), implementa diálogo inteligente |
@@ -233,7 +233,7 @@ Este projeto fornece as seguintes ferramentas de teste para ajudá-lo a verifica
 
 ### Em Desenvolvimento 🚧
 
-Para conhecer o progresso específico do plano de desenvolvimento, [clique aqui](https://github.com/users/xinnan-tech/projects/3). Perguntas frequentes e tutoriais relacionados podem ser consultados [neste link](../FAQ.md)
+Para conhecer o progresso específico do plano de desenvolvimento, clique aqui. Perguntas frequentes e tutoriais relacionados podem ser consultados [neste link](../FAQ.md)
 
 Se você é um desenvolvedor de software, aqui está uma [Carta Aberta aos Desenvolvedores](../contributor_open_letter.md). Seja bem-vindo a participar!
 
