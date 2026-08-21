@@ -18,7 +18,7 @@ docker compose up -d
 ```
 
 - **Compose file:** `main/xiaozhi-server/docker-compose.yml`
-- **Image:** `ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest`
+- **Image:** `xiaozhi-local:server_latest`
 - **Ports:** `8000` (WebSocket), `8003` (HTTP / OTA / vision)
 - **Needs:** `data/.config.yaml` and `models/SenseVoiceSmall/model.pt` (see docs/Deployment.md)
 
@@ -39,7 +39,7 @@ docker compose -f docker-compose_all.yml up -d
 ```
 
 - **Compose file:** `main/xiaozhi-server/docker-compose_all.yml`
-- **Images:** `ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest` and `:web_latest`
+- **Images:** `xiaozhi-local:server_latest` and `:web_latest`
 - **Ports:** `8000` (WebSocket), `8002` (Admin Console), `8003` (HTTP / vision)
 - **Services:** `xiaozhi-esp32-server`, `-web`, `-db` (MySQL), `-redis`
 

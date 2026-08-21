@@ -92,11 +92,14 @@ An **English-first, standalone fork** of the open-source project
 ### Fresh deploy (WSL)
 ```bash
 cd /mnt/d/DEV/Projects/xiaozhi-server-en-standalone/xiaozhi-esp32-server-en-standalone
-docker build -f Dockerfile-web   -t xiaozhi-local:web_latest    .
-docker build -f Dockerfile-server -t xiaozhi-local:server_latest .
+# Build our OWN base image first (no dependency on the upstream repo's images), then the app images:
+docker build -f Dockerfile-server-base -t xiaozhi-local:server-base .   # own base (python:3.10-slim + PyPI, en_US)
+docker build -f Dockerfile-server       -t xiaozhi-local:server_latest .
+docker build -f Dockerfile-web          -t xiaozhi-local:web_latest    .
 bash deploy-local-now.sh   # backs up DB, resets mysql, deploys via docker-compose.local.yml
 ```
 - `docker-compose.local.yml` uses `xiaozhi-local:*` images with absolute `/opt/xiaozhi-server` paths.
+- The Docker build is **independent** — it no longer pulls the upstream `xinnan-tech` images (`Dockerfile-server` builds from our own `xiaozhi-local:server-base`). Note the first `server-base` build installs `requirements.txt` (incl. torch), so it is slow; subsequent builds are cached.
 - After a fresh DB reset, **sync `server.secret`**: get the new value from the DB
   (`SELECT param_value FROM sys_params WHERE param_code='server.secret';`) and update
   `/opt/xiaozhi-server/data/.config.yaml` → `manager-api.secret` (write via a docker container, since `/opt` is root-owned), then restart the server container.

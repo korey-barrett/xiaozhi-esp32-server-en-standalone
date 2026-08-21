@@ -108,8 +108,8 @@ docker stop xiaozhi-esp32-server
 docker rm xiaozhi-esp32-server
 docker stop xiaozhi-esp32-server-web
 docker rm xiaozhi-esp32-server-web
-docker rmi ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest
-docker rmi ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest
+docker rmi xiaozhi-local:server_latest
+docker rmi xiaozhi-local:web_latest
 ```
 
 5.3. Deploy again using the Docker method

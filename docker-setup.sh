@@ -160,8 +160,8 @@ if check_installed; then
         
         # Delete specific images (in case the images do not exist)
         images=(
-            "ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest"
-            "ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest"
+            "xiaozhi-local:server_latest"
+            "xiaozhi-local:web_latest"
         )
         
         for image in "${images[@]}"; do

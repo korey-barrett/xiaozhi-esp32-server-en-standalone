@@ -53,14 +53,8 @@ mkdir -p "$DEPLOY/mysql/data"
 echo "  mysql data cleared"
 
 echo "[7/7] Deploy the translated stack ..."
-# Temporarily point compose at the local images, then restore.
-cp docker-compose_all.yml docker-compose_all.yml.bak-$TS
-sed -i \
-  -e 's#ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest#xiaozhi-local:server_latest#g' \
-  -e 's#ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest#xiaozhi-local:web_latest#g' \
-  docker-compose_all.yml
 docker-compose -f docker-compose_all.yml up -d
-echo "  (compose image refs temporarily switched to xiaozhi-local; original saved as docker-compose_all.yml.bak-$TS)"
+echo "  (compose uses the locally-built xiaozhi-local images)"
 
 echo
 echo "==================================================="

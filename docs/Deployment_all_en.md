@@ -122,8 +122,8 @@ docker rm xiaozhi-esp32-server-db
 docker stop xiaozhi-esp32-server-redis
 docker rm xiaozhi-esp32-server-redis
 
-docker rmi ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest
-docker rmi ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest
+docker rmi xiaozhi-local:server_latest
+docker rmi xiaozhi-local:web_latest
 ```
 
 ## 4. Run the Program
