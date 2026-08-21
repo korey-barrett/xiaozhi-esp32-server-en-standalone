@@ -165,6 +165,35 @@ This project provides the following test tools to help you verify the system and
 
 ---
 
+## Backup & Restore 💾
+
+All of your console configuration — server params, model providers/configs, agents, devices, users, voice
+clones, and RAG knowledge — is stored in the MySQL database. A fresh deploy wipes that database, so every
+setting and agent used to have to be re-applied by hand. The `backup-restore.sh` script makes that a one-liner.
+
+```bash
+./backup-restore.sh backup                 # dump config/agent tables to backups/
+./backup-restore.sh restore <file.sql>     # re-import after a fresh deploy
+./backup-restore.sh list                   # show available backups
+./backup-restore.sh secret                 # show DB vs config secret (diagnostic)
+```
+
+Run inside WSL2 (where docker is available). After `restore`, the script also re-syncs the Python server's
+`manager-api.secret` to match the restored DB value, so the two stay in agreement.
+
+**`deploy-local-now.sh` now does this automatically:** it backs up your settings/agents before the DB reset
+and re-applies them after the fresh deploy, so you no longer re-enter anything by hand.
+
+```bash
+./deploy-local-now.sh                 # backup -> reset -> deploy -> restore
+./deploy-local-now.sh --no-restore    # skip the automatic restore
+```
+
+> 💡 Backups are stored in `backups/` (git-ignored). Chat history and session tokens are intentionally
+> excluded — they are large and not needed to re-apply configuration.
+
+---
+
 ## Headless Device Onboarding 🔌
 
 Devices without a screen (headless ESP32 boards) can be onboarded over serial. The **MAC address** and the

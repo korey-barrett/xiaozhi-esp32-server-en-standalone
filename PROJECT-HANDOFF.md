@@ -240,3 +240,22 @@ Users can log in to the admin console with a third-party account (**Google, Appl
 - SSO alone is not enough — the **passcode** is always required to complete login.
 - A brand-new SSO identity auto-creates a local user; the same provider identity always maps to the same
   local user (unique `(provider, provider_user_id)`).
+
+---
+
+## 11. Backup & Restore (settings / agents)
+
+All console configuration (server params, model providers/configs, agents, devices, users, voice clones, RAG)
+lives in the MySQL database, which a fresh deploy wipes. `backup-restore.sh` (repo root) dumps/restores those
+tables so nothing has to be re-applied by hand.
+
+- **`./backup-restore.sh backup`** — `mysqldump` of 25 config/agent/user/device tables → `backups/backup-<TS>.sql`
+  (uses `--replace --no-create-info`, so restore overwrites the re-seeded defaults).
+- **`./backup-restore.sh restore <file>`** — re-imports the SQL, then re-syncs the Python server's
+  `manager-api.secret` (in `/opt/xiaozhi-server/data/.config.yaml`) to match the restored DB `server.secret`
+  (via `tools/sync_manager_secret.py` run in the server image container, since `/opt` is root-owned).
+- **`list`** / **`secret`** — list backups / show DB-vs-config secret (diagnostic).
+- **`deploy-local-now.sh`** now auto-runs backup → reset → deploy → restore (use `--no-restore` to skip).
+  Its stale `REPO` path was fixed to the new standalone repo location.
+- Chat history + session tokens are intentionally excluded (large, not needed to re-apply config).
+- Backups live in `backups/` (git-ignored).

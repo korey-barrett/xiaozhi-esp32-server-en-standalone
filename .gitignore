@@ -170,6 +170,9 @@ main/manager-mobile/node_modules
 fix_secret.sh
 get_secret.sql
 
+# Database backups (contain API keys / secrets — never commit)
+/backups/
+
 # Generated output of the docs-image translation tooling (not source)
 /docs_images_en/
 
