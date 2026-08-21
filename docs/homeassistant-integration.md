@@ -176,7 +176,6 @@ Go to the `data` directory and find the `.mcp_server_settings.json` file.
 
 If there is no `.mcp_server_settings.json` file in your `data` directory,
 - Copy the `mcp_server_settings.json` file at the root of the `xiaozhi-server` folder to the `data` directory and rename it to `.mcp_server_settings.json`
-- Or [download this file](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/main/xiaozhi-server/mcp_server_settings.json), download it to the `data` directory and rename it to `.mcp_server_settings.json`
 
 
 Modify the content of this part in `"mcpServers"`:

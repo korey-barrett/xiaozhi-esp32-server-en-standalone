@@ -31,7 +31,7 @@ John, 2025.3.11, Guangzhou
 
 ## Join Us
 
-We warmly welcome like-minded friends to join and contribute to the project. You can check the features we plan to implement in the near future at [this link](https://github.com/users/xinnan-tech/projects/3). The features in the list that have not yet been assigned to anyone are exactly where your participation is urgently needed. Ways to participate are as follows:
+We warmly welcome like-minded friends to join and contribute to the project. You can check the features we plan to implement in the near future in the project roadmap. The features in the list that have not yet been assigned to anyone are exactly where your participation is urgently needed. Ways to participate are as follows:
 
 ### 1. Become a Regular Contributor
 
