@@ -85,6 +85,10 @@ An **English-first, standalone fork** of the open-source project
 
 ## 5. HOW TO RUN / DEPLOY (reference)
 
+> 📘 **Full install/deploy reference:** see `docs/INSTALLATION.md` for an audit of every method (Docker
+> minimal/full, one-click script, source, local images, WSL2) plus new commands for SSO, headless device
+> onboarding, and dependency install/update.
+
 ### Fresh deploy (WSL)
 ```bash
 cd /mnt/d/DEV/Projects/xiaozhi-server-en-standalone/xiaozhi-esp32-server-en-standalone
@@ -135,6 +139,7 @@ main/
   xiaozhi-server/  Python core AI server (device-facing)
   digital-human/   browser digital-human test module
 docs/              documentation (English) + FULL-ENGLISH-CONVERSION-CHECKLIST.md
+docs/INSTALLATION.md   (audit of every install/deploy method + new commands: SSO, device onboarding, deps)
 tools/             translation/caption tooling
 ```
 

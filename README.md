@@ -187,6 +187,10 @@ Want to see it in action? Click the videos! 🎥
 
 ![Banners...](docs/images/banner2.png)
 
+> 📘 **Full installation & deployment reference:** see [docs/INSTALLATION.md](./docs/INSTALLATION.md) for an
+> audit of every install method (Docker minimal/full, one-click script, source, local images, WSL2) plus the
+> new commands for **SSO login**, **headless device onboarding**, and **dependency install/update**.
+
 This project offers two deployment methods. Please choose based on your specific needs:
 
 #### 🚀 Deployment Method Selection
