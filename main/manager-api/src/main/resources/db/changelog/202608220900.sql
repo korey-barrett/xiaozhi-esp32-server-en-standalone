@@ -16,7 +16,7 @@ SET `config_json` = '{\"type\": \"edge\", \"voice\": \"en-US-AriaNeural\", \"out
 WHERE `id` = 'TTS_EdgeTTS';
 
 -- 4. VLLM default -> Google Gemini vision (add config if missing)
-INSERT INTO `ai_model_config` (`id`, `model_type`, `model_code`, `name`, `is_default`, `is_enabled`, `config_json`, `sort`)
+INSERT INTO `ai_model_config` (`id`, `model_type`, `model_code`, `model_name`, `is_default`, `is_enabled`, `config_json`, `sort`)
 SELECT 'VLLM_GeminiVLM', 'VLLM', 'GeminiVLM', 'Google Gemini Vision', 1, 1,
        '{\"type\": \"openai\", \"model_name\": \"gemini-2.0-flash\", \"base_url\": \"https://generativelanguage.googleapis.com/v1beta/openai/\", \"api_key\": \"YOUR_API_KEY\"}',
        3
