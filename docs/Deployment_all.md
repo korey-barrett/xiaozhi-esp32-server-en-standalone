@@ -1,5 +1,10 @@
 # Deployment Architecture Diagram
 ![Refer to the all-modules installation architecture diagram — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](../docs/images/deploy2.png)
+
+> ⚠️ **This document is the original upstream deployment guide.** For the authoritative, audited install
+> instructions for this fork (Docker minimal/full, one-click script, source, local images, WSL2, plus SSO,
+> headless device onboarding, and dependency install), see **[docs/INSTALLATION.md](./INSTALLATION.md)**.
+
 # Option 1: Run All Modules with Docker
 Starting from version `0.8.2`, the Docker images published by this project only support the `x86 architecture`. If you need to deploy on an `arm64 architecture` CPU, you can build an `arm64 image` locally by following [this tutorial](docker-build.md).
 
@@ -18,7 +23,9 @@ Deployment is simple; you can refer to the [video tutorial](https://www.bilibili
 
 Use an SSH tool to connect to the server and run the following script with root privileges
 ```bash
-sudo bash -c "$(wget -qO- https://ghfast.top/https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/main/docker-setup.sh)"
+> Note: The one-click setup script is not available in this fork. Use the files in this repository
+> (`main/xiaozhi-server/docker-compose_all.yml` and `main/xiaozhi-server/config.yaml`) instead of
+> downloading them from the original repository.
 ```
 
 The script will automatically complete the following operations:
@@ -69,7 +76,7 @@ Open [this link](../main/xiaozhi-server/docker-compose_all.yml) in a browser.
 
 On the right side of the page, find the button named `RAW`. Next to the `RAW` button, find the download icon, click it, and download the `docker-compose_all.yml` file. Save the file into your `xiaozhi-server` folder.
 
-Or directly run `wget https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/docker-compose_all.yml` to download it.
+Or use the `docker-compose_all.yml` file from this repository (`main/xiaozhi-server/docker-compose_all.yml`) instead of downloading it from the original repository.
 
 After downloading, return to this tutorial and continue.
 
@@ -79,7 +86,7 @@ Open [this link](../main/xiaozhi-server/config_from_api.yaml) in a browser.
 
 On the right side of the page, find the button named `RAW`. Next to the `RAW` button, find the download icon, click it, and download the `config_from_api.yaml` file. Save the file into the `data` folder under your `xiaozhi-server`, then rename the `config_from_api.yaml` file to `.config.yaml`.
 
-Or directly run `wget https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/refs/heads/main/main/xiaozhi-server/config_from_api.yaml` to download and save it.
+Or use the `config_from_api.yaml` file from this repository (`main/xiaozhi-server/config_from_api.yaml`) instead of downloading it from the original repository.
 
 After downloading the configuration files, let's confirm that the files in your `xiaozhi-server` folder look like this:
 
@@ -360,7 +367,7 @@ Please note that the commands above will not all succeed if you just run them at
 
 First you need to download this project's source code. The source code can be downloaded with the `git clone` command. If you are not familiar with the `git clone` command:
 
-You can also open this address in a browser: `https://github.com/xinnan-tech/xiaozhi-esp32-server.git`
+You can also open this address in a browser: `https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone.git`
 
 Once open, find the green `Code` button on the page, click it, and you will see the `Download ZIP` button.
 
@@ -465,7 +472,7 @@ Here are some common questions for reference:
 ## Deployment Tutorials
 1、[How to automatically pull the latest code of this project, compile, and start it](./dev-ops-integration.md)<br/>
 2、[How to deploy the MQTT gateway to enable the MQTT+UDP protocol](./mqtt-gateway-integration.md)<br/>
-3、[How to integrate with Nginx](https://github.com/xinnan-tech/xiaozhi-esp32-server/issues/791)<br/>
+3、How to integrate with Nginx<br/>
 ## Extension Tutorials
 1、[How to enable phone-number registration for the Console (optional)](./ali-sms-integration.md)<br/>
 2、[How to integrate HomeAssistant for smart home control](./homeassistant-integration.md)<br/>
@@ -482,4 +489,4 @@ Here are some common questions for reference:
 4、[How to deploy and integrate the PaddleSpeech local voice](./paddlespeech-deploy.md)<br/>
 ## Performance Testing Tutorials
 1、[Speed testing guide for each component](./performance_tester.md)<br/>
-2、[Periodically published test results](https://github.com/xinnan-tech/xiaozhi-performance-research)<br/>
+2、Periodically published test results<br/>

@@ -1,3 +1,5 @@
+> **Lưu ý:** Đây là bản dịch của README. Bản README tiếng Anh chính thức nằm ở thư mục gốc của kho lưu trữ: [`README.md`](../../README.md).
+
 [![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](../images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)
 
 <h1 align="center">Dịch vụ Backend Xiaozhi xiaozhi-esp32-server</h1>
@@ -22,14 +24,8 @@ Hỗ trợ giao thức MQTT+UDP, giao thức Websocket, điểm truy cập MCP, 
   <a href="./README_vi.md"><img alt="Tiếng Việt" src="https://img.shields.io/badge/Tiếng Việt-DBEDFA"></a>
   <a href="./README_de.md"><img alt="Deutsch" src="https://img.shields.io/badge/Deutsch-DFE0E5"></a>
   <a href="./README_pt_BR.md"><img alt="Português (Brasil)" src="https://img.shields.io/badge/Português (Brasil)-DFE0E5"></a>
-  <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/releases">
-    <img alt="GitHub Contributors" src="https://img.shields.io/github/v/release/xinnan-tech/xiaozhi-esp32-server?logo=docker" />
-  </a>
   <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/LICENSE">
     <img alt="GitHub pull requests" src="https://img.shields.io/badge/license-MIT-white?labelColor=black" />
-  </a>
-  <a href="https://github.com/xinnan-tech/xiaozhi-esp32-server">
-    <img alt="stars" src="https://img.shields.io/github/stars/xinnan-tech/xiaozhi-esp32-server?color=ffcb47&labelColor=black" />
   </a>
 </p>
 
@@ -350,13 +346,3 @@ Trên thực tế, bất kỳ VLLM nào hỗ trợ gọi giao diện openai đ�
 | <img src="../images/logo_huiyuan.png" width="160"> | [Huiyuan Design](http://ui.kwd988.net/) | Cảm ơn [Huiyuan Design](http://ui.kwd988.net/) đã cung cấp giải pháp thị giác chuyên nghiệp cho dự án này, sử dụng kinh nghiệm thực tế thiết kế phục vụ hơn nghìn doanh nghiệp, trao quyền cho trải nghiệm người dùng sản phẩm của dự án này |
 | <img src="../images/logo_qinren.png" width="160"> | [Xi'an Qinren Information Technology](https://www.029app.com/) | Cảm ơn [Xi'an Qinren Information Technology](https://www.029app.com/) đã làm sâu sắc hệ thống thị giác của dự án này, đảm bảo tính nhất quán và khả năng mở rộng của phong cách thiết kế tổng thể trong ứng dụng đa tình huống |
 | <img src="../images/logo_contributors.png" width="160"> | [Người đóng góp mã](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors) | Cảm ơn [tất cả người đóng góp mã](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors), sự cống hiến của bạn khiến dự án mạnh mẽ và vững chắc hơn. |
-
-
-<a href="https://star-history.com/#xinnan-tech/xiaozhi-esp32-server&Date">
-
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xinnan-tech/xiaozhi-esp32-server&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xinnan-tech/xiaozhi-esp32-server&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xinnan-tech/xiaozhi-esp32-server&type=Date" />
- </picture>
-</a>

@@ -1,5 +1,10 @@
 # Deployment Architecture Diagram
 ![Minimal architecture diagram — UI text shown: "Simplified Installation", "ESP32", "Router", "xiaozhi-server", "Voice Activity Detection (VAD)", "Speech Recognition (ASR)".](../docs/images/deploy1.png)
+
+> ⚠️ **This document is the original upstream deployment guide.** For the authoritative, audited install
+> instructions for this fork (Docker minimal/full, one-click script, source, local images, WSL2, plus SSO,
+> headless device onboarding, and dependency install), see **[docs/INSTALLATION.md](./INSTALLATION.md)**.
+
 # Method 1: Run only the Server with Docker
 
 Since version `0.8.2`, the Docker images published by this project only support the `x86 architecture`. If you need to deploy on an `arm64` CPU, you can build an `arm64 image` locally by following [this tutorial](docker-build.md).
@@ -148,7 +153,7 @@ Please note that the above commands will not all succeed if run at once. Execute
 
 First you need to download this project's source code. You can download it with the `git clone` command. If you are not familiar with the `git clone` command,
 
-You can open this address in a browser `https://github.com/xinnan-tech/xiaozhi-esp32-server.git`
+You can open this address in a browser `https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone.git`
 
 After opening it, find a green button labeled `Code` on the page, click it, and then you will see a `Download ZIP` button.
 
@@ -269,7 +274,7 @@ Here are some common questions for reference:
 ## Deployment-Related Tutorials
 1、[How to automatically pull the latest project code, compile it, and start it](./dev-ops-integration.md)<br/>
 2、[How to deploy an MQTT gateway to enable the MQTT+UDP protocol](./mqtt-gateway-integration.md)<br/>
-3、[How to integrate with Nginx](https://github.com/xinnan-tech/xiaozhi-esp32-server/issues/791)<br/>
+3、How to integrate with Nginx<br/>
 ## Extension-Related Tutorials
 1、[How to enable phone-number registration for the console (optional)](./ali-sms-integration.md)<br/>
 2、[How to integrate HomeAssistant for smart-home control](./homeassistant-integration.md)<br/>
@@ -286,4 +291,4 @@ Here are some common questions for reference:
 4、[How to deploy and integrate PaddleSpeech local speech](./paddlespeech-deploy.md)<br/>
 ## Performance Testing Tutorials
 1、[Component speed testing guide](./performance_tester.md)<br/>
-2、[Periodically published test results](https://github.com/xinnan-tech/xiaozhi-performance-research)<br/>
+2、Periodically published test results<br/>

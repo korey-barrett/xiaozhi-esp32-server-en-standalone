@@ -45,7 +45,7 @@ If you want to improve response speed, you can try replacing each component. Sin
 | Intent (Intent Recognition) | function_call | function_call |
 | Memory | mem_local_short (local short-term memory) | mem_local_short (local short-term memory) |
 
-If you care about the time each component takes, please refer to the [Xiaozhi component performance test report](https://github.com/xinnan-tech/xiaozhi-performance-research). You can actually test in your own environment using the methods in the report.
+If you care about the time each component takes, please refer to the Xiaozhi component performance test report. You can actually test in your own environment using the methods in the report.
 
 ### 6、I speak very slowly, and Xiaozhi always interrupts me during pauses 🗣️
 
@@ -64,7 +64,7 @@ VAD:
 2、[How to perform the full-module deployment](./Deployment_all_en.md)<br/>
 3、[How to deploy an MQTT gateway to enable the MQTT+UDP protocol](./mqtt-gateway-integration.md)<br/>
 4、[How to automatically pull the latest project code, compile it, and start it](./dev-ops-integration.md)<br/>
-5、[How to integrate with Nginx](https://github.com/xinnan-tech/xiaozhi-esp32-server/issues/791)<br/>
+5、How to integrate with Nginx<br/>
 6、[After modifying code, how to compile your own Docker image](./docker-build.md)<br/>
 
 ### 8、Firmware Compilation Tutorials
@@ -100,8 +100,8 @@ VAD:
 
 ### 12、Performance Testing Tutorials
 1、[Component speed testing guide](./performance_tester.md)<br/>
-2、[Periodically published test results](https://github.com/xinnan-tech/xiaozhi-performance-research)<br/>
+2、Periodically published test results<br/>
 
 ### 13、For more questions, please contact us 💬
 
-You can submit your questions in [issues](https://github.com/xinnan-tech/xiaozhi-esp32-server/issues).
+You can submit your questions in [issues](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues).

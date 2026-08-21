@@ -31,7 +31,7 @@ At this point, run the first command first to pull the source code. This command
 
 ```
 cd /home/system/xiaozhi
-git clone https://ghproxy.net/https://github.com/xinnan-tech/xiaozhi-esp32-server.git
+git clone https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone.git
 ```
 
 After running it, your project directory will have an additional folder `xiaozhi-esp32-server`, which is the project source code.
@@ -171,7 +171,7 @@ tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/tmp/server
 ```
 
 # Notes
-The test platform `https://2662r3426b.vicp.fun` uses nginx as a reverse proxy. For the detailed nginx.conf configuration, you can [refer to here](https://github.com/xinnan-tech/xiaozhi-esp32-server/issues/791)
+The test platform `https://2662r3426b.vicp.fun` uses nginx as a reverse proxy. For the detailed nginx.conf configuration, you can refer to here
 
 ## FAQ
 
