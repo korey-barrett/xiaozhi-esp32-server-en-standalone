@@ -1,0 +1,102 @@
+# Local build & deploy of the ENGLISH-TRANSLATED xiaozhi-esp32-server.
+# Uses locally-built images (xiaozhi-local) with ABSOLUTE /opt paths so it can
+# run from any directory (no sudo needed for /opt writes — docker runs as root).
+#
+# Build first:
+#   docker build -f Dockerfile-web   -t xiaozhi-local:web_latest    <repo>
+#   docker build -f Dockerfile-server -t xiaozhi-local:server_latest <repo>
+# Then: docker-compose -f docker-compose.local.yml up -d
+
+version: '3'
+services:
+  # Server module (English-translated Python server)
+  xiaozhi-esp32-server:
+    image: xiaozhi-local:server_latest
+    container_name: xiaozhi-esp32-server
+    depends_on:
+      - xiaozhi-esp32-server-db
+      - xiaozhi-esp32-server-redis
+    restart: always
+    networks:
+      - default
+    ports:
+      # WebSocket server
+      - "8000:8000"
+      # HTTP port, used for vision analysis
+      - "8003:8003"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      # Config file directory
+      - /opt/xiaozhi-server/data:/opt/xiaozhi-esp32-server/data
+      # Model file mount, very important
+      - /opt/xiaozhi-server/models/SenseVoiceSmall/model.pt:/opt/xiaozhi-esp32-server/models/SenseVoiceSmall/model.pt
+
+  # manager-api + manager-web module (English-translated Vue + Java)
+  xiaozhi-esp32-server-web:
+    image: xiaozhi-local:web_latest
+    container_name: xiaozhi-esp32-server-web
+    restart: always
+    networks:
+      - default
+    depends_on:
+      xiaozhi-esp32-server-db:
+        condition: service_healthy
+      xiaozhi-esp32-server-redis:
+        condition: service_healthy
+    ports:
+      # Admin Console
+      - "8002:8002"
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-esp32-server-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - SPRING_DATASOURCE_DRUID_USERNAME=root
+      - SPRING_DATASOURCE_DRUID_PASSWORD=123456
+      - SPRING_DATA_REDIS_HOST=xiaozhi-esp32-server-redis
+      - SPRING_DATA_REDIS_PASSWORD=
+      - SPRING_DATA_REDIS_PORT=6379
+    volumes:
+      # Config file directory
+      - /opt/xiaozhi-server/uploadfile:/uploadfile
+
+  # Database module
+  xiaozhi-esp32-server-db:
+    image: mysql:latest
+    container_name: xiaozhi-esp32-server-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    networks:
+      - default
+    expose:
+      - 3306
+    volumes:
+      - /opt/xiaozhi-server/mysql/data:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - MYSQL_INITDB_ARGS="--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+
+  # Redis module
+  xiaozhi-esp32-server-redis:
+    image: redis:8.0
+    expose:
+      - 6379
+    container_name: xiaozhi-esp32-server-redis
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - default
+
+networks:
+  default:

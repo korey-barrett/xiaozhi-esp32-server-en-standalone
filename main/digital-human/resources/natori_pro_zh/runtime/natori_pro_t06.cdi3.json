@@ -1,0 +1,711 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "Angle X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "Angle Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "Angle Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left eye open/close"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left eye smile"
+		},
+		{
+			"Id": "ParamEyeLForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left eye form"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right eye open/close"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right eye smile"
+		},
+		{
+			"Id": "ParamEyeRForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right eye form"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Eyeball X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Eyeball Y"
+		},
+		{
+			"Id": "ParamEyeBallForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Eyeball zoom"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left brow up/down"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right brow up/down"
+		},
+		{
+			"Id": "ParamBrowLX",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left brow left/right"
+		},
+		{
+			"Id": "ParamBrowRX",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right brow left/right"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left brow angle"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right brow angle"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left brow form"
+		},
+		{
+			"Id": "ParamBrowLForm2",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Left brow form 2"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right brow form"
+		},
+		{
+			"Id": "ParamBrowRForm2",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Right brow form 2"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Mouth form"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Mouth open/close"
+		},
+		{
+			"Id": "ParamMouthForm2",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Mouth form 2"
+		},
+		{
+			"Id": "ParamTeethOn",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Teeth display"
+		},
+		{
+			"Id": "ParamCheek",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Blush"
+		},
+		{
+			"Id": "ParamGlassUD",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Glasses up/down"
+		},
+		{
+			"Id": "ParamGrassWhite",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Lens white"
+		},
+		{
+			"Id": "ParamGrassHighlight",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Lens highlight display"
+		},
+		{
+			"Id": "ParamGrassHighlightMove",
+			"GroupId": "ParamGroupExpression",
+			"Name": "Lens highlight move"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body rotation X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body rotation Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body rotation Z"
+		},
+		{
+			"Id": "ParamWaistAngleZ",
+			"GroupId": "ParamGroupBody",
+			"Name": "Waist rotation Z"
+		},
+		{
+			"Id": "ParamBodyPosition",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body front/back"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "ParamGroupBody",
+			"Name": "Breathing"
+		},
+		{
+			"Id": "ParamLeftShoulderUp",
+			"GroupId": "ParamGroupBody",
+			"Name": "Left shoulder up/down"
+		},
+		{
+			"Id": "ParamRightShoulderUp",
+			"GroupId": "ParamGroupBody",
+			"Name": "Right shoulder up/down"
+		},
+		{
+			"Id": "ParamAllX",
+			"GroupId": "ParamGroup",
+			"Name": "Overall movement X"
+		},
+		{
+			"Id": "ParamAllY",
+			"GroupId": "ParamGroup",
+			"Name": "Overall movement Y"
+		},
+		{
+			"Id": "ParamAllRotate",
+			"GroupId": "ParamGroup",
+			"Name": "Overall rotation"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair sway front"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair sway side"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair sway back"
+		},
+		{
+			"Id": "ParamHairFrontFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Front hair fluffy"
+		},
+		{
+			"Id": "ParamHairSideFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Side hair fluffy"
+		},
+		{
+			"Id": "ParamHairBackFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Back hair fluffy"
+		},
+		{
+			"Id": "ParamJacket",
+			"GroupId": "ParamGroupSway",
+			"Name": "Tailcoat sway"
+		},
+		{
+			"Id": "ParamChainWaist",
+			"GroupId": "ParamGroupSway",
+			"Name": "Chain A sway"
+		},
+		{
+			"Id": "ParamWatchSwingA1",
+			"GroupId": "ParamGroupSway",
+			"Name": "Pocket watch A sway 1"
+		},
+		{
+			"Id": "ParamWatchSwingA2",
+			"GroupId": "ParamGroupSway",
+			"Name": "Pocket watch A sway 2"
+		},
+		{
+			"Id": "ParamWatchBChain",
+			"GroupId": "ParamGroupSway",
+			"Name": "Pocket watch B chain sway"
+		},
+		{
+			"Id": "ParamWatchAX",
+			"GroupId": "ParamGroup8",
+			"Name": "Pocket watch A horizontal rotation"
+		},
+		{
+			"Id": "ParamWatchBSwitch",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B switch"
+		},
+		{
+			"Id": "ParamWatchBOpen",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B lid open/close"
+		},
+		{
+			"Id": "ParamWatchBOpen2",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B dial open/close"
+		},
+		{
+			"Id": "ParamWatchBX",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B horizontal rotation"
+		},
+		{
+			"Id": "ParamWatchBRoll",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B rotation"
+		},
+		{
+			"Id": "ParamWatchBLR",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B left/right"
+		},
+		{
+			"Id": "ParamWatchBUD",
+			"GroupId": "ParamGroup9",
+			"Name": "Pocket watch B up/down"
+		},
+		{
+			"Id": "ParamArmAL01",
+			"GroupId": "ParamGroup3",
+			"Name": "Left arm A shoulder"
+		},
+		{
+			"Id": "ParamArmAL02",
+			"GroupId": "ParamGroup3",
+			"Name": "Left shoulder A elbow rotation"
+		},
+		{
+			"Id": "ParamArmAL03",
+			"GroupId": "ParamGroup3",
+			"Name": "Left arm A wrist"
+		},
+		{
+			"Id": "ParamArmAL04",
+			"GroupId": "ParamGroup3",
+			"Name": "Left arm A forearm front/back"
+		},
+		{
+			"Id": "ParamArmAR01",
+			"GroupId": "ParamGroup2",
+			"Name": "Right arm A shoulder rotation"
+		},
+		{
+			"Id": "ParamArmAR02",
+			"GroupId": "ParamGroup2",
+			"Name": "Right arm A elbow rotation"
+		},
+		{
+			"Id": "ParamArmAR03",
+			"GroupId": "ParamGroup2",
+			"Name": "Right arm A wrist rotation"
+		},
+		{
+			"Id": "ParamArmAR04",
+			"GroupId": "ParamGroup2",
+			"Name": "Right arm A forearm front/back"
+		},
+		{
+			"Id": "ParamArmBR01",
+			"GroupId": "ParamGroup4",
+			"Name": "Right arm B shoulder rotation"
+		},
+		{
+			"Id": "ParamArmBR02",
+			"GroupId": "ParamGroup4",
+			"Name": "Right arm B elbow rotation"
+		},
+		{
+			"Id": "ParamArmBR03",
+			"GroupId": "ParamGroup4",
+			"Name": "Right arm B wrist rotation"
+		},
+		{
+			"Id": "ParamArmBRHand01",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 01 display"
+		},
+		{
+			"Id": "ParamArmBRHand01Roll",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 01 finger bend"
+		},
+		{
+			"Id": "ParamArmBRHand05",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 05 display"
+		},
+		{
+			"Id": "ParamArmBRHand05Roll1",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 05 finger bend 1"
+		},
+		{
+			"Id": "ParamArmBRHand05Roll2",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 05 finger bend 2"
+		},
+		{
+			"Id": "ParamArmBRHand05Roll3",
+			"GroupId": "ParamGroup4",
+			"Name": "Right hand 05 finger bend 3"
+		},
+		{
+			"Id": "ParamArmCR01",
+			"GroupId": "ParamGroup5",
+			"Name": "Left arm C shoulder rotation"
+		},
+		{
+			"Id": "ParamArmCR02",
+			"GroupId": "ParamGroup5",
+			"Name": "Left arm C elbow rotation"
+		},
+		{
+			"Id": "ParamArmCR03",
+			"GroupId": "ParamGroup5",
+			"Name": "Left arm C wrist rotation"
+		},
+		{
+			"Id": "ParamArmCLHandRoll1",
+			"GroupId": "ParamGroup5",
+			"Name": "Left hand C finger bend 1"
+		},
+		{
+			"Id": "ParamArmDL01",
+			"GroupId": "ParamGroup6",
+			"Name": "Left arm D shoulder rotation"
+		},
+		{
+			"Id": "ParamArmDL02",
+			"GroupId": "ParamGroup6",
+			"Name": "Left arm D elbow rotation"
+		},
+		{
+			"Id": "ParamArmDL03",
+			"GroupId": "ParamGroup6",
+			"Name": "Left arm D wrist rotation"
+		},
+		{
+			"Id": "ParamArmDLHand03Roll",
+			"GroupId": "ParamGroup6",
+			"Name": "Left hand 03 finger bend"
+		},
+		{
+			"Id": "ParamArmER01",
+			"GroupId": "ParamGroup7",
+			"Name": "Right arm E shoulder rotation"
+		},
+		{
+			"Id": "ParamArmER02",
+			"GroupId": "ParamGroup7",
+			"Name": "Right arm E elbow rotation"
+		},
+		{
+			"Id": "ParamArmER03",
+			"GroupId": "ParamGroup7",
+			"Name": "Right arm E wrist rotation"
+		},
+		{
+			"Id": "ParamArmER04",
+			"GroupId": "ParamGroup7",
+			"Name": "Right arm E upper arm length"
+		},
+		{
+			"Id": "ParamArmERHand04",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 04 display"
+		},
+		{
+			"Id": "ParamArmERHand04Roll1",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 04 finger bend 1"
+		},
+		{
+			"Id": "ParamArmERHand04Roll2",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 04 finger bend 2"
+		},
+		{
+			"Id": "ParamArmERHand06",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 06 display"
+		},
+		{
+			"Id": "ParamArmERHand06Roll1",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 06 finger bend 1"
+		},
+		{
+			"Id": "ParamArmERHand06Roll2",
+			"GroupId": "ParamGroup7",
+			"Name": "Right hand 06 finger bend 2"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroupExpression",
+			"GroupId": "",
+			"Name": "Expression"
+		},
+		{
+			"Id": "ParamGroupBody",
+			"GroupId": "",
+			"Name": "Body"
+		},
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "Overall movement"
+		},
+		{
+			"Id": "ParamGroupSway",
+			"GroupId": "",
+			"Name": "Sway"
+		},
+		{
+			"Id": "ParamGroup8",
+			"GroupId": "",
+			"Name": "Pocket watch A"
+		},
+		{
+			"Id": "ParamGroup9",
+			"GroupId": "",
+			"Name": "Pocket watch B"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "Left arm A"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "Right arm A"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "Right arm B"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "Left arm C"
+		},
+		{
+			"Id": "ParamGroup6",
+			"GroupId": "",
+			"Name": "Left arm D"
+		},
+		{
+			"Id": "ParamGroup7",
+			"GroupId": "",
+			"Name": "Right arm E"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "PartCredit",
+			"Name": "Nameplate"
+		},
+		{
+			"Id": "PartCore",
+			"Name": "CORE"
+		},
+		{
+			"Id": "PartGlass",
+			"Name": "Glasses"
+		},
+		{
+			"Id": "PartWatchA",
+			"Name": "Pocket watch A"
+		},
+		{
+			"Id": "PartWatchB",
+			"Name": "Pocket watch B"
+		},
+		{
+			"Id": "PartHairFront",
+			"Name": "Front hair"
+		},
+		{
+			"Id": "PartHead",
+			"Name": "Head"
+		},
+		{
+			"Id": "PartUpperBody",
+			"Name": "Upper body"
+		},
+		{
+			"Id": "PartHairBack",
+			"Name": "Back hair"
+		},
+		{
+			"Id": "PartLowerBody",
+			"Name": "Lower body"
+		},
+		{
+			"Id": "PartArmAL",
+			"Name": "Left arm A"
+		},
+		{
+			"Id": "PartArmAR",
+			"Name": "Right arm A"
+		},
+		{
+			"Id": "PartArmBR",
+			"Name": "Right arm B"
+		},
+		{
+			"Id": "PartArmCL",
+			"Name": "Left arm C"
+		},
+		{
+			"Id": "PartArmDL",
+			"Name": "Left arm D"
+		},
+		{
+			"Id": "PartArmER",
+			"Name": "Right arm E"
+		},
+		{
+			"Id": "PartEyeBlow",
+			"Name": "Brows"
+		},
+		{
+			"Id": "PartEyeR",
+			"Name": "Right eye"
+		},
+		{
+			"Id": "PartEyeL",
+			"Name": "Left eye"
+		},
+		{
+			"Id": "PartHairLine",
+			"Name": "Hairline"
+		},
+		{
+			"Id": "PartHairShadow",
+			"Name": "Hair shadow"
+		},
+		{
+			"Id": "PartNose",
+			"Name": "Nose"
+		},
+		{
+			"Id": "PartMouth",
+			"Name": "Mouth"
+		},
+		{
+			"Id": "PartJacket",
+			"Name": "Tailcoat"
+		},
+		{
+			"Id": "PartArmALFore",
+			"Name": "Left arm A forearm"
+		},
+		{
+			"Id": "PartArmARFore",
+			"Name": "Right arm A forearm"
+		},
+		{
+			"Id": "PartHand11",
+			"Name": "Glove_1"
+		},
+		{
+			"Id": "PartHand51",
+			"Name": "Glove_5"
+		},
+		{
+			"Id": "PartHand21",
+			"Name": "Glove_2"
+		},
+		{
+			"Id": "PartHand31",
+			"Name": "Glove_3"
+		},
+		{
+			"Id": "PartHand41",
+			"Name": "Glove_4"
+		},
+		{
+			"Id": "PartHand61",
+			"Name": "Glove_6"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamAngleX",
+			"ParamAngleY"
+		],
+		[
+			"ParamEyeBallX",
+			"ParamEyeBallY"
+		],
+		[
+			"ParamMouthForm",
+			"ParamMouthOpenY"
+		],
+		[
+			"ParamBodyAngleX",
+			"ParamBodyAngleY"
+		],
+		[
+			"ParamLeftShoulderUp",
+			"ParamRightShoulderUp"
+		],
+		[
+			"ParamAllX",
+			"ParamAllY"
+		],
+		[
+			"ParamWatchSwingA1",
+			"ParamWatchSwingA2"
+		],
+		[
+			"ParamWatchBLR",
+			"ParamWatchBUD"
+		]
+	]
+}

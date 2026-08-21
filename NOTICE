@@ -1,0 +1,24 @@
+NOTICE
+======
+
+This project is an English-language translation and maintenance fork of the
+open-source project **xiaozhi-esp32-server**.
+
+Original project
+----------------
+- Name: xiaozhi-esp32-server
+- Author: xinnan-tech
+- Source: https://github.com/xinnan-tech/xiaozhi-esp32-server
+- License: MIT (see LICENSE)
+
+This fork
+---------
+- Maintainer: Korey Paul Barrett (GitHub: korey-barrett)
+- Purpose: English-language translation of the original Chinese source code,
+  documentation, and user-facing strings, while preserving functionality.
+
+The original project's copyright and license terms are retained in the LICENSE
+file. This project is distributed under the MIT License.
+
+Third-party components retain their own copyright and license notices as
+included in their respective source files.

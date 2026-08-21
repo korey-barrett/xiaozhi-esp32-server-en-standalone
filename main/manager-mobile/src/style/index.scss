@@ -1,0 +1,19 @@
+// iconfont used for testing; it takes effect
+// @import './iconfont.css';
+
+.test {
+  // Multiple styles can be composed with @apply to wrap the overall style
+  @apply mt-4 ml-4;
+
+  padding-top: 4px;
+  color: red;
+}
+
+:root,
+page {
+  // Change the theme color
+  // --wot-color-theme: #37c2bc;
+
+  // Change the button background color
+  // --wot-button-primary-bg-color: green;
+}
