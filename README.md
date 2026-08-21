@@ -21,23 +21,22 @@
 
 ---
 
-[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](docs/images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en)
+[![Banners — UI text shown: "Hello, XiaoZhi", "Let's have a wonderful day!", "Help you build XiaoZhi backend services", "xiaozhi-esp32-server", "100".](docs/images/banner1.png)](https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone)
 
 <h1 align="center">Xiaozhi Backend Service xiaozhi-esp32-server</h1>
 
 <p align="center">
 This project develops an intelligent terminal software and hardware system based on human-machine symbiotic intelligence theory and technology, providing backend services for the open-source intelligent hardware project
 <a href="https://github.com/78/xiaozhi-esp32">xiaozhi-esp32</a><br/>
-Implemented in Python, Java, and Vue according to the
-<a href="https://ccnphfhqs21z.feishu.cn/wiki/M0XiwldO9iJwHikpXD5cEx71nKh">Xiaozhi communication protocol</a><br/>
+Implemented in Python, Java, and Vue according to the Xiaozhi communication protocol<br/>
 Supports MQTT+UDP protocol, WebSocket protocol, MCP access points, voiceprint recognition, and knowledge base
 </p>
 
 <p align="center">
 <a href="./docs/FAQ.md">FAQ</a>
-· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en/issues">Report Issues</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Report Issues</a>
 · <a href="./README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Deployment Documentation</a>
-· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en/releases">Changelog</a>
+· <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Changelog</a>
 </p>
 
 <p align="center">
@@ -46,14 +45,14 @@ Supports MQTT+UDP protocol, WebSocket protocol, MCP access points, voiceprint re
   <a href="./docs/readme/README_vi.md"><img alt="Tiếng Việt" src="https://img.shields.io/badge/Tiếng Việt-DFE0E5"></a>
   <a href="./docs/readme/README_de.md"><img alt="Deutsch" src="https://img.shields.io/badge/Deutsch-DFE0E5"></a>
   <a href="./docs/readme/README_pt_BR.md"><img alt="Português (Brasil)" src="https://img.shields.io/badge/Português (Brasil)-DFE0E5"></a>
-  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en/releases">
-    <img alt="GitHub Contributors" src="https://img.shields.io/github/v/release/korey-barrett/xiaozhi-esp32-server-en?logo=docker" />
+  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">
+    <img alt="GitHub Contributors" src="https://img.shields.io/github/v/release/korey-barrett/xiaozhi-esp32-server-en-standalone?logo=docker" />
   </a>
-  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en/blob/main/LICENSE">
+  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/blob/main/LICENSE">
     <img alt="GitHub pull requests" src="https://img.shields.io/badge/license-MIT-white?labelColor=black" />
   </a>
-  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en">
-    <img alt="stars" src="https://img.shields.io/github/stars/korey-barrett/xiaozhi-esp32-server-en?color=ffcb47&labelColor=black" />
+  <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone">
+    <img alt="stars" src="https://img.shields.io/github/stars/korey-barrett/xiaozhi-esp32-server-en-standalone?color=ffcb47&labelColor=black" />
   </a>
 </p>
 
@@ -90,106 +89,9 @@ and set `server.websocket` / `server.ota` in **Parameter Management**.
 This project requires ESP32 hardware devices. If you have purchased ESP32-related hardware, have successfully connected to the backend service deployed by Xiaoge, and want to independently build your own
 `xiaozhi-esp32` backend service, then this project is perfect for you.
 
-Want to see it in action? Click the videos! 🎥
+Want to see it in action? 🎥
 
-<table>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1FMFyejExX" target="_blank">
-        <picture>
-          <img alt="Feel the response speed" src="docs/images/demo9.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1vchQzaEse" target="_blank">
-        <picture>
-          <img alt="Secrets to speed optimization" src="docs/images/demo6.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1WEcxzFEAT" target="_blank">
-        <picture>
-          <img alt="Xiaozhi digital human, supports voice wake-up" src="docs/images/demo8.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1CKVz6UEuB" target="_blank">
-        <picture>
-          <img alt="Device calling device, making calls" src="docs/images/demo0.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1C1tCzUEZh" target="_blank">
-        <picture>
-          <img alt="Complex medical scenarios" src="docs/images/demo1.png" /></picture>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1VC96Y5EMH" target="_blank">
-        <picture>
-          <img alt="Play music, check weather, broadcast news" src="docs/images/demo7.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV12J7WzBEaH" target="_blank">
-        <picture>
-          <img alt="Real-time interruption" src="docs/images/demo10.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1Co76z7EvK" target="_blank">
-        <picture>
-          <img alt="Identify objects with photos" src="docs/images/demo12.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1pNXWYGEx1" target="_blank">
-        <picture>
-          <img alt="Control home appliance switches" src="docs/images/demo5.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1TJ7WzzEo6" target="_blank">
-        <picture>
-          <img alt="Multi-command tasks" src="docs/images/demo11.png" /></picture>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1ZQKUzYExM" target="_blank">
-        <picture>
-          <img alt="MCP access point" src="docs/images/demo13.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1zUW5zJEkq" target="_blank">
-        <picture>
-          <img alt="MQTT command dispatch" src="docs/images/demo4.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1Exu3zqEDe" target="_blank">
-        <picture>
-          <img alt="Voiceprint recognition" src="docs/images/demo14.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1CDKWemEU6" target="_blank">
-        <picture>
-          <img alt="Custom timbre" src="docs/images/demo2.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV12yA2egEaC" target="_blank">
-        <picture>
-          <img alt="Communicate in Cantonese" src="docs/images/demo3.png" /></picture>
-      </a>
-    </td>
-  </tr>
-</table>
+> **Coming Soon** — demo videos are being prepared for this fork and will be added here.
 
 ---
 
@@ -215,7 +117,7 @@ This project offers two deployment methods. Please choose based on your specific
 | Deployment Method | Features | Applicable Scenarios | Deployment Doc | Configuration Requirements | Video Tutorial | 
 |---------|------|---------|---------|---------|---------|
 | **Minimal Installation** | Intelligent conversation, single agent management | Low-configuration environment; data stored in config files, no database required | [① Docker version](./docs/Deployment.md#%E6%96%B9%E5%BC%8F%E4%B8%80docker%E5%8F%AA%E8%BF%90%E8%A1%8Cserver) / [② Source code deployment](./docs/Deployment.md#%E6%96%B9%E5%BC%8F%E4%BA%8C%E6%9C%AC%E5%9C%B0%E6%BA%90%E7%A0%81%E5%8F%AA%E8%BF%90%E8%A1%8Cserver)| If using `FunASR`, 2 cores and 4GB; if all API, 2 cores and 2GB | - | 
-| **Full Module Installation** | Intelligent conversation, multi-user management, multi-agent management, Console UI operations | Full-featured experience; data stored in database |[① Docker version](./docs/Deployment_all.md#%E6%96%B9%E5%BC%8F%E4%B8%80docker%E8%BF%90%E8%A1%8C%E5%85%A8%E6%A8%A1%E5%9D%97) / [② Source code deployment](./docs/Deployment_all.md#%E6%96%B9%E5%BC%8F%E4%BA%8C%E6%9C%AC%E5%9C%B0%E6%BA%90%E7%A0%81%E8%BF%90%E8%A1%8C%E5%85%A8%E6%A8%A1%E5%9D%97) / [③ Source code deployment auto-update tutorial](./docs/dev-ops-integration.md) | If using `FunASR`, 4 cores and 8GB; if all API, 2 cores and 4GB| [Local source code startup video tutorial](https://www.bilibili.com/video/BV1wBJhz4Ewe) | 
+| **Full Module Installation** | Intelligent conversation, multi-user management, multi-agent management, Console UI operations | Full-featured experience; data stored in database |[① Docker version](./docs/Deployment_all.md#%E6%96%B9%E5%BC%8F%E4%B8%80docker%E8%BF%90%E8%A1%8C%E5%85%A8%E6%A8%A1%E5%9D%97) / [② Source code deployment](./docs/Deployment_all.md#%E6%96%B9%E5%BC%8F%E4%BA%8C%E6%9C%AC%E5%9C%B0%E6%BA%90%E7%A0%81%E8%BF%90%E8%A1%8C%E5%85%A8%E6%A8%A1%E5%9D%97) / [③ Source code deployment auto-update tutorial](./docs/dev-ops-integration.md) | If using `FunASR`, 4 cores and 8GB; if all API, 2 cores and 4GB| Coming Soon | 
 
 For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 
@@ -249,7 +151,7 @@ WebSocket interface address: wss://2662r3426b.vicp.fun/xiaozhi/v1/
 | Intent (Intent Recognition) | function_call (function calling) | function_call (function calling) |
 | Memory | nomem (no memory) | mem_local_short (local short-term memory) |
 
-If you care about the latency of each component, please refer to the [Xiaozhi component performance test report](https://github.com/xinnan-tech/xiaozhi-performance-research). You can actually test it in your own environment using the testing methods described in the report.
+If you care about the latency of each component, you can test it in your own environment using the testing methods described in [docs/performance_tester.md](./docs/performance_tester.md).
 
 #### 🔧 Test Tools
 This project provides the following test tools to help you verify the system and choose the right models:
@@ -298,7 +200,7 @@ The boot log contains the 6-digit setup code used to install the device in the a
 ![Full module installation architecture — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](docs/images/deploy2.png)
 | Feature Module | Description |
 |:---:|:---|
-| Core Architecture | Based on [MQTT+UDP gateway](https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mqtt-gateway-integration.md), WebSocket, and HTTP servers, providing a complete console management and authentication system |
+| Core Architecture | Based on MQTT+UDP gateway, WebSocket, and HTTP servers, providing a complete console management and authentication system |
 | Voice Interaction | Supports streaming ASR (speech recognition), streaming TTS (speech synthesis), VAD (voice activity detection), multi-language recognition, and speech processing |
 | Voiceprint Recognition | Supports multi-user voiceprint registration, management, and recognition, processing in parallel with ASR to identify the speaker in real time and pass the identity to the LLM for personalized responses |
 | Intelligent Conversation | Supports multiple LLMs (large language models) for intelligent conversation |
@@ -319,14 +221,14 @@ The boot log contains the 6-digit setup code used to install the device in the a
 - **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
   - ✅ Google, Apple, Microsoft, GitHub implemented (JustAuth 1.16.7) + passcode.
 
-To learn about the specific development plan progress, [click here](https://github.com/users/xinnan-tech/projects/3). For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
+To learn about the specific development plan progress, see the project roadmap. For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 
 If you are a software developer, here is an [Open Letter to Developers](docs/contributor_open_letter.md). Welcome aboard!
 
 ---
 
 ## Product Ecosystem 👬
-Xiaozhi is an ecosystem. When you use this product, you can also check out other [outstanding projects](https://github.com/78/xiaozhi-esp32/blob/main/README_zh.md#%E7%9B%B8%E5%85%B3%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE) in this ecosystem.
+Xiaozhi is an ecosystem. When you use this product, you can also check out other outstanding projects in this ecosystem.
 
 ---
 
@@ -432,11 +334,3 @@ In fact, any VLLM that supports the openai API can be integrated.
 | <img src="./docs/images/logo_qinren.png" width="160"> | [Xi'an Qinren Information Technology](https://www.029app.com/) | Thanks to [Xi'an Qinren Information Technology](https://www.029app.com/) for deepening this project's visual system, ensuring the consistency and scalability of the overall design style across multi-scenario applications |
 | <img src="./docs/images/logo_contributors.png" width="160"> | [Code Contributors](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors) | Thanks to [all code contributors](https://github.com/xinnan-tech/xiaozhi-esp32-server/graphs/contributors) — your contributions make the project more robust and powerful |
 
-
-<a href="https://www.star-history.com/?repos=xinnan-tech%2Fxiaozhi-esp32-server&type=date&legend=top-left">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=xinnan-tech/xiaozhi-esp32-server&type=date&theme=dark&legend=top-left&sealed_token=cQovHKgZjqEnQ-svfYfN392irNvGuq-6pyv4cA8nd2jQEhQLz1ETV4YHTVk2UZyLMFbCQuZA7jduRh3YbeK5WPYaRLrfmIimGQa3lram652jJL9oQk-UuSZA5H6L4dPIhZc8KCc-Ur_UAUNbly7TePpnTR2otGknBLCOjOliD4fk1st6z7tPEDVjSRx5" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=xinnan-tech/xiaozhi-esp32-server&type=date&legend=top-left&sealed_token=cQovHKgZjqEnQ-svfYfN392irNvGuq-6pyv4cA8nd2jQEhQLz1ETV4YHTVk2UZyLMFbCQuZA7jduRh3YbeK5WPYaRLrfmIimGQa3lram652jJL9oQk-UuSZA5H6L4dPIhZc8KCc-Ur_UAUNbly7TePpnTR2otGknBLCOjOliD4fk1st6z7tPEDVjSRx5" />
-    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=xinnan-tech/xiaozhi-esp32-server&type=date&legend=top-left&sealed_token=cQovHKgZjqEnQ-svfYfN392irNvGuq-6pyv4cA8nd2jQEhQLz1ETV4YHTVk2UZyLMFbCQuZA7jduRh3YbeK5WPYaRLrfmIimGQa3lram652jJL9oQk-UuSZA5H6L4dPIhZc8KCc-Ur_UAUNbly7TePpnTR2otGknBLCOjOliD4fk1st6z7tPEDVjSRx5" />
-  </picture>
-</a>
