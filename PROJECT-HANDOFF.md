@@ -92,6 +92,7 @@ NOTICE             (credits original project + this fork)
 SECURITY.md        (added on GitHub)
 PROJECT-HANDOFF.md (this file — import into a fresh chat session)
 deploy-local.sh, deploy-local-now.sh   (helpers to build + deploy the English stack; WSL)
+capture_serial.py   (headless-device onboarding helper — captures boot log / 6-digit setup code)
 main/
   manager-api/     Java Spring Boot backend (admin console API)
   manager-web/     Vue.js admin console frontend
@@ -214,3 +215,40 @@ This is COMPLETE. The remaining work is now the DEPLOYMENT/PENDING items in sect
 - **Live2D model files** (`digital-human/resources/*`) are model data — `Name` display fields translated, `Id` values preserved.
 - **`YOUR_` sentinel:** config placeholder values start with `YOUR_` and the code detects "not configured"
   via `"YOUR_" in value` — keep that marker consistent across config + code.
+
+---
+
+## 9. Headless device onboarding (serial)
+
+Devices without a screen (headless ESP32 boards) are onboarded over serial. The **MAC address** and the
+**6-digit setup code** (needed to install the device in the admin console) are read from the serial port.
+
+**Prerequisites:** `esptool` and `pyserial` installed (`pip install esptool pyserial`).
+
+**Step 1 — Read the MAC address (also resets the board):**
+```powershell
+esptool --port COM<port> read_mac
+```
+
+**Step 2 — Capture the boot log to get the 6-digit setup code:**
+```powershell
+python capture_serial.py COM<port>
+```
+`capture_serial.py` (repo root) opens the port, captures ~15s of boot output at 115200 baud, and prints it.
+The boot log contains the 6-digit setup code used to install the device in the admin console.
+
+> 💡 The `read_mac` command resets the board via the RTS pin, so run it first, then immediately capture
+> the serial output to catch the setup code printed during boot.
+
+> 💡 **New vs. known device:** when you enter the setup code in the admin console, the same prompt checks
+> whether the device is **new** or **already known** and acts accordingly. A brand-new device is registered;
+> an already-added device (matching MAC) logs straight into the server — no duplicate is created.
+
+> 🔒 **Security:** only the operator can add new devices (the 6-digit setup code is obtained over serial).
+> Known devices auto-login on matching MAC, so no one can silently register a device on the server.
+
+**Standing workflow:** when the user says something like "add new device on COM4" (any phrasing containing
+`on COM<port>`), run Step 1 then Step 2 against that port and report the MAC + setup code.
+
+**Standing doc convention:** `README.md` and `PROJECT-HANDOFF.md` are auto-updated to reflect every new
+change/update without asking for approval.

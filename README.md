@@ -240,6 +240,37 @@ This project provides the following test tools to help you verify the system and
 > 💡 Note: When testing model speed, only models with configured keys will be tested.
 
 ---
+
+## Headless Device Onboarding 🔌
+
+Devices without a screen (headless ESP32 boards) can be onboarded over serial. The **MAC address** and the
+**6-digit setup code** (needed to install the device in the admin console) are read from the serial port.
+
+**Prerequisites:** `esptool` and `pyserial` installed (`pip install esptool pyserial`).
+
+**Step 1 — Read the MAC address (also resets the board):**
+```powershell
+esptool --port COM<port> read_mac
+```
+
+**Step 2 — Capture the boot log to get the 6-digit setup code:**
+```powershell
+python capture_serial.py COM<port>
+```
+`capture_serial.py` (repo root) opens the port, captures ~15s of boot output at 115200 baud, and prints it.
+The boot log contains the 6-digit setup code used to install the device in the admin console.
+
+> 💡 The `read_mac` command resets the board via the RTS pin, so run it first, then immediately capture
+> the serial output to catch the setup code printed during boot.
+
+> 💡 **New vs. known device:** when you enter the setup code in the admin console, the same prompt checks
+> whether the device is **new** or **already known** and acts accordingly. A brand-new device is registered;
+> an already-added device (matching MAC) logs straight into the server — no duplicate is created.
+
+> 🔒 **Security:** only the operator can add new devices (the 6-digit setup code is obtained over serial).
+> Known devices auto-login on matching MAC, so no one can silently register a device on the server.
+
+---
 ## Feature List ✨
 ### Implemented ✅
 ![Full module installation architecture — UI text shown: "Visual Model (VLLM)", "Voice Activity Detection (VAD)", "Automatic Speech Recognition (ASR)", "Voice Print Recognition (VP)", "Large Language Model (LLM)", "Memory (MEM)".](docs/images/deploy2.png)
