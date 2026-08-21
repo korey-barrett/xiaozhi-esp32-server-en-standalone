@@ -1,0 +1,268 @@
+import os
+import base64
+from typing import Optional, Dict
+
+import httpx
+
+TAG = __name__
+
+
+class DeviceNotFoundException(Exception):
+    pass
+
+
+class DeviceBindException(Exception):
+    def __init__(self, bind_code):
+        self.bind_code = bind_code
+        super().__init__(f"Device bind exception, bind code: {bind_code}")
+
+
+class ManageApiClient:
+    _instance = None
+    _async_clients = {}  # store an independent client for each event loop
+    _secret = None
+
+    def __new__(cls, config):
+        """Singleton pattern to ensure a globally unique instance, and accept config parameters"""
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._init_client(config)
+        return cls._instance
+
+    @classmethod
+    def _init_client(cls, config):
+        """Initialize the config (defer client creation)"""
+        cls.config = config.get("manager-api")
+
+        if not cls.config:
+            raise Exception("manager-api config error")
+
+        if not cls.config.get("url") or not cls.config.get("secret"):
+            raise Exception("manager-api url or secret config error")
+
+        if "YOUR_" in cls.config.get("secret"):
+            raise Exception("Please configure the manager-api secret first")
+
+        cls._secret = cls.config.get("secret")
+        cls.max_retries = cls.config.get("max_retries", 6)  # max retry count
+        cls.retry_delay = cls.config.get("retry_delay", 10)  # initial retry delay (seconds)
+        # do not create the AsyncClient here, defer it to actual use
+        cls._async_clients = {}
+
+    @classmethod
+    async def _ensure_async_client(cls):
+        """Ensure the async client is created (create an independent client for each event loop)"""
+        import asyncio
+
+        try:
+            loop = asyncio.get_running_loop()
+            loop_id = id(loop)
+
+            # create an independent client for each event loop
+            if loop_id not in cls._async_clients:
+                # the server may actively close connections, and the httpx connection pool cannot correctly detect and clean them up
+                limits = httpx.Limits(
+                    max_keepalive_connections=0,  # disable keep-alive, create a new connection each time
+                )
+                cls._async_clients[loop_id] = httpx.AsyncClient(
+                    base_url=cls.config.get("url"),
+                    headers={
+                        "User-Agent": f"PythonClient/2.0 (PID:{os.getpid()})",
+                        "Accept": "application/json",
+                        "Authorization": "Bearer " + cls._secret,
+                    },
+                    timeout=cls.config.get("timeout", 30),
+                    limits=limits,  # use the limits
+                    trust_env=False,
+                )
+            return cls._async_clients[loop_id]
+        except RuntimeError:
+            # if there is no running event loop, create a temporary one
+            raise Exception("Must be called in an async context")
+
+    @classmethod
+    async def _async_request(cls, method: str, endpoint: str, **kwargs) -> Dict:
+        """Send a single async HTTP request and process the response"""
+        # ensure the client is created
+        client = await cls._ensure_async_client()
+        endpoint = endpoint.lstrip("/")
+        response = None
+        try:
+            response = await client.request(method, endpoint, **kwargs)
+            response.raise_for_status()
+
+            result = response.json()
+
+            # handle business errors returned by the API
+            if result.get("code") == 10041:
+                raise DeviceNotFoundException(result.get("msg"))
+            elif result.get("code") == 10042:
+                raise DeviceBindException(result.get("msg"))
+            elif result.get("code") != 0:
+                raise Exception(f"API returned error: {result.get('msg', 'Unknown error')}")
+
+            # return the success data
+            return result.get("data") if result.get("code") == 0 else None
+        finally:
+            # ensure the response is closed (executed even on exception)
+            if response is not None:
+                await response.aclose()
+
+    @classmethod
+    def _should_retry(cls, exception: Exception) -> bool:
+        """Determine whether the exception should be retried"""
+        # network connection related errors
+        if isinstance(
+            exception, (httpx.ConnectError, httpx.TimeoutException, httpx.NetworkError)
+        ):
+            return True
+
+        # HTTP status code errors
+        if isinstance(exception, httpx.HTTPStatusError):
+            status_code = exception.response.status_code
+            return status_code in [408, 429, 500, 502, 503, 504]
+
+        return False
+
+    @classmethod
+    async def _execute_async_request(cls, method: str, endpoint: str, **kwargs) -> Dict:
+        """Async request executor with retry mechanism"""
+        import asyncio
+
+        retry_count = 0
+
+        while retry_count <= cls.max_retries:
+            try:
+                # execute the async request
+                return await cls._async_request(method, endpoint, **kwargs)
+            except Exception as e:
+                # determine whether to retry
+                if retry_count < cls.max_retries and cls._should_retry(e):
+                    retry_count += 1
+                    print(
+                        f"{method} {endpoint} async request failed, will retry for the {retry_count}th time in {cls.retry_delay:.1f} seconds"
+                    )
+                    await asyncio.sleep(cls.retry_delay)
+                    continue
+                else:
+                    # do not retry, raise the exception directly
+                    raise
+
+    @classmethod
+    def safe_close(cls):
+        """Safely close all async connection pools"""
+        import asyncio
+
+        for client in list(cls._async_clients.values()):
+            try:
+                asyncio.run(client.aclose())
+            except Exception:
+                pass
+        cls._async_clients.clear()
+        cls._instance = None
+
+
+async def get_server_config() -> Optional[Dict]:
+    """Get the server base config"""
+    return await ManageApiClient._instance._execute_async_request(
+        "POST", "/config/server-base"
+    )
+
+
+async def get_agent_models(
+    mac_address: str, client_id: str, selected_module: Dict
+) -> Optional[Dict]:
+    """Get the agent model config"""
+    return await ManageApiClient._instance._execute_async_request(
+        "POST",
+        "/config/agent-models",
+        json={
+            "macAddress": mac_address,
+            "clientId": client_id,
+            "selectedModule": selected_module,
+        },
+    )
+
+
+async def get_correct_words(mac_address: str) -> Optional[Dict]:
+    """Get the agent replacement words"""
+    try:
+        return await ManageApiClient._instance._execute_async_request(
+            "POST", "/config/correct-words",
+            json={"macAddress": mac_address}
+        )
+    except Exception as e:
+        print(f"Failed to get replacement words: {e}")
+        return None
+
+
+async def generate_and_save_chat_summary(session_id: str) -> Optional[Dict]:
+    """Generate and save the chat summary"""
+    try:
+        return await ManageApiClient._instance._execute_async_request(
+            "POST",
+            f"/agent/chat-summary/{session_id}/save",
+        )
+    except Exception as e:
+        print(f"Failed to generate and save the chat summary: {e}")
+        return None
+
+
+async def generate_and_save_chat_title(session_id: str) -> Optional[Dict]:
+    """Generate and save the chat title"""
+    try:
+        return await ManageApiClient._instance._execute_async_request(
+            "POST",
+            f"/agent/chat-title/{session_id}/generate",
+        )
+    except Exception as e:
+        print(f"Failed to generate and save the chat title: {e}")
+        return None
+
+
+async def report(
+    mac_address: str, session_id: str, chat_type: int, content: str, audio, report_time
+) -> Optional[Dict]:
+    """Async chat record report"""
+    if not content or not ManageApiClient._instance:
+        return None
+    try:
+        return await ManageApiClient._instance._execute_async_request(
+            "POST",
+            f"/agent/chat-history/report",
+            json={
+                "macAddress": mac_address,
+                "sessionId": session_id,
+                "chatType": chat_type,
+                "content": content,
+                "reportTime": report_time,
+                "audioBase64": (
+                    base64.b64encode(audio).decode("utf-8") if audio else None
+                ),
+            },
+        )
+    except Exception as e:
+        print(f"TTS report failed: {e}")
+        return None
+
+
+async def lookup_address_book(caller_mac: str, nickname: str) -> Optional[Dict]:
+    """Look up the target device by nickname"""
+    if not ManageApiClient._instance:
+        return None
+    try:
+        return await ManageApiClient._instance._execute_async_request(
+            "GET",
+            f"/device/address-book/lookup?callerMac={caller_mac}&nickname={nickname}",
+        )
+    except Exception as e:
+        print(f"Address book lookup failed: {e}")
+        return None
+
+
+def init_service(config):
+    ManageApiClient(config)
+
+
+def manage_api_http_safe_close():
+    ManageApiClient.safe_close()
