@@ -75,8 +75,27 @@ Doing server-only would not help — the device would still detect "你好小智
 - Add English **exit commands** (e.g. `"exit"`, `"goodbye"`) alongside `退出`/`关闭`.
 - Test: Chinese still wakes; no regressions.
 
-### Phase 2 — Device-side English wake model
-- Flash a device with an **English WakeNet** (or custom) wake word model.
+### Phase 2 — Device-side English wake model (concrete steps)
+
+The device runs the **`xiaozhi-esp32` firmware** (a separate repo). Configure it to wake on an English word.
+
+**Option A — Custom wake word (Multinet) — recommended.**
+In `idf.py menuconfig` → "Xiaozhi Assistant":
+1. **Wake Word Implementation Type** → `USE_CUSTOM_WAKE_WORD` (requires ESP32-S3/P4 + PSRAM).
+2. **Custom Wake Word** → `hey xiaozhi` (for English, use the words directly; pinyin only applies to Chinese).
+3. **Custom Wake Word Display** → `hey xiaozhi` — this exact string is sent to the server and MUST match a
+   `wakeup_words` entry (Phase 1 added it).
+4. **Custom Wake Word Threshold** → tune sensitivity (lower = more sensitive; start ~20).
+
+**Option B — Preset English WakeNet word.** Some WakeNet models include preset English words (e.g. "Jarvis",
+"Alexa"). If you use one, add that exact word to the server's `wakeup_words` (e.g. `jarvis` / `alexa`) so the
+server recognizes it — currently the server list has `hey/hello/hi xiaozhi`.
+
+**Flash & verify:**
+```bash
+idf.py set-target esp32s3 && idf.py menuconfig && idf.py flash monitor
+```
+Confirm the device now reports the **English** wake text (not `你好小智`) to the server.
 - Confirm the device now reports the English wake text to the server.
 
 ### Phase 3 — Switch server default to English
