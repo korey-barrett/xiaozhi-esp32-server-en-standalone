@@ -3,8 +3,9 @@
 # run from any directory (no sudo needed for /opt writes — docker runs as root).
 #
 # Build first:
+#   docker build -f Dockerfile-server-base -t xiaozhi-local:server-base <repo>
 #   docker build -f Dockerfile-web   -t xiaozhi-local:web_latest    <repo>
-#   docker build -f Dockerfile-server -t xiaozhi-local:server_latest <repo>
+#   docker build -f Dockerfile-server -t xiaozhi-local:server_latest --build-arg BASE_IMAGE=xiaozhi-local:server-base <repo>
 # Then: docker-compose -f docker-compose.local.yml up -d
 
 version: '3'

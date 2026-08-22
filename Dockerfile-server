@@ -1,6 +1,11 @@
 # Production image, contains only the application code
 # Built from our own base image (Dockerfile-server-base) — no dependency on the upstream repo's images.
-FROM xiaozhi-local:server-base
+#
+# The base image is referenced via BASE_IMAGE so the same Dockerfile works in both
+# GitHub Actions CI (pulls ghcr.io/<repo>:server-base) and local builds (pass
+# --build-arg BASE_IMAGE=xiaozhi-local:server-base).
+ARG BASE_IMAGE=ghcr.io/korey-barrett/xiaozhi-esp32-server-en-standalone:server-base
+FROM ${BASE_IMAGE}
 
 COPY main/xiaozhi-server .
 

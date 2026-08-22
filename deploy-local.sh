@@ -16,7 +16,7 @@
 set -euo pipefail
 
 # ----- configurable paths -----
-REPO="/mnt/d/DEV/Projects/xiaozhi-server/xiaozhi-server"   # translated repo
+REPO="/mnt/d/DEV/Projects/xiaozhi-esp32-server-en-standalone"   # translated repo
 DEPLOY="/opt/xiaozhi-server"                                # existing live deploy
 TS="$(date +%Y%m%d-%H%M%S)"
 
@@ -33,7 +33,7 @@ cd "$REPO"
 docker build -f Dockerfile-server-base -t xiaozhi-local:server-base .
 
 echo "[2/7] Build server image from translated repo ..."
-docker build -f Dockerfile-server -t xiaozhi-local:server_latest .
+docker build -f Dockerfile-server -t xiaozhi-local:server_latest --build-arg BASE_IMAGE=xiaozhi-local:server-base .
 
 echo "[3/7] Build web image from translated repo ..."
 docker build -f Dockerfile-web -t xiaozhi-local:web_latest .
