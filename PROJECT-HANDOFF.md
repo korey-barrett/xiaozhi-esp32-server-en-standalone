@@ -123,9 +123,37 @@ bash deploy-local-now.sh   # backs up DB, resets mysql, deploys via docker-compo
   (`SELECT param_value FROM sys_params WHERE param_code='server.secret';`) and update
   `/opt/xiaozhi-server/data/.config.yaml` → `manager-api.secret` (write via a docker container, since `/opt` is root-owned), then restart the server container.
 
-### WSL2 + Docker LAN access
-- WSL2 NAT exposes ports on `127.0.0.1`; portproxy forwards `0.0.0.0:8000/8002/8003` → WSL IP (`172.17.76.77`).
-- Firewall rules `xiaozhi-8000/8002/8003` exist. Re-check the portproxy after any WSL reboot (WSL IP can change).
+### WSL2 + Docker LAN access (mirrored mode — verify current setup!)
+- **Networking mode is `networkingMode=mirrored`** (`.wslconfig`). The VM shares the host LAN IP (`192.168.0.195`).
+  Published container ports are reachable at **host `127.0.0.1:<port>`** (the mirror forwards loopback into the VM).
+  They are **NOT** reachable on the LAN IP by themselves.
+- **External/LAN access uses a portproxy bound to the LAN IP → `127.0.0.1`** (NOT `0.0.0.0` — binding `0.0.0.0`
+  on 8000/8002/8003 collides with the guest publish, verified 2026-09-14):
+  ```powershell
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8000 connectaddress=127.0.0.1 connectport=8000
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8002 connectaddress=127.0.0.1 connectport=8002
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8003 connectaddress=127.0.0.1 connectport=8003
+  netsh interface portproxy show all
+  ```
+- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them). **Do NOT bind the portproxy to `0.0.0.0`** —
+  it fails and will block the containers from publishing.
+- Note: in mirrored mode, host-side self-tests to `192.168.0.195:<port>` can appear black-holed even when LAN
+  devices work, so confirm LAN reachability from a *different* device (phone / another PC / the ESP32).
+- **On the host itself, use `http://localhost:8002`** (console) / `ws://localhost:8000` — the LAN IP is NOT
+  reachable from the host browser in mirrored mode (verified); it is only reachable from other LAN devices.
+
+### Fix: containers driftted off the compose network (2026-09-14)
+Symptom: server crash-loops with `httpx.ConnectError: Temporary failure in name resolution`, console/OTA/ws all time out.
+Cause: `xiaozhi-esp32-server` and `xiaozhi-esp32-server-web` had **no network attached** (empty
+`NetworkSettings.Networks`), so they had no DNS and no host ports; only db/redis were on `xiaozhi-server_default`.
+- If the container config diverged from `docker-compose.local.yml`, a plain `up -d` only **starts** the old
+  orphaned containers without reconnecting them. Force a clean recreate **after ports are free**:
+  ```bash
+  cd /mnt/d/DEV/Projects/xiaozhi-esp32-server-en-standalone/main/xiaozhi-server
+  docker compose -f docker-compose.local.yml up -d --force-recreate xiaozhi-esp32-server xiaozhi-esp32-server-web
+  ```
+- Verify with `docker network inspect xiaozhi-server_default` (expect 4 members) and
+  `docker exec xiaozhi-esp32-server python3 -c "import socket;print(socket.gethostbyname('xiaozhi-esp32-server-web'))"`.
 
 ---
 
