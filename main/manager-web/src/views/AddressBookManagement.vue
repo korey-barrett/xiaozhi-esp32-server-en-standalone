@@ -294,11 +294,16 @@ export default {
             });
           });
           Promise.all(agentPromises).then(() => {
-            const firstDevice = agentList[0] || {};
             this.agentDeviceOptions = agentList;
             this.filteredAgents = agentList;
-            // Select the first item by default
-            this.handleDeviceClick(firstDevice.devices?.[0] || {}, firstDevice);
+            // Select the first agent that actually has devices. Picking a device-less
+            // group as the default would leave the detail panel with an empty device
+            // and crash the avatar render (`getDeviceAvatar(undefined)`).
+            const firstWithDevices = agentList.find(agent => agent.devices && agent.devices.length) || {};
+            const firstDevice = firstWithDevices.devices && firstWithDevices.devices[0];
+            if (firstDevice) {
+              this.handleDeviceClick(firstDevice, firstWithDevices);
+            }
             // Get device status
             this.fetchDeviceStatus();
           });
@@ -605,10 +610,12 @@ export default {
         require('@/assets/device-avatars/xiaozhi-logo15.png'),
         require('@/assets/device-avatars/xiaozhi-logo16.png')
       ];
-      // Simple hash algorithm, assigns an avatar based on deviceId
+      // Simple hash algorithm, assigns an avatar based on deviceId.
+      // Guard empty/undefined ids so an empty device never crashes the render.
+      const id = String(deviceId || '');
       let hash = 0;
-      for (let i = 0; i < deviceId.length; i++) {
-        hash = ((hash << 5) - hash) + deviceId.charCodeAt(i);
+      for (let i = 0; i < id.length; i++) {
+        hash = ((hash << 5) - hash) + id.charCodeAt(i);
         hash = hash & hash;
       }
       const index = Math.abs(hash) % avatars.length;
