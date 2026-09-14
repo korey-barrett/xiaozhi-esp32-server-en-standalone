@@ -173,13 +173,14 @@ Verify MQTT+UDP from an actual device (host self-tests can black-hole).
 ## New: SSO login configuration
 
 SSO (Google / Apple / Microsoft / GitHub) with a passcode second factor is configured in
-`main/manager-api/src/main/resources/application.yml` under `xiaozhi.sso`:
+`main/manager-api/src/main/resources/application.yml` under `xiaozhi.sso`. The file holds
+**placeholders only** — the real secrets never go in the repo:
 
 ```yaml
 xiaozhi:
   sso:
     enabled: true
-    passcode: "your-passcode"
+    passcode: "YOUR_SSO_PASSCODE"
     frontend-redirect-url: "http://localhost:8002"
     providers:
       google:
@@ -197,14 +198,21 @@ xiaozhi:
         client-secret: ""
         redirect-uri: ""
       github:
-        client-id: "Ov23li..."          # GitHub OAuth App client id
-        client-secret: "b7de..."        # GitHub OAuth App client secret
+        client-id: "YOUR_GITHUB_CLIENT_ID"           # GitHub OAuth App client id (public)
+        client-secret: "YOUR_GITHUB_CLIENT_SECRET"   # overridden by env — never a real value here
         redirect-uri: "http://localhost:8002/xiaozhi/user/sso/callback?provider=github"
 ```
 
-A provider is enabled only when its `client-id` is set. After changing `application.yml`, rebuild the web
-image (`docker build -f Dockerfile-web ...`) and redeploy. The `sys_user_oauth` table is created
-automatically by Liquibase on startup.
+A provider is enabled only when its `client-id` is set. The **passcode** and GitHub **client-secret** are
+**never stored in the repo**: put the real values in `main/xiaozhi-server/.env` (gitignored) as
+`SSO_PASSCODE` and `GITHUB_CLIENT_SECRET`. `docker-compose.local.yml` and `docker-compose_all.yml`
+interpolate them into the web service's environment, and `docs/docker/start.sh` forwards them to the JVM
+as `--xiaozhi.sso.passcode=` / `--xiaozhi.sso.providers.github.client-secret=`. If the env vars are unset,
+`start.sh` falls back to the `YOUR_` placeholders, so SSO always fails **safe** (never an empty passcode).
+
+To rotate a secret, edit `.env` and redeploy the web container (no image rebuild). After changing
+`application.yml` itself, rebuild the web image (`docker build -f Dockerfile-web ...`) and redeploy.
+The `sys_user_oauth` table is created automatically by Liquibase on startup.
 
 Notes:
 

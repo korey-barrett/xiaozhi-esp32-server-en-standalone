@@ -58,6 +58,10 @@ services:
       - SPRING_DATA_REDIS_HOST=xiaozhi-esp32-server-redis
       - SPRING_DATA_REDIS_PASSWORD=
       - SPRING_DATA_REDIS_PORT=6379
+      # SSO secrets come from main/xiaozhi-server/.env (gitignored), interpolated
+      # here so start.sh can forward them to the JVM. Never commit real values.
+      - SSO_PASSCODE=${SSO_PASSCODE:-YOUR_SSO_PASSCODE}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET:-YOUR_GITHUB_CLIENT_SECRET}
     volumes:
       # Config file directory
       - /opt/xiaozhi-server/uploadfile:/uploadfile

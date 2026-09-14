@@ -295,7 +295,7 @@ Users can log in to the admin console with a third-party account (**Google, Appl
 
 ### Configuration (`application.yml` → `xiaozhi.sso`)
 - `enabled` — master switch.
-- `passcode` — the required second factor.
+- `passcode` — the required second factor. **Secret — never committed** (see "Secrets" below).
 - `frontend-redirect-url` — base URL the callback redirects back to (e.g. `http://localhost:8002`). On the
   live LAN/WSL setup it must be `localhost` because that is the only origin the host browser can reach
   (mirrored mode black-holes self-connects to the LAN IP).
@@ -308,6 +308,15 @@ Users can log in to the admin console with a third-party account (**Google, Appl
   callback URL, and it must match verbatim, including `?provider=github`.
 - Google / Apple / Microsoft require **HTTPS** redirect URIs; over the current HTTP/LAN setup **GitHub is
   the only viable provider** (GitHub allows HTTP + any port).
+
+### Secrets (never committed)
+The GitHub repo is **PUBLIC**, so the SSO passcode and the GitHub client-secret never appear in `application.yml`
+(placeholders only). The real values live in the gitignored `main/xiaozhi-server/.env` as `SSO_PASSCODE` and
+`GITHUB_CLIENT_SECRET`; `docker-compose.local.yml` / `docker-compose_all.yml` interpolate them into the web
+service's environment, and `docs/docker/start.sh` forwards them to the JVM as
+`--xiaozhi.sso.passcode=` / `--xiaozhi.sso.providers.github.client-secret=`. Unset env vars fall back to the
+`YOUR_` placeholders so SSO fails safe (never an empty passcode).
+To rotate a secret: edit `.env`, then `docker compose -f docker-compose.local.yml up -d --no-deps --force-recreate xiaozhi-esp32-server-web` — no image rebuild.
 
 ### Backend files
 - `SsoController` (`/user/sso/providers`, `/render`, `/callback`, `/verify`)
