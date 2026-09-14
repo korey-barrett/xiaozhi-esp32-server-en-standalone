@@ -15,8 +15,6 @@
 -- Idempotent: ids not present are inserted; existing ids are refreshed.
 INSERT INTO `sys_dict_data` (`id`, `dict_type_id`, `dict_label`, `dict_value`,
 `remark`, `sort`, `creator`, `create_date`, `updater`, `update_date`) VALUES
-INSERT INTO `sys_dict_data` (`id`, `dict_type_id`, `dict_label`, `dict_value`, 
-`remark`, `sort`, `creator`, `create_date`, `updater`, `update_date`) VALUES
 (101001, 101, 'Breadboard New Wiring (WiFi)', 'bread-compact-wifi', 'Breadboard New Wiring (WiFi)', 1, 1, NOW(), 1, NOW()),
 (101002, 101, 'Breadboard New Wiring (WiFi) + LCD', 'bread-compact-wifi-lcd', 'Breadboard New Wiring (WiFi) + LCD', 2, 1, NOW(), 1, NOW()),
 (101003, 101, 'Breadboard New Wiring (ML307 AT)', 'bread-compact-ml307', 'Breadboard New Wiring (ML307 AT)', 3, 1, NOW(), 1, NOW()),
