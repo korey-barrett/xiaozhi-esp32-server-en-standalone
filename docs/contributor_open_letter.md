@@ -53,7 +53,8 @@ Portuguese.
 
 This isn't just a translation. In this fork we've also added real features and hardened the stack:
 
-- **SSO login** (Google / Apple / Microsoft / GitHub) with a **passcode** second factor.
+- **SSO login** (Google / Apple / Microsoft / GitHub) with a **passcode** second factor — **GitHub live**,
+  with secrets kept out of the public repo (env-injected at runtime).
 - **Headless device onboarding** over serial — a clean way to add screen-less ESP32 boards.
 - **Updated all third-party dependencies** to current stable versions (reducing old, vulnerable packages).
 - **Audited every install method** and documented it in `docs/INSTALLATION.md`, so new users aren't led

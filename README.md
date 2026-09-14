@@ -248,17 +248,14 @@ The boot log contains the 6-digit setup code used to install the device in the a
 | Tool Calling | Supports the client IoT protocol, client MCP protocol, server MCP protocol, MCP access point protocol, and custom tool functions |
 | Command Dispatch | Based on the MQTT protocol, supports dispatching MCP commands from the Console to ESP32 devices |
 | Admin Console | Provides a web management interface supporting user management, system configuration, and device management; the interface defaults to **English** (also supports Simplified Chinese, Traditional Chinese, and other languages) |
-| SSO Login | Sign in with **Google / Apple / Microsoft / GitHub** (OAuth2/OIDC) plus a **passcode** second factor |
+| SSO Login | Sign in with **Google / Apple / Microsoft / GitHub** (OAuth2/OIDC) plus a **passcode** second factor — **GitHub is live** (requests the `user:email` scope) |
 | Test Tools | Provides performance test tools, vision model test tools, and audio interaction test tools |
 | Deployment Support | Supports Docker and local deployment, with complete configuration file management |
 | Plugin System | Supports functional plugin extensions, custom plugin development, and plugin hot-reloading |
 
-### In Development 🚧
-
-- **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
-  - ✅ Google, Apple, Microsoft, GitHub implemented (JustAuth 1.16.7) + passcode.
-  - ✅ GitHub verified live — requests the `user:email` scope so the email (not a generated
-    `sso_github_<id>`) becomes the new user's username. See `PROJECT-HANDOFF.md §10`.
+SSO login is **implemented and live** — see the **SSO Login** row in the Core Features table above (GitHub,
+`user:email` scope, passcode second factor, secrets externalized via env so they never enter the repo).
+Remaining roadmap items are tracked in `PROJECT-HANDOFF.md §4`.
 
 To learn about the specific development plan progress, see the project roadmap. For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 
