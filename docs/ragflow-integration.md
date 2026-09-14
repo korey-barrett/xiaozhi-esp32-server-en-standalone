@@ -92,7 +92,7 @@ You need to find a folder on your computer to store the ragflow project. For exa
 
 You can use the `git` command to download the ragflow project into this folder. This tutorial uses version `v0.22.0` for installation and deployment.
 ```
-git clone https://ghfast.top/https://github.com/infiniflow/ragflow.git
+git clone https://github.com/infiniflow/ragflow.git
 cd ragflow
 git checkout v0.22.0
 ```

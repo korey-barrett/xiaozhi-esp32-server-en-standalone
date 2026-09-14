@@ -32,7 +32,7 @@ If you deploy on a server, ensure that ports `1883`, `8884`, and `8007` are all 
 
 1. Clone the [adapted xiaozhi-mqtt-gateway project](https://github.com/xinnan-tech/xiaozhi-mqtt-gateway.git):
 ```bash
-git clone https://ghfast.top/https://github.com/xinnan-tech/xiaozhi-mqtt-gateway.git
+git clone https://github.com/xinnan-tech/xiaozhi-mqtt-gateway.git
 cd xiaozhi-mqtt-gateway
 ```
 

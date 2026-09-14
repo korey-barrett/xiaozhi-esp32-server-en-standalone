@@ -8,7 +8,7 @@ If you used full-module deployment following the tutorial, you should have an OT
 
 Now, open your OTA address in a browser, for example my OTA address is
 ```
-https://2662r3426b.vicp.fun/xiaozhi/ota/
+http://192.168.1.25:8002/xiaozhi/ota/
 ```
 
 If it shows "OTA interface running normally, number of websocket clusters: X", continue below.
@@ -22,7 +22,7 @@ If it shows "OTA interface is not running normally", you probably have not confi
 - 3. Find the `server.websocket` entry in the list and enter your `Websocket` address. For example, mine is:
 
 ```
-wss://2662r3426b.vicp.fun/xiaozhi/v1/
+ws://192.168.1.25:8000/xiaozhi/v1/
 ```
 
 After configuring it, refresh your OTA interface address in the browser to see whether it works normally now. If it still does not work, double-check whether Websocket started normally and whether the Websocket address is configured.

@@ -121,15 +121,13 @@ This project offers two deployment methods. Please choose based on your specific
 
 For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 
-> 💡 Note: The following is a test platform deployed from the latest code. You can flash and test if needed. Concurrency is 6, and data is cleared daily.
+> 💡 This fork does not operate a public test platform. Deploy your own stack (see
+> [docs/INSTALLATION.md](./docs/INSTALLATION.md)) and use your own addresses:
 
 ```
-Console address: https://2662r3426b.vicp.fun
-Console (H5 version): https://2662r3426b.vicp.fun/h5/index.html
-
-Service test tool: https://2662r3426b.vicp.fun/test/
-OTA interface address: https://2662r3426b.vicp.fun/xiaozhi/ota/
-WebSocket interface address: wss://2662r3426b.vicp.fun/xiaozhi/v1/
+Console address: http://<LAN-IP>:8002
+OTA interface address: http://<LAN-IP>:8002/xiaozhi/ota/
+WebSocket interface address: ws://<LAN-IP>:8000/xiaozhi/v1/
 ```
 
 #### 🚩 Configuration Notes and Recommendations

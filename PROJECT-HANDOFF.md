@@ -43,6 +43,14 @@ An **English-first, standalone fork** of the open-source project
 
 ### English-first / no-Chinese-egress (DONE)
 - **Console + mobile + Python server + config + docs + `/generator`** are all English-default.
+- **Stale-URL scrub (2026-09-14):** removed the dead upstream test-platform `2662r3426b.vicp.fun` from all
+  English docs; runoob → official Docker docs, feishu tutorials → official ESP-IDF/nginx docs,
+  ghfast/gitclone clones → direct GitHub, bilibili demo gallery → "Coming Soon" (matches root README).
+  Also fixed `docs/dev-ops-integration.md` 8001/8002 comment swap and the manager-mobile H5 `√`/`×` bug.
+  **Deliberately kept:** feishu Xiaozhi Communication Protocol wiki (`M0XiwldO9iJwHikpXD5cEx71nKh` — no
+  English equivalent) and functional China sources (ModelScope / Baidu Pan / Zhipu bigmodel.cn).
+  **Still stale:** `docs/readme/README_de.md` / `_vi.md` / `_pt_BR.md` still carry the old VicP + bilibili
+  content — not touched (non-EN/CN translations out of scope until a translation refresh).
 - **Provider defaults (non-Chinese):** LLM/VLLM → **Google Gemini** (free tier), ASR → **FunASR** (local),
   VAD → **Silero** (local), TTS → **Edge TTS** (English voice), Memory → **nomem**, Weather → **Open-Meteo**,
   Web search → **Tavily** (US), News → **BBC RSS** (newsnow plugin disabled).

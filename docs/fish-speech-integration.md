@@ -16,7 +16,7 @@ cd autodl-tmp/
 
 Clone the project
 ```
-git clone https://gitclone.com/github.com/fishaudio/fish-speech.git ; cd fish-speech
+git clone https://github.com/fishaudio/fish-speech.git ; cd fish-speech
 ```
 
 Install dependencies

@@ -227,8 +227,8 @@ The `manager-mobile` component is a cross-platform mobile management application
 *   **Platform Compatibility:**
 
 | H5 | iOS | Android | WeChat Mini Program |
-| -- | --- | ------- | ------------------ | 
-| ×  | √   | √       | √                  | 
+| -- | --- | ------- | ------------------- |
+| √  | √   | √       | √                   | 
 
 *   **Core Technologies:**
     *   **uni-app v3:** A framework for developing all frontend applications using Vue.js, supporting iOS, Android, H5, and various mini-programs.

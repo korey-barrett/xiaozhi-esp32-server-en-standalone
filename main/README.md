@@ -235,7 +235,7 @@ The `manager-api` component is a powerful backend service built with Java and th
         *   Changes to the database's table structures, indexes, initial data, etc., are defined and version-managed through Liquibase's `changelog` files (typically in XML format). At application startup, Liquibase automatically checks for and applies necessary database structure updates, ensuring consistency of the database structure across development, test, and production environments.
 
     6.  **API Documentation:**
-        *   Complete API documentation can be accessed at: https://2662r3426b.vicp.fun/xiaozhi/doc.html
+        *   Complete API documentation can be accessed at: http://localhost:8002/xiaozhi/doc.html
         *   This documentation is generated with Knife4j and provides detailed descriptions of all RESTful API endpoints, request/response examples, and online testing capabilities.
 
 Through these carefully selected technologies and design patterns, `manager-api` builds a comprehensive, well-structured, secure, reliable, and easy-to-maintain-and-extend Java backend service. Its modular design is particularly well suited to handling complex systems with multiple management functional requirements.

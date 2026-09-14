@@ -14,7 +14,7 @@ Support for MQTT+UDP protocol, Websocket protocol, MCP access point, voiceprint 
 <p align="center">
 <a href="../FAQ.md">FAQ</a>
 · <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/issues">Report Issues</a>
-· <a href="../../README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3">Deployment Docs</a>
+· <a href="../../README.md#deployment-documentation">Deployment Docs</a>
 · <a href="https://github.com/korey-barrett/xiaozhi-esp32-server-en-standalone/releases">Release Notes</a>
 </p>
 
@@ -43,106 +43,9 @@ Developed by Professor Liu Siyuan's team (South China University of Technology)
 
 This project requires ESP32 hardware devices to work. If you have purchased ESP32-related hardware, successfully connected to Brother Xia's deployed backend service, and want to build your own `xiaozhi-esp32` backend service independently, then this project is perfect for you.
 
-Want to see the usage effects? Click the videos below 🎥
+Want to see the usage effects? 🎥
 
-<table>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1FMFyejExX" target="_blank">
-        <picture>
-          <img alt="Response speed experience" src="docs/images/demo9.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1vchQzaEse" target="_blank">
-        <picture>
-          <img alt="Speed optimization tips" src="docs/images/demo6.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1WEcxzFEAT" target="_blank">
-        <picture>
-          <img alt="Xiaozhi digital human, supports voice wake-up" src="docs/images/demo8.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1CKVz6UEuB" target="_blank">
-        <picture>
-          <img alt="Device-to-device calling" src="docs/images/demo0.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1C1tCzUEZh" target="_blank">
-        <picture>
-          <img alt="Complex medical scenarios" src="docs/images/demo1.png" /></picture>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1VC96Y5EMH" target="_blank">
-        <picture>
-          <img alt="Play music, check weather, read news" src="docs/images/demo7.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV12J7WzBEaH" target="_blank">
-        <picture>
-          <img alt="Real-time interruption" src="docs/images/demo10.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1Co76z7EvK" target="_blank">
-        <picture>
-          <img alt="Identify objects by photo" src="docs/images/demo12.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1pNXWYGEx1" target="_blank">
-        <picture>
-          <img alt="Control home appliances" src="docs/images/demo5.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1TJ7WzzEo6" target="_blank">
-        <picture>
-          <img alt="Multi-command tasks" src="docs/images/demo11.png" /></picture>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1ZQKUzYExM" target="_blank">
-        <picture>
-          <img alt="MCP access point" src="docs/images/demo13.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1zUW5zJEkq" target="_blank">
-        <picture>
-          <img alt="MQTT command dispatch" src="docs/images/demo4.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1Exu3zqEDe" target="_blank">
-        <picture>
-          <img alt="Voice print recognition" src="docs/images/demo14.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV1CDKWemEU6" target="_blank">
-        <picture>
-          <img alt="Custom timbre" src="docs/images/demo2.png" /></picture>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.bilibili.com/video/BV12yA2egEaC" target="_blank">
-        <picture>
-          <img alt="Communicate in Cantonese" src="docs/images/demo3.png" /></picture>
-      </a>
-    </td>
-  </tr>
-</table>
+> **Coming Soon** — demo videos are being prepared for this fork and will be added here.
 
 ---
 
@@ -164,19 +67,17 @@ This project provides two deployment methods. Please choose based on your specif
 | Deployment Method | Features | Applicable Scenarios | Deployment Docs | Configuration Requirements | Video Tutorials | 
 |---------|------|---------|---------|---------|---------|
 | **Simplified Installation** | Intelligent dialogue, single agent management | Low-configuration environments, data stored in config files, no database required | [①Docker Version](../Deployment_en.md) / [②Source Code Deployment](../Deployment_en.md) | 2 cores 4GB if using `FunASR`, 2 cores 2GB if all APIs | - | 
-| **Full Module Installation** | Intelligent dialogue, multi-user management, multi-agent management, intelligent console interface operation | Complete functionality experience, data stored in database |[①Docker Version](../Deployment_all_en.md) / [②Source Code Deployment](../Deployment_all_en.md) / [③Source Code Deployment Auto-Update Tutorial](../dev-ops-integration.md) | 4 cores 8GB if using `FunASR`, 2 cores 4GB if all APIs| [Local Source Code Startup Video Tutorial](https://www.bilibili.com/video/BV1wBJhz4Ewe) |
+| **Full Module Installation** | Intelligent dialogue, multi-user management, multi-agent management, intelligent console interface operation | Complete functionality experience, data stored in database |[①Docker Version](../Deployment_all_en.md) / [②Source Code Deployment](../Deployment_all_en.md) / [③Source Code Deployment Auto-Update Tutorial](../dev-ops-integration.md) | 4 cores 8GB if using `FunASR`, 2 cores 4GB if all APIs| Coming Soon |
 
 For frequently asked questions and related tutorials, please refer to [this link](../FAQ_en.md)
 
-> 💡 Note: Below is a test platform deployed with the latest code. You can burn and test if needed. Concurrent users: 6, data will be cleared daily.
+> 💡 This fork does not operate a public test platform. Deploy your own stack (see
+> [docs/INSTALLATION.md](../INSTALLATION.md)) and use your own addresses:
 
 ```
-Intelligent Control Console Address: https://2662r3426b.vicp.fun
-Intelligent Control Console Address (H5): https://2662r3426b.vicp.fun/h5/index.html
-
-Service Test Tool: https://2662r3426b.vicp.fun/test/
-OTA Interface Address: https://2662r3426b.vicp.fun/xiaozhi/ota/
-Websocket Interface Address: wss://2662r3426b.vicp.fun/xiaozhi/v1/
+Console address: http://<LAN-IP>:8002
+OTA Interface Address: http://<LAN-IP>:8002/xiaozhi/ota/
+Websocket Interface Address: ws://<LAN-IP>:8000/xiaozhi/v1/
 ```
 
 #### 🚩 Configuration Description and Recommendations

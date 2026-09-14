@@ -42,7 +42,7 @@ ws://192.168.1.25:8000/xiaozhi/v1/
 After configuring, refresh your OTA interface address in the browser and check whether it works now. If it still does not work, confirm again whether Websocket started normally and whether a Websocket address was configured.
 
 ## Step 2: Configure the Environment
-First, set up the project environment following this tutorial: [Set up the Windows ESP IDF 5.3.2 development environment and compile Xiaozhi](https://icnynnzcwou8.feishu.cn/wiki/JEYDwTTALi5s2zkGlFGcDiRknXf)
+First, set up the project environment following the [official ESP-IDF Windows setup guide](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/windows-setup.html).
 
 ## Step 3: Open the Configuration File
 After setting up the build environment, download the xiaozhi-esp32 project source code from Xiaoge,
@@ -114,8 +114,7 @@ Note: If a "zip"-related error is reported after running the second command, ign
 https://espressif.github.io/esp-launchpad/
 ```
 
-Open this tutorial, [Flash tools/Web-based firmware flashing (no IDF development environment)](https://ccnphfhqs21z.feishu.cn/wiki/Zpz4wXBtdimBrLk25WdcXzxcnNS).
-Scroll to: `Method 2: ESP-Launchpad browser WEB flashing`, start from `3. Flash firmware/download to the development board`, and follow the tutorial.
+Open the [ESP Launchpad web flashing tool](https://espressif.github.io/esp-launchpad/), select the precompiled firmware you built (e.g. `merged-binary.bin`), and flash it to the board in the browser — no IDF development environment needed.
 
 After flashing succeeds and the device is connected to the network, wake Xiaozhi with the wake word and watch the console information output by the server.
 

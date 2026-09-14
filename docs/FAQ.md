@@ -26,9 +26,9 @@ Reason: Xiaoge's firmware requires a secure connection in 4G mode.
 
 Solution: There are currently two ways to resolve this. Choose either:
 
-1. Modify the code. Refer to this video https://www.bilibili.com/video/BV18MfTYoE85
+1. Modify the code to drop the TLS requirement (advanced — see the `xiaozhi-esp32` firmware sources).
 
-2. Use nginx to configure an SSL certificate. Refer to the tutorial https://icnt94i5ctj4.feishu.cn/docx/GnYOdMNJOoRCljx1ctecsj9cnRe
+2. Use nginx to configure an SSL certificate. Refer to the official [nginx HTTPS configuration guide](https://nginx.org/en/docs/http/configuring_https_servers.html).
 
 ### 5. How can I improve Xiaozhi's conversation response speed? ⚡
 

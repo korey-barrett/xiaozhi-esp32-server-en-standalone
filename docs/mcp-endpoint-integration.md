@@ -80,7 +80,7 @@ If you are deploying on the Console, after starting, go back into the Console an
 If you are doing a single-module deployment, when the device connects, it will output logs like the following, which means success
 
 ```
-250705 -INFO-Initializing MCP endpoint: wss://2662r3426b.vicp.fun/mcp_e 
+250705 -INFO-Initializing MCP endpoint: wss://<your-server>/mcp_e 
 250705 -INFO-Sending MCP endpoint initialization message
 250705 -INFO-MCP endpoint connected successfully
 250705 -INFO-MCP endpoint initialized successfully

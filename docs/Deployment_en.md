@@ -11,7 +11,7 @@ Since version `0.8.2`, the Docker images published by this project only support 
 
 ## 1. Install Docker
 
-If Docker is not yet installed on your computer, follow the tutorial here: [Install Docker](https://www.runoob.com/docker/ubuntu-docker-install.html)
+If Docker is not yet installed on your computer, follow the tutorial here: [Install Docker](https://docs.docker.com/engine/install/)
 
 Once Docker is installed, continue.
 

@@ -129,19 +129,27 @@ bash deploy-local-now.sh        # no sudo (docker runs as root)
 
 ---
 
-## Method 7 — WSL2 + Docker LAN access
+## Method 7 — WSL2 + Docker LAN access (mirrored mode)
 
-The xiaozhi stack runs inside WSL2 native Docker. WSL2 NAT only exposes ports on `127.0.0.1`; add portproxy
-rules (from an admin PowerShell) after each WSL reboot to reach it on the LAN IP.
+The xiaozhi stack runs inside WSL2 native Docker with `networkingMode=mirrored`, so the VM shares the host's
+LAN IP and published container ports are reachable on the host at `127.0.0.1:<port>`. They are **not**
+reachable on the LAN IP by themselves — add portproxy rules bound to the **LAN IP → `127.0.0.1`** (from an
+admin PowerShell) so other LAN devices can reach the stack:
 
 ```powershell
-netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=8000 connectaddress=<WSL_IP> connectport=8000
-netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=8002 connectaddress=<WSL_IP> connectport=8002
-netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=8003 connectaddress=<WSL_IP> connectport=8003
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8000 connectaddress=127.0.0.1 connectport=8000
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8002 connectaddress=127.0.0.1 connectport=8002
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8003 connectaddress=127.0.0.1 connectport=8003
 ```
 
-- WSL `.wslconfig`: `networkingMode=NAT`, `memory=16GB`, `swap=8GB`
-- Firewall rules `xiaozhi-8000/8002/8003` must exist.
+- WSL `.wslconfig`: `networkingMode=mirrored`, `memory=8GB`, `processors=8`, `swap=4GB`.
+- **Do NOT bind to `0.0.0.0`** — it collides with Docker's mirrored publish (`address already in use`) and
+  blocks the containers from starting. Bind to the LAN IP instead (verified 2026-09-14).
+- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them). `iphlpsvc` (IP Helper) must be **running** — it
+  is what turns portproxy rules into real listeners.
+- **On the host itself, use `http://localhost:8002`** — the LAN IP is not reachable from the host browser in
+  mirrored mode (verified); it is only reachable from other LAN devices. Confirm LAN access from a phone /
+  another PC / the ESP32.
 
 ---
 

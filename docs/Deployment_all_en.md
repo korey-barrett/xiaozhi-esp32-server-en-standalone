@@ -10,13 +10,13 @@ Since version `0.8.2`, the Docker images published by this project only support 
 
 ## 1. Install Docker
 
-If Docker is not yet installed on your computer, follow the tutorial here: [Install Docker](https://www.runoob.com/docker/ubuntu-docker-install.html)
+If Docker is not yet installed on your computer, follow the tutorial here: [Install Docker](https://docs.docker.com/engine/install/)
 
 There are two ways to install the full modules with Docker. You can use the [lazy script](./Deployment_all.md#11-lazy-script) (author [@VanillaNahida](https://github.com/VanillaNahida))  
 The script will automatically download the needed files and configuration files for you. You can also use [manual deployment](./Deployment_all.md#12-manual-deployment) to build everything from scratch.
 
 ### 1.1 Lazy Script
-Deployment is simple. You can refer to the [video tutorial](https://www.bilibili.com/video/BV17bbvzHExd/). The text tutorial is as follows:
+Deployment is simple. The text tutorial is as follows:
 > [!NOTE]  
 > For now, only Ubuntu-server one-click deployment is supported. Other systems have not been tested and may have some strange bugs.
 

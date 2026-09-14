@@ -2,9 +2,7 @@
 
 This tutorial helps fans of all-module source deployment learn how to use automatic commands to automatically pull the source code, compile it, and start the ports, achieving the most efficient upgrade system.
 
-This project's test platform `https://2662r3426b.vicp.fun` has used this method since it opened, with good results.
-
-You can refer to the video tutorial published by the Bilibili blogger `Bile labs`: [《Open-source Xiaozhi server xiaozhi-server automatic update and latest-version MCP access point configuration beginner's tutorial》](https://www.bilibili.com/video/BV15H37zHE7Q)
+This update method has been used in practice on a live deployment with good results.
 
 # Prerequisites
 - Your computer/server runs a Linux operating system
@@ -156,9 +154,9 @@ Once all the scripts above are in place, for daily updates we just need to run t
 
 ```
 cd /home/system/xiaozhi
-# Update and start the Java program
+# Update and start the web program
 ./update_8001.sh
-# Update the web program
+# Update and start the Java program
 ./update_8002.sh
 # Update and start the python program
 ./update_8000.sh
@@ -171,7 +169,7 @@ tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/tmp/server
 ```
 
 # Notes
-The test platform `https://2662r3426b.vicp.fun` uses nginx as a reverse proxy. For the detailed nginx.conf configuration, you can refer to here
+A source-code deployment is typically fronted by nginx as a reverse proxy. For a detailed nginx.conf example, see the [official nginx documentation](https://nginx.org/en/docs/).
 
 ## FAQ
 
