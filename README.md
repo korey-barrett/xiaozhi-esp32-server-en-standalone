@@ -68,7 +68,8 @@ Developed by Professor Siyuan Liu's Team (South China University of Technology)
 
 ## Quick Start 🚀
 
-The fastest way to get a full working stack (server + admin console + DB + Redis) is **Docker (full module)**:
+The fastest way to get a full working stack (server + admin console + DB + Redis + **MQTT gateway**) is
+**Docker (full module)**:
 
 ```bash
 cd main/xiaozhi-server
@@ -77,6 +78,11 @@ docker compose -f docker-compose_all.yml up -d
 
 Then open the admin console at `http://<LAN-IP>:8002`, register the first account (becomes super-admin),
 and set `server.websocket` / `server.ota` in **Parameter Management**.
+
+> 💡 The stack ships the **MQTT gateway** as a standard service
+> (`xiaozhi-esp32-mqtt-gateway`, ports `1883` / `8884`/udp / `8007`) — it is what makes the console show
+> **live online/offline status** for devices and lets the theme generator autofill hardware. See
+> [docs/mqtt-gateway-integration.md](./docs/mqtt-gateway-integration.md).
 
 > 📘 **All install methods** (Docker minimal/full, one-click script, source, local images, WSL2) plus new
 > commands for **SSO login**, **headless device onboarding**, and **dependency install/update** are in

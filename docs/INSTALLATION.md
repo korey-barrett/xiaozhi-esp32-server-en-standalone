@@ -31,7 +31,8 @@ docker logs -f xiaozhi-esp32-server
 
 ## Method 2 — Docker: Full module (server + console + DB + Redis)
 
-Runs the complete stack: Python server, admin console (Vue + Java), MySQL, and Redis. Uses official images.
+Runs the complete stack: Python server, admin console (Vue + Java), MySQL, Redis, and the **MQTT gateway**
+(which provides live device online status + theme-generator hardware autofill). Uses official/local images.
 
 ```bash
 cd main/xiaozhi-server
@@ -39,9 +40,13 @@ docker compose -f docker-compose_all.yml up -d
 ```
 
 - **Compose file:** `main/xiaozhi-server/docker-compose_all.yml`
-- **Images:** `xiaozhi-local:server_latest` and `:web_latest`
-- **Ports:** `8000` (WebSocket), `8002` (Admin Console), `8003` (HTTP / vision)
-- **Services:** `xiaozhi-esp32-server`, `-web`, `-db` (MySQL), `-redis`
+- **Images:** `xiaozhi-local:server_latest`, `:web_latest`, and `:mqtt_gateway`
+- **Ports:** `8000` (WebSocket), `8002` (Admin Console), `8003` (HTTP / vision), `1883` (MQTT), `8884`/udp
+  (device discovery), `8007` (gateway manager API)
+- **Services:** `xiaozhi-esp32-server`, `-web`, `-db` (MySQL), `-redis`, `-mqtt-gateway`
+- **MQTT gateway env:** create `main/xiaozhi-server/mqtt-gateway.env` from `mqtt-gateway.env.example`
+  (`PUBLIC_IP` = your LAN IP, `MQTT_SIGNATURE_KEY` = the same value you set in `server.mqtt_signature_key`).
+  See [mqtt-gateway-integration.md](./mqtt-gateway-integration.md).
 
 View logs:
 ```bash
@@ -117,6 +122,7 @@ fork's live deployment (WSL2 native Docker).
 # 1. Build the local images (from the repo root)
 docker build -f Dockerfile-web   -t xiaozhi-local:web_latest    .
 docker build -f Dockerfile-server -t xiaozhi-local:server_latest .
+docker build -f Dockerfile-mqtt-gateway -t xiaozhi-local:mqtt_gateway .
 
 # 2. Deploy (resets DB so Liquibase re-seeds English)
 bash deploy-local-now.sh        # no sudo (docker runs as root)
@@ -126,6 +132,10 @@ bash deploy-local-now.sh        # no sudo (docker runs as root)
 - **Compose file:** `main/xiaozhi-server/docker-compose.local.yml` (uses `xiaozhi-local:*` images, absolute `/opt` paths)
 - **Deploys to:** `/opt/xiaozhi-server`
 - **After deploy:** re-register the admin account, then set `server.websocket` and `server.ota` in Parameter Management.
+- **MQTT gateway:** create `main/xiaozhi-server/mqtt-gateway.env` (see `mqtt-gateway.env.example`) so the
+  5th service comes up and the console shows live device status. Set `server.mqtt_gateway` /
+  `server.mqtt_signature_key` / `server.udp_gateway` / `server.mqtt_manager_api` in Parameter Management to
+  match it (see [mqtt-gateway-integration.md](./mqtt-gateway-integration.md)).
 
 ---
 
@@ -140,13 +150,20 @@ admin PowerShell) so other LAN devices can reach the stack:
 netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8000 connectaddress=127.0.0.1 connectport=8000
 netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8002 connectaddress=127.0.0.1 connectport=8002
 netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8003 connectaddress=127.0.0.1 connectport=8003
+# MQTT gateway ports (device-facing, LAN)
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=1883 connectaddress=127.0.0.1 connectport=1883
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8007 connectaddress=127.0.0.1 connectport=8007
+netsh interface portproxy add v4tov4 listenaddress=<LAN_IP> listenport=8884 connectaddress=127.0.0.1 connectport=8884
 ```
+The UDP rule for `8884` is best-effort — mirrored-mode publish usually already binds UDP onto the LAN IP.
+Verify MQTT+UDP from an actual device (host self-tests can black-hole).
 
 - WSL `.wslconfig`: `networkingMode=mirrored`, `memory=8GB`, `processors=8`, `swap=4GB`.
 - **Do NOT bind to `0.0.0.0`** — it collides with Docker's mirrored publish (`address already in use`) and
   blocks the containers from starting. Bind to the LAN IP instead (verified 2026-09-14).
-- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them). `iphlpsvc` (IP Helper) must be **running** — it
-  is what turns portproxy rules into real listeners.
+- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them); add matching rules for `1883`, `8007`,
+  `8884`/UDP if devices can't connect. `iphlpsvc` (IP Helper) must be **running** — it is what turns
+  portproxy rules into real listeners.
 - **On the host itself, use `http://localhost:8002`** — the LAN IP is not reachable from the host browser in
   mirrored mode (verified); it is only reachable from other LAN devices. Confirm LAN access from a phone /
   another PC / the ESP32.
@@ -238,3 +255,6 @@ pnpm build:h5
 | 8000 | WebSocket (device-facing Python server) |
 | 8002 | Admin Console (Vue + Java) |
 | 8003 | HTTP / OTA / vision endpoint |
+| 1883 | MQTT broker (MQTT gateway, device-facing) |
+| 8884 | UDP device discovery (MQTT gateway) |
+| 8007 | Gateway manager API (device status / tools; consumed by Java manager-api) |

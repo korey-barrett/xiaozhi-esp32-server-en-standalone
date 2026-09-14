@@ -1,0 +1,20 @@
+# MQTT gateway (MQTT+UDP -> WebSocket bridge) for the standalone stack.
+# Builds the vendored upstream xiaozhi-mqtt-gateway source at main/xiaozhi-server/mqtt-gateway.
+#
+# Build:
+#   docker build -f Dockerfile-mqtt-gateway -t xiaozhi-local:mqtt_gateway .
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy the vendored gateway source (package.json first for layer caching)
+COPY main/xiaozhi-server/mqtt-gateway/package.json ./
+COPY main/xiaozhi-server/mqtt-gateway/ ./
+
+# Install runtime dependencies (libopus-wasm, ws, express, debug, dotenv)
+RUN npm install --omit=dev
+
+# MQTT broker (TCP), UDP device discovery, management API
+EXPOSE 1883 8884/udp 8007
+
+CMD ["node", "app.js"]

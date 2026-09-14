@@ -20,3 +20,25 @@ services:
       - ./data:/opt/xiaozhi-esp32-server/data
       # Model file mount, very important
       - ./models/SenseVoiceSmall/model.pt:/opt/xiaozhi-esp32-server/models/SenseVoiceSmall/model.pt
+
+  # MQTT gateway (MQTT+UDP -> WebSocket bridge): provides MQTT transport for devices
+  # and live device status / theme-generator autofill when the console module is added.
+  xiaozhi-esp32-mqtt-gateway:
+    image: xiaozhi-local:mqtt_gateway
+    container_name: xiaozhi-esp32-mqtt-gateway
+    restart: always
+    networks:
+      - default
+    env_file: mqtt-gateway.env
+    depends_on:
+      - xiaozhi-esp32-server
+    ports:
+      # MQTT broker, device-facing (LAN)
+      - "1883:1883"
+      # UDP device discovery / audio relay
+      - "8884:8884/udp"
+      # Management API (device status / tools), consumed by the Java manager-api
+      - "8007:8007"
+
+networks:
+  default:

@@ -35,7 +35,7 @@ An **English-first, standalone fork** of the open-source project
 | Maven 3.9.11 | `C:\Users\korey\devtools\apache-maven-3.9.11` |
 | pnpm 11.22.0 | global |
 | gh CLI 2.97.0 | `C:\Users\korey\devtools\bin\gh.exe` (auth as `korey-barrett`) |
-| Ollama | Windows host (`http://192.168.0.198:11434`), model `qwen2.5vl:7b` pulled |
+| Ollama | Windows host (`http://192.168.0.198:11434`), model `qwen2.5vl:7b` pulled (live stack uses `gemma4:31b-cloud` for the device LLM/VLLM) |
 
 ---
 
@@ -65,7 +65,9 @@ An **English-first, standalone fork** of the open-source project
 - `LICENSE`/`NOTICE` credit the original `xinnan-tech` project (MIT) + `Copyright (c) 2026 Korey Paul Barrett`.
 
 ### Deployment (DONE — fresh deploy)
-- Runs in **WSL2 native Docker** (NOT Docker Desktop). Stack: `xiaozhi-esp32-server`, `-web`, `-db`, `-redis`.
+- Runs in **WSL2 native Docker** (NOT Docker Desktop). Stack: `xiaozhi-esp32-server`, `-web`, `-db`, `-redis`,
+  **`-mqtt-gateway`** (5 members; the gateway is now a standard service, image `xiaozhi-local:mqtt_gateway`,
+  ports `1883` / `8884`/udp / `8007`).
 - **Fresh deploy done:** DB reset + re-seeded with English defaults; `server.secret` synced; all containers healthy.
 - Console: `http://192.168.0.195:8002` (HTTP 200). Server websocket: `ws://172.18.0.4:8000/xiaozhi/v1/` (internal).
 
@@ -83,6 +85,25 @@ An **English-first, standalone fork** of the open-source project
 - A Liquibase checksum conflict (from editing an applied changelog) was resolved by **resetting the DB**
   and re-seeding with the current changelogs. The backend now starts cleanly.
 
+### TTS / Memory-LLM dangling-reference fix (DONE, 2026-09-14)
+- The device showed **"listening" but never replied** — `/config/agent-models` returned HTTP 500 because
+  `Memory_mem_local_short.config_json.llm` pointed at `LLM_ChatGLMLLM` (not in this fork's catalog) and
+  `Intent_intent_llm.config_json.llm` pointed at `GeminiLLM` (catalog id is `LLM_GeminiLLM`). The null LLM
+  threw an NPE in `ConfigServiceImpl`, so the TTS/LLM/Memory/Intent sections were never sent and the Python
+  server died with `KeyError('TTS')`.
+- **Fixed:** values corrected to `LLM_OllamaLLM` / `LLM_GeminiLLM` (live DB + Redis eviction + durable
+  changelog `202609141400.sql`), plus null-guards in `ConfigServiceImpl` so a stale referenced LLM id can
+  never 500 the whole agent config again. Verified end-to-end (TTS init, ASR, LLM reply, Edge TTS audio,
+  on-device tool call).
+
+### Board list synced to upstream (DONE, 2026-09-14)
+- The FIRMWARE_TYPE dict was re-synced to the full upstream board set: the original 54-row seed only covered
+  the boards that existed when the fork was cut; upstream `main/boards` now defines **181 build variants**.
+  New changelog `202609141500.sql` upserts all of them (185 total, dash-only lowercase per
+  `docs/custom-board.md`; ids `101001`–`101185`), so a fresh setup ships the same boards as xiaozhi.ai.
+  The Quandong-S3 device registers as `quandong-s3-dev` (its `config.json` `type`), which the status path
+  reads from `ai_device.board` — no dict lookup involved.
+
 ---
 
 ## 4. ⚠️ REMAINING / NEXT STEPS (do these first in the new session)
@@ -92,6 +113,12 @@ An **English-first, standalone fork** of the open-source project
 2. **Parameter Management** (More → Params Management):
    - `server.websocket` = `ws://192.168.0.195:8000/xiaozhi/v1/`
    - `server.ota` = `http://192.168.0.195:8002/xiaozhi/ota/`
+   - `server.mqtt_gateway` = `192.168.0.195:1883`, `server.mqtt_signature_key` = (the `.env` value),
+     `server.udp_gateway` = `192.168.0.195:8884`, `server.mqtt_manager_api` =
+     `xiaozhi-esp32-mqtt-gateway:8007` (Docker DNS, consumed by Java server-side — no LAN hop).
+     These four make the console show **live device online status** and the theme generator **autofill
+     hardware**; they must match `mqtt-gateway.env` + the Python server's `data/.config.yaml`
+     (`mqtt_gateway` / `mqtt_signature_key` / `udp_gateway`).
 3. **Model Configuration** (Models): add **Gemini API key** for LLM and VLLM (defaults are Gemini; ASR=FunASR local, TTS=Edge English — no keys).
 4. **Provider Management**: set Web Search to **Tavily** + add **Tavily API key** (if web search is wanted).
 5. **Weather**: Open-Meteo — no key needed.
@@ -136,15 +163,22 @@ bash deploy-local-now.sh   # backs up DB, resets mysql, deploys via docker-compo
   Published container ports are reachable at **host `127.0.0.1:<port>`** (the mirror forwards loopback into the VM).
   They are **NOT** reachable on the LAN IP by themselves.
 - **External/LAN access uses a portproxy bound to the LAN IP → `127.0.0.1`** (NOT `0.0.0.0` — binding `0.0.0.0`
-  on 8000/8002/8003 collides with the guest publish, verified 2026-09-14):
+  on the published ports collides with the guest publish, verified 2026-09-14). The console/OTA/ws ports plus
+  the **MQTT gateway ports** (`1883` MQTT, `8884`/udp discovery, `8007` manager API) all need proxying:
   ```powershell
   netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8000 connectaddress=127.0.0.1 connectport=8000
   netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8002 connectaddress=127.0.0.1 connectport=8002
   netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8003 connectaddress=127.0.0.1 connectport=8003
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=1883 connectaddress=127.0.0.1 connectport=1883
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8007 connectaddress=127.0.0.1 connectport=8007
+  netsh interface portproxy add v4tov4 listenaddress=192.168.0.195 listenport=8884 connectaddress=127.0.0.1 connectport=8884
   netsh interface portproxy show all
   ```
-- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them). **Do NOT bind the portproxy to `0.0.0.0`** —
-  it fails and will block the containers from publishing.
+  (UDP proxy rule for `8884` is best-effort — mirrored-mode publish usually already binds UDP onto the LAN IP;
+  verify MQTT+UDP from a real device, since host-side self-tests can black-hole.)
+- Firewall rules `xiaozhi-8000/8002/8003` exist (leave them). Add similar rules for `1883`, `8007`, and
+  `8884`/UDP as needed. **Do NOT bind the portproxy to `0.0.0.0`** — it fails and will block the containers
+  from publishing.
 - Note: in mirrored mode, host-side self-tests to `192.168.0.195:<port>` can appear black-holed even when LAN
   devices work, so confirm LAN reachability from a *different* device (phone / another PC / the ESP32).
 - **On the host itself, use `http://localhost:8002`** (console) / `ws://localhost:8000` — the LAN IP is NOT
@@ -160,8 +194,11 @@ Cause: `xiaozhi-esp32-server` and `xiaozhi-esp32-server-web` had **no network at
   cd /mnt/d/DEV/Projects/xiaozhi-esp32-server-en-standalone/main/xiaozhi-server
   docker compose -f docker-compose.local.yml up -d --force-recreate xiaozhi-esp32-server xiaozhi-esp32-server-web
   ```
-- Verify with `docker network inspect xiaozhi-server_default` (expect 4 members) and
+- Verify with `docker network inspect xiaozhi-server_default` (expect **5 members** — server, web, db, redis,
+  mqtt-gateway) and
   `docker exec xiaozhi-esp32-server python3 -c "import socket;print(socket.gethostbyname('xiaozhi-esp32-server-web'))"`.
+  Device status resolves through the gateway: the Java `getDeviceOnlineData` builds `{board}@@@{mac}@@@{mac}`
+  from `ai_device.board` and calls the gateway's `/api/devices/status` on `8007`.
 
 ---
 

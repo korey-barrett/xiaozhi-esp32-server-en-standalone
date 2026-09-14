@@ -170,6 +170,9 @@ main/manager-mobile/node_modules
 fix_secret.sh
 get_secret.sql
 
+# MQTT gateway secrets (generated for this machine; see mqtt-gateway.env.example)
+main/xiaozhi-server/mqtt-gateway.env
+
 # Database backups (contain API keys / secrets — never commit)
 /backups/
 

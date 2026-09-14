@@ -516,16 +516,22 @@ public class ConfigServiceImpl implements ConfigService {
                     if (StringUtils.isNotBlank(intentLLMModelId)) {
                         if (!typeConfig.containsKey(intentLLMModelId)) {
                             // Add the isMaskSensitive=false parameter here
+                            // null-guard: a stale/removed referenced LLM id must not 500 the whole agent config
                             ModelConfigEntity intentLLM = modelConfigService.getModelByIdFromCache(intentLLMModelId);
-                            typeConfig.put(intentLLM.getId(), intentLLM.getConfigJson());
+                            if (intentLLM != null && intentLLM.getConfigJson() != null) {
+                                typeConfig.put(intentLLM.getId(), intentLLM.getConfigJson());
+                            }
                         }
                     }
                     if (StringUtils.isNotBlank(memLocalShortLLMModelId)) {
                         if (!typeConfig.containsKey(memLocalShortLLMModelId)) {
                             // Add the isMaskSensitive=false parameter here
+                            // null-guard: a stale/removed referenced LLM id must not 500 the whole agent config
                             ModelConfigEntity memLocalShortLLM = modelConfigService
                                     .getModelByIdFromCache(memLocalShortLLMModelId);
-                            typeConfig.put(memLocalShortLLM.getId(), memLocalShortLLM.getConfigJson());
+                            if (memLocalShortLLM != null && memLocalShortLLM.getConfigJson() != null) {
+                                typeConfig.put(memLocalShortLLM.getId(), memLocalShortLLM.getConfigJson());
+                            }
                         }
                     }
                     // LLM also returns the selected SLM; do not show duplicates if the id is the same

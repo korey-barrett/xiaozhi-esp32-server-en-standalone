@@ -1,5 +1,12 @@
 # MQTT Gateway Deployment Tutorial
 
+> 💡 **This fork ships the MQTT gateway as a standard service.** The gateway source is **vendored** in
+> `main/xiaozhi-server/mqtt-gateway/` and deployed as compose service `xiaozhi-esp32-mqtt-gateway`
+> (image `xiaozhi-local:mqtt_gateway`, built via `Dockerfile-mqtt-gateway`, configured via
+> `main/xiaozhi-server/mqtt-gateway.env`, ports `1883` / `8884`/udp / `8007`). All three compose files
+> include it, so a plain `docker compose up` brings it up with the rest of the stack. The external-PM2
+> instructions below remain valid as the manual/alternative path.
+
 The `xiaozhi-esp32-server` project can be simply adapted together with the open-source [xiaozhi-mqtt-gateway](https://github.com/78/xiaozhi-mqtt-gateway) project from Xiaozhi to enable MQTT+UDP connections for Xiaozhi hardware.
 This tutorial is divided into three parts. Depending on whether you are doing full-module or single-module deployment, choose the corresponding part to connect to the MQTT gateway:
 - Part 1: Deploy the MQTT gateway
@@ -22,11 +29,6 @@ ws://your-host-LAN-IP:8000/xiaozhi/v1/?from=mqtt_gateway
 ## Important Notes
 
 If you deploy on a server, ensure that ports `1883`, `8884`, and `8007` are all open to the outside. Port `8884` uses the `UDP` protocol; the others use `TCP`.
-
-If you deploy on a server, ensure that ports `1883`, `8884`, and `8007` are all open to the outside. Port `8884` uses the `UDP` protocol; the others use `TCP`.
-
-If you deploy on a server, ensure that ports `1883`, `8884`, and `8007` are all open to the outside. Port `8884` uses the `UDP` protocol; the others use `TCP`.
-
 
 ## Part 1: Deploy the MQTT gateway
 
@@ -82,8 +84,6 @@ Note the `PUBLIC_IP` configuration; make sure it matches your actual public IP, 
 
 `MQTT_SIGNATURE_KEY` is the key used for MQTT connection authentication. It is best to make it complex, ideally more than 8 characters and containing both uppercase and lowercase letters. This key will be used again later.
 
-- Do not use a simple password such as `123456` or `test`.
-- Do not use a simple password such as `123456` or `test`.
 - Do not use a simple password such as `123456` or `test`.
 
 `SERVER_SECRET` is used to generate the authentication information for the websocket connection.
