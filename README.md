@@ -140,6 +140,10 @@ OTA interface address: http://<LAN-IP>:8002/xiaozhi/ota/
 WebSocket interface address: ws://<LAN-IP>:8000/xiaozhi/v1/
 ```
 
+> 🛠 **Flashing new ESP32 boards:** to build and flash firmware for a board from the console's board
+> dictionary, pointed at *your* OTA address above instead of the cloud, see
+> [docs/firmware-flash-guide.md](./docs/firmware-flash-guide.md).
+
 #### 🚩 Configuration Notes and Recommendations
 > [!Note]
 > This project provides two configuration options:

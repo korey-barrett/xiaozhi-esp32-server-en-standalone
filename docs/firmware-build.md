@@ -41,6 +41,22 @@ ws://192.168.1.25:8000/xiaozhi/v1/
 
 After configuring, refresh your OTA interface address in the browser and check whether it works now. If it still does not work, confirm again whether Websocket started normally and whether a Websocket address was configured.
 
+> **Which OTA address should the firmware point at? (fork note)**
+> This fork's standalone full-module stack runs **both** OTA endpoints, and both speak the device
+> OTA protocol (returning `websocket`/`mqtt` + `firmware` config):
+> - **`http://<LAN-IP>:8002/xiaozhi/ota/`** — the **console/Java** OTA (the address above and in
+>   `README.md`). Fully managed from the Console: WebSocket/MQTT come from Parameter Management
+>   (`server.websocket`, `server.mqtt_gateway`), and firmware is uploaded through the Console's
+>   Firmware page (stored in the database; download link built from `server.ota`).
+> - **`http://<LAN-IP>:8003/xiaozhi/ota/`** — the **Python server** OTA handler. It reads
+>   `data/.config.yaml` (`server.websocket`, `server.mqtt_gateway`, `server.mqtt_signature_key`) and
+>   serves firmware staged as `.bin` files in `data/bin/` — see
+>   [ota-upgrade-guide.md](./ota-upgrade-guide.md).
+>
+> Pick the one that matches how you want to manage firmware (Console vs. files) and put it in the
+> firmware's `OTA_URL` (Step 4). A full board-by-board flashing walkthrough is in
+> [firmware-flash-guide.md](./firmware-flash-guide.md).
+
 ## Step 2: Configure the Environment
 First, set up the project environment following the [official ESP-IDF Windows setup guide](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/windows-setup.html).
 
@@ -50,6 +66,12 @@ After setting up the build environment, download the xiaozhi-esp32 project sourc
 Download Xiaoge's [xiaozhi-esp32 project source](https://github.com/78/xiaozhi-esp32).
 
 After downloading, open the `xiaozhi-esp32/main/Kconfig.projbuild` file.
+
+> **Choosing a board:** the board names in the Console's board dictionary (System → Dictionary →
+> `FIRMWARE_TYPE`) are exactly the build names from `main/boards/**/config.json`
+> (`type` / `builds[].name`). In menuconfig (Step 5), pick the board under `Xiaozhi Assistant →
+> Target Board` that matches your physical hardware and your dictionary entry; its `config.json`
+> `target` tells you which `idf.py set-target` chip to use.
 
 ## Step 4: Modify the OTA Address
 
