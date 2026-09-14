@@ -204,7 +204,7 @@ export default {
   'firmwareDialog.firmwareFile': 'Arquivo de Firmware',
   'firmwareDialog.clickUpload': 'Clique para Enviar',
   'firmwareDialog.uploadTip': 'Apenas arquivos de firmware (.bin/.apk) são suportados, e o tamanho não deve exceder 100MB',
-  'firmwareDialog.uploadHint': 'Lembrete: Por favor, envie o arquivo xiaozhi.bin pré-mesclado, não o arquivo merged-binary.bin mesclado',
+  'firmwareDialog.uploadHint': 'Lembrete: Envie o arquivo de imagem do aplicativo xiaozhi.bin da pasta de build (ex.: build/xiaozhi.bin). Não envie o merged-binary.bin — esse pacote completo de flash é apenas para gravação via USB/serial, não para OTA.',
   'firmwareDialog.remark': 'Observação',
   'firmwareDialog.remarkPlaceholder': 'Por favor, insira informações de observação',
   'firmwareDialog.requiredFirmwareName': 'Por favor, insira o nome do firmware (placa + versão)',

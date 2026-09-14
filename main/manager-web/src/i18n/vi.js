@@ -204,7 +204,7 @@ export default {
   'firmwareDialog.firmwareFile': 'Tệp firmware',
   'firmwareDialog.clickUpload': 'Nhấp để tải lên',
   'firmwareDialog.uploadTip': 'Chỉ hỗ trợ tệp firmware (.bin/.apk), kích thước không vượt quá 100MB',
-  'firmwareDialog.uploadHint': 'Nhắc nhở: Vui lòng tải lên tệp xiaozhi.bin đã hợp nhất trước, không phải tệp merged-binary.bin đã hợp nhất',
+  'firmwareDialog.uploadHint': 'Nhắc nhở: Vui lòng tải lên tệp ảnh ứng dụng xiaozhi.bin từ thư mục build (ví dụ: build/xiaozhi.bin). Không tải lên tệp merged-binary.bin — gói flash đầy đủ đó chỉ dùng để nạp qua USB/serial, không dùng cho OTA.',
   'firmwareDialog.remark': 'Ghi chú',
   'firmwareDialog.remarkPlaceholder': 'Vui lòng nhập thông tin ghi chú',
   'firmwareDialog.requiredFirmwareName': 'Vui lòng nhập tên firmware (board + phiên bản)',

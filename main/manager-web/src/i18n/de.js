@@ -204,7 +204,7 @@ export default {
   'firmwareDialog.firmwareFile': 'Firmware-Datei',
   'firmwareDialog.clickUpload': 'Zum Hochladen klicken',
   'firmwareDialog.uploadTip': 'Nur Firmware-Dateien (.bin/.apk) werden unterstützt, Größe sollte 100MB nicht überschreiten',
-  'firmwareDialog.uploadHint': 'Hinweis: Bitte die vorab zusammengeführte xiaozhi.bin-Datei hochladen, nicht die zusammengeführte merged-binary.bin-Datei',
+  'firmwareDialog.uploadHint': 'Hinweis: Bitte das App-Image xiaozhi.bin aus dem Build-Ordner hochladen (z. B. build/xiaozhi.bin). Nicht merged-binary.bin hochladen — dieses vollständige Flash-Bundle dient nur zum Flashen über USB/seriell, nicht für OTA.',
   'firmwareDialog.remark': 'Bemerkung',
   'firmwareDialog.remarkPlaceholder': 'Bitte Bemerkungsinformationen eingeben',
   'firmwareDialog.requiredFirmwareName': 'Bitte Firmware-Namen eingeben (Board + Version)',
