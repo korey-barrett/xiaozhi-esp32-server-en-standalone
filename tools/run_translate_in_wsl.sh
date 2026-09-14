@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-REPO="/mnt/d/DEV/Projects/xiaozhi-server/xiaozhi-server"
+REPO="/mnt/d/DEV/Projects/xiaozhi-esp32-server-en-standalone"
 
 # cd into the repo wherever the script lives (script may be in the repo already)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

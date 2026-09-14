@@ -110,7 +110,7 @@ An **English-first, standalone fork** of the open-source project
 
 ### Fresh deploy (WSL)
 ```bash
-cd /mnt/d/DEV/Projects/xiaozhi-server-en-standalone/xiaozhi-esp32-server-en-standalone
+cd /mnt/d/DEV/Projects/xiaozhi-esp32-server-en-standalone
 # Build our OWN base image first (no dependency on the upstream repo's images), then the app images:
 docker build -f Dockerfile-server-base -t xiaozhi-local:server-base .   # own base (python:3.10-slim + PyPI, en_US)
 docker build -f Dockerfile-server       -t xiaozhi-local:server_latest .
