@@ -88,6 +88,10 @@ and set `server.websocket` / `server.ota` in **Parameter Management**.
 > commands for **SSO login**, **headless device onboarding**, and **dependency install/update** are in
 > [docs/INSTALLATION.md](./docs/INSTALLATION.md).
 
+> 🎙 The console's **Voice Clone** (per-user cloned voices) and **Voice Resource** (super-admin voice
+> provisioning) menu pages — what they're for, how records get created, and how a cloned voice becomes an
+> agent's TTS voice — are explained in [docs/voice-clone-management.md](./docs/voice-clone-management.md).
+
 ---
 
 ## Who This Is For 👥
