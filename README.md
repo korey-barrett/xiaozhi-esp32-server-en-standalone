@@ -140,6 +140,14 @@ OTA interface address: http://<LAN-IP>:8002/xiaozhi/ota/
 WebSocket interface address: ws://<LAN-IP>:8000/xiaozhi/v1/
 ```
 
+> ⚠️ **Are you on the same machine that hosts the server? Use `localhost`, not your LAN IP.**
+> With mirrored-mode Docker (WSL2), the host cannot reach itself through its own LAN IP — self
+> connections to the LAN address black-hole. So **any step or settings change you do on the host
+> itself** — opening the Console, logging in via SSO, editing parameters in the Console, or
+> verifying an endpoint (browser/curl) — must use `http://localhost:8002` (WebSocket:
+> `ws://localhost:8000/xiaozhi/v1/`). The `http://<LAN-IP>:…` addresses above are reachable only
+> **from other LAN devices** — ESP32 boards, phones, tablets.
+
 > 🛠 **Flashing new ESP32 boards:** to build and flash firmware for a board from the console's board
 > dictionary, pointed at *your* OTA address above instead of the cloud, see
 > [docs/firmware-flash-guide.md](./docs/firmware-flash-guide.md).

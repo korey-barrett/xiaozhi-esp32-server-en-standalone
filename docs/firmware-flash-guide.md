@@ -73,6 +73,14 @@ endpoint** (the address printed in `README.md` and used by the full-module secti
 container, use **`:8003`**. Either way, the device receives your WebSocket or MQTT gateway config,
 so it connects exactly like any other board on your stack.
 
+> ⚠️ **These `<LAN-IP>` addresses are for the devices/phones on your LAN — not for the machine that
+> hosts the server.** With mirrored-mode Docker (WSL2) the host cannot reach itself through its own
+> LAN IP (self-connections black-hole). So whenever **you** act from the host — open the admin
+> console, change a parameter in the Console, log in via SSO, or verify an endpoint with a
+> browser/curl — use the **`localhost`** form: `http://localhost:8002/xiaozhi/ota/`,
+> `http://localhost:8003/xiaozhi/ota/`, `ws://localhost:8000/xiaozhi/v1/`. Save the `<LAN-IP>`
+> forms for the **ESP32 devices themselves** (see the caution in section 4).
+
 ## 4. Point the firmware's OTA address at your server
 
 The firmware's hardcoded OTA/cloud address lives in **`main/Kconfig.projbuild`**:
@@ -95,6 +103,11 @@ or
 ```
     default "http://192.168.0.195:8003/xiaozhi/ota/"    # file-driven (data/bin)
 ```
+
+> ⚠️ **Inside the firmware, keep the LAN IP — never `localhost`.** The ESP32 reads this address from
+> *its own* network stack after you flash it, so a `localhost` (or `127.0.0.1`) OTA_URL would point
+> the board at **itself** and it could never reach your server. `localhost` is only for steps *you*
+> run on the host machine (console, parameter edits, curl checks — see section 3).
 
 That single change is what turns the board into a **self-hosted** device instead of one phoning home
 to `api.tenclass.net` / the `xiaozhi.me` cloud flow.
@@ -156,8 +169,10 @@ current one, the model matches exactly, and the file is staged:
 
 ## 9. Verification
 
-- `curl http://<LAN-IP>:8003/xiaozhi/ota/` → "OTA interface is running normally, the websocket
-  address sent to devices is: ws://192.168.0.195:8000/xiaozhi/v1/"
+- From the **host**: `curl http://localhost:8003/xiaozhi/ota/` → "OTA interface is running normally,
+  the websocket address sent to devices is: ws://192.168.0.195:8000/xiaozhi/v1/" (on the same
+  machine as the server, use `localhost`, never the LAN IP — section 3). From a phone/LAN device:
+  `curl http://192.168.0.195:8003/xiaozhi/ota/`.
 - `docker logs xiaozhi-esp32-server` shows the board's OTA request line with its reported model and
   version.
 - Console → Device Management shows the new board **online** (green) — confirming the MQTT
