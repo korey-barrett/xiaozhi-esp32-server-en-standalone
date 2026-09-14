@@ -257,6 +257,8 @@ The boot log contains the 6-digit setup code used to install the device in the a
 
 - **SSO login** via Google / Apple / Microsoft / GitHub accounts, with a **passcode requirement**.
   - ✅ Google, Apple, Microsoft, GitHub implemented (JustAuth 1.16.7) + passcode.
+  - ✅ GitHub verified live — requests the `user:email` scope so the email (not a generated
+    `sso_github_<id>`) becomes the new user's username. See `PROJECT-HANDOFF.md §10`.
 
 To learn about the specific development plan progress, see the project roadmap. For FAQs and related tutorials, refer to [this link](./docs/FAQ.md)
 

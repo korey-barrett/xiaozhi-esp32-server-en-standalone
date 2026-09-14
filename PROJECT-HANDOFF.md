@@ -286,7 +286,9 @@ Users can log in to the admin console with a third-party account (**Google, Appl
 1. The login page shows SSO buttons for the enabled providers.
 2. Clicking a provider redirects to its OAuth2 authorization page.
 3. The provider redirects back to `/user/sso/callback`, which exchanges the code, stores a **pending SSO
-   session** in Redis (10-min expiry), and redirects the browser to `/sso-callback?sso_state=...`.
+   session** in Redis (10-min expiry), and redirects the browser to `/#/sso-callback?sso_state=...`. The
+   `#/` hash prefix is **required** — the console is a hash-routed SPA, so a redirect that omits it
+   (e.g. `/sso-callback?sso_state=...`) falls back to the login route and the passcode step is never shown.
 4. The frontend prompts for the **passcode** and calls `POST /user/sso/verify`.
 5. On a correct passcode, the backend links/creates the local user (table `sys_user_oauth`) and issues a
    normal session token.
@@ -294,10 +296,18 @@ Users can log in to the admin console with a third-party account (**Google, Appl
 ### Configuration (`application.yml` → `xiaozhi.sso`)
 - `enabled` — master switch.
 - `passcode` — the required second factor.
-- `frontend-redirect-url` — base URL the callback redirects back to (e.g. `http://192.168.0.195:8002`).
+- `frontend-redirect-url` — base URL the callback redirects back to (e.g. `http://localhost:8002`). On the
+  live LAN/WSL setup it must be `localhost` because that is the only origin the host browser can reach
+  (mirrored mode black-holes self-connects to the LAN IP).
 - `providers.<google|apple|microsoft|github>` — `client-id`, `client-secret`, `redirect-uri`. A provider is
   enabled only when its `client-id` is set. **Apple** additionally needs `team-id` and `key-id` (the private
   key goes in `client-secret`).
+- **GitHub** additionally requests the `user:email` scope (hard-coded in
+  `SsoServiceImpl.buildAuthRequest`) — without it GitHub returns **no email**, and provisioning falls back
+  to a `sso_<provider>_<providerUserId>` username. GitHub OAuth apps allow **exactly one** Authorization
+  callback URL, and it must match verbatim, including `?provider=github`.
+- Google / Apple / Microsoft require **HTTPS** redirect URIs; over the current HTTP/LAN setup **GitHub is
+  the only viable provider** (GitHub allows HTTP + any port).
 
 ### Backend files
 - `SsoController` (`/user/sso/providers`, `/render`, `/callback`, `/verify`)
@@ -313,6 +323,22 @@ Users can log in to the admin console with a third-party account (**Google, Appl
 - SSO alone is not enough — the **passcode** is always required to complete login.
 - A brand-new SSO identity auto-creates a local user; the same provider identity always maps to the same
   local user (unique `(provider, provider_user_id)`).
+
+### Account provisioning / linking notes
+- First login with an identity has **no account-linking step**: it always **creates a new local user**. The
+  username is the provider's email when one is returned (`user:email` scope for GitHub), else
+  `sso_<provider>_<providerUserId>`; a random strong password is generated.
+- To attach an OAuth identity to an **existing** account instead (e.g. your superuser), repoint the link —
+  this is the procedure used when the superuser logged in via GitHub:
+  ```sql
+  -- 1. delete the shell user's session token
+  DELETE FROM sys_user_token WHERE user_id = <shell_user_id>;
+  -- 2. repoint the OAuth identity at the real account
+  UPDATE sys_user_oauth SET user_id = <real_user_id> WHERE provider_user_id = '<provider_user_id>';
+  -- 3. remove the auto-created shell user
+  DELETE FROM sys_user WHERE id = <shell_user_id>;
+  ```
+  Signing out, then signing in again with GitHub logs into the repointed account.
 
 ---
 

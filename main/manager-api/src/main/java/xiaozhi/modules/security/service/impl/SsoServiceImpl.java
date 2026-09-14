@@ -108,7 +108,10 @@ public class SsoServiceImpl implements SsoService {
         if (StringUtils.isBlank(base)) {
             throw new RenException(ErrorCode.SSO_FRONTEND_NOT_CONFIGURED);
         }
-        return base + "/sso-callback?sso_state=" + ssoState;
+        // The console is a hash-routed SPA, so the redirect must carry the hash segment
+        // (e.g. http://host:8002/#/sso-callback?sso_state=...). Without "#/" the router
+        // falls back to the login route and the passcode step is never reached.
+        return base + "/#/sso-callback?sso_state=" + ssoState;
     }
 
     @Override
@@ -164,8 +167,10 @@ public class SsoServiceImpl implements SsoService {
                 .redirectUri(cfg.getRedirectUri());
         return switch (provider) {
             case "google" -> new AuthGoogleRequest(builder.build());
-            case "github" -> new AuthGithubRequest(builder.build());
             case "microsoft" -> new AuthMicrosoftRequest(builder.build());
+            // GitHub only returns the user's email address when the "user:email" scope is
+            // granted; findOrCreateUser prefers email as the new local username.
+            case "github" -> new AuthGithubRequest(builder.scopes(List.of("user:email")).build());
             case "apple" -> new AuthAppleRequest(builder
                     .teamId(cfg.getTeamId())
                     .kid(cfg.getKeyId())

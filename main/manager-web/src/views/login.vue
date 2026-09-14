@@ -452,7 +452,8 @@ export default {
         google: "G",
         apple: "",
         microsoft: "",
-        github: "",
+        // "GH" rather than "G" so the GitHub button isn't mistaken for Google.
+        github: "GH",
       };
       return icons[provider] || provider.charAt(0).toUpperCase();
     },

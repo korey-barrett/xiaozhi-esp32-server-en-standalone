@@ -180,31 +180,53 @@ xiaozhi:
   sso:
     enabled: true
     passcode: "your-passcode"
-    frontend-redirect-url: "http://192.168.0.195:8002"
+    frontend-redirect-url: "http://localhost:8002"
     providers:
       google:
-        client-id: "..."
-        client-secret: "..."
-        redirect-uri: "http://192.168.0.195:8002/xiaozhi/user/sso/callback?provider=google"
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
       apple:
-        client-id: "..."        # services/bundle id
-        client-secret: "..."    # .p8 private key
-        redirect-uri: "..."
-        team-id: "..."
-        key-id: "..."
+        client-id: ""          # services/bundle id
+        client-secret: ""      # .p8 private key
+        redirect-uri: ""
+        team-id: ""
+        key-id: ""
       microsoft:
-        client-id: "..."
-        client-secret: "..."
-        redirect-uri: "..."
+        client-id: ""
+        client-secret: ""
+        redirect-uri: ""
       github:
-        client-id: "..."
-        client-secret: "..."
-        redirect-uri: "..."
+        client-id: "Ov23li..."          # GitHub OAuth App client id
+        client-secret: "b7de..."        # GitHub OAuth App client secret
+        redirect-uri: "http://localhost:8002/xiaozhi/user/sso/callback?provider=github"
 ```
 
 A provider is enabled only when its `client-id` is set. After changing `application.yml`, rebuild the web
 image (`docker build -f Dockerfile-web ...`) and redeploy. The `sys_user_oauth` table is created
 automatically by Liquibase on startup.
+
+Notes:
+
+- **Redirect URI must match verbatim.** GitHub OAuth apps allow **exactly one** Authorization callback URL,
+  and the `redirect-uri` above must equal it character-for-character, including the `?provider=github`
+  query.
+- **`user:email` scope.** The GitHub request automatically asks for the `user:email` scope (set in
+  `SsoServiceImpl.buildAuthRequest`) so the provider returns the user's email — that email becomes the new
+  local user's username.
+- **`localhost` is host-browser only.** The callback and `frontend-redirect-url` use `localhost:8002`, which
+  only the **host browser** can reach (mirrored-mode WSL black-holes self-connects to the LAN IP, and the
+  browser is on the host). LAN-device SSO would require changing the callback URL in GitHub **and** in
+  `application.yml`, then redeploying.
+- **Google / Apple / Microsoft need HTTPS** callback URLs; over the current HTTP/LAN setup **GitHub is the
+  only viable provider** (GitHub allows HTTP and any port).
+- **Account provisioning.** A brand-new SSO identity auto-creates a local user (provider email as username,
+  random strong password) — there is no account-linking step. To attach an identity to an **existing** user,
+  repoint `sys_user_oauth.user_id` to that user (and delete the auto-created shell user). See
+  `PROJECT-HANDOFF.md §10` for the exact SQL.
+- **Passcode flow.** After the provider redirects back, the backend validates a passcode to complete login.
+  The redirect back to the SPA uses the `#/sso-callback` hash route on purpose — the console is a
+  hash-routed SPA and the passcode prompt appears under that route.
 
 ---
 
