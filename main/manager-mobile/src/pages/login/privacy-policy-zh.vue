@@ -73,7 +73,7 @@ function goBack() {
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            1.1 Account Registration Information: When you register an account, we collect your mobile phone number or username, password, and other information for the purpose of creating and verifying your account.
+            1.1 Account Registration Information: When you register an account, we collect your username, password, and other information for the purpose of creating and verifying your account.
           </text>
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
@@ -134,11 +134,6 @@ function goBack() {
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
             1.13 Log Information: When you use this Service, we automatically collect service log information, including but not limited to access times, IP addresses, browser types, and operation records, for service operations and security assurance.
-          </text>
-        </view>
-        <view class="mb-[40rpx] ml-[20rpx]">
-          <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            1.14 Verification Code Information: When you log in using a mobile phone number, we send you a verification code via SMS services for identity verification.
           </text>
         </view>
         <view class="mb-[32rpx]">
@@ -323,7 +318,7 @@ function goBack() {
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            7.1 When providing intelligent interaction features, this Service requires the invocation of third-party services, including but not limited to: voice activity detection services (VAD), speech recognition services (ASR), large language model services (LLM), speech synthesis services (TTS), vision model services, SMS verification code services, MQTT message broker services, and database services.
+            7.1 When providing intelligent interaction features, this Service requires the invocation of third-party services, including but not limited to: voice activity detection services (VAD), speech recognition services (ASR), large language model services (LLM), speech synthesis services (TTS), vision model services, MQTT message broker services, and database services.
           </text>
         </view>
         <view class="mb-[40rpx] ml-[20rpx]">

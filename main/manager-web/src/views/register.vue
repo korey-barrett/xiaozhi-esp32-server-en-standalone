@@ -24,50 +24,11 @@
 
           <div style="padding: 0 30px;">
             <form @submit.prevent="register">
-              <!-- Username/phone input field -->
-              <div class="input-box" v-if="!enableMobileRegister">
+              <!-- Username input field -->
+              <div class="input-box">
                 <img loading="lazy" alt="" class="input-icon" src="@/assets/login/username.png" />
                 <el-input v-model="form.username" :placeholder="$t('register.usernamePlaceholder')" />
               </div>
-
-              <!-- Mobile number registration section -->
-              <template v-if="enableMobileRegister">
-                <div class="input-box">
-                  <div style="display: flex; align-items: center; width: 100%;">
-                    <el-select v-model="form.areaCode" style="width: 220px; margin-right: 10px;">
-                      <el-option v-for="item in mobileAreaList" :key="item.key" :label="`${item.name} (${item.key})`"
-                        :value="item.key" />
-                    </el-select>
-                    <el-input v-model="form.mobile" :placeholder="$t('register.mobilePlaceholder')" />
-                  </div>
-                </div>
-
-                <div style="display: flex; align-items: center; margin-top: 20px; width: 100%; gap: 10px;">
-                  <div class="input-box" style="width: calc(100% - 130px); margin-top: 0;">
-                    <img loading="lazy" alt="" class="input-icon" src="@/assets/login/shield.png" />
-                    <el-input v-model="form.captcha" :placeholder="$t('register.captchaPlaceholder')"
-                      style="flex: 1;" />
-                  </div>
-                  <img loading="lazy" v-if="captchaUrl" :src="captchaUrl" alt="captcha"
-                    style="width: 150px; height: 40px; cursor: pointer;" @click="fetchCaptcha" />
-                </div>
-
-                <!-- Mobile verification code -->
-
-                <div style="display: flex; align-items: center; margin-top: 20px; width: 100%; gap: 10px;">
-                  <div class="input-box" style="width: calc(100% - 130px); margin-top: 0;">
-                    <img loading="lazy" alt="" class="input-icon" src="@/assets/login/phone.png" />
-                    <el-input v-model="form.mobileCaptcha" :placeholder="$t('register.mobileCaptchaPlaceholder')"
-                      style="flex: 1;" maxlength="6" />
-                  </div>
-                  <el-button type="primary" class="send-captcha-btn" :disabled="!canSendMobileCaptcha"
-                    @click="sendMobileCaptcha">
-                    <span>
-                      {{ countdown > 0 ? `${countdown}${$t('register.secondsLater')}` : $t('register.sendCaptcha') }}
-                    </span>
-                  </el-button>
-                </div>
-              </template>
 
               <!-- Password input field -->
               <div class="input-box">
@@ -84,7 +45,7 @@
               </div>
 
               <!-- Keep the captcha section the same -->
-              <div v-if="!enableMobileRegister"
+              <div
                 style="display: flex; align-items: center; margin-top: 20px; width: 100%; gap: 10px;">
                 <div class="input-box" style="width: calc(100% - 130px); margin-top: 0;">
                   <img loading="lazy" alt="" class="input-icon" src="@/assets/login/shield.png" />
@@ -125,7 +86,7 @@
 <script>
 import Api from '@/apis/api';
 import VersionFooter from '@/components/VersionFooter.vue';
-import { getUUID, goToPage, showDanger, showSuccess, sm2Encrypt, validateMobile } from '@/utils';
+import { getUUID, goToPage, showDanger, showSuccess, sm2Encrypt } from '@/utils';
 import { mapState } from 'vuex';
 import i18n from '@/i18n';
 
@@ -139,8 +100,6 @@ export default {
   computed: {
     ...mapState({
       allowUserRegister: state => state.pubConfig.allowUserRegister,
-      enableMobileRegister: state => state.pubConfig.enableMobileRegister,
-      mobileAreaList: state => state.pubConfig.mobileAreaList,
       sm2PublicKey: state => state.pubConfig.sm2PublicKey,
     }),
     // Get the current language
@@ -165,9 +124,6 @@ export default {
           return require("@/assets/xiaozhi-ai.png");
       }
     },
-    canSendMobileCaptcha() {
-      return this.countdown === 0 && validateMobile(this.form.mobile, this.form.areaCode);
-    }
   },
   data() {
     return {
@@ -177,13 +133,8 @@ export default {
         confirmPassword: '',
         captcha: '',
         captchaId: '',
-        areaCode: '+86',
-        mobile: '',
-        mobileCaptcha: ''
       },
       captchaUrl: '',
-      countdown: 0,
-      timer: null,
     }
   },
   mounted() {
@@ -229,67 +180,11 @@ export default {
       return true;
     },
 
-    // Send mobile verification code
-    sendMobileCaptcha() {
-      if (!validateMobile(this.form.mobile, this.form.areaCode)) {
-        showDanger(this.$t('register.inputCorrectMobile'));
-        return;
-      }
-
-      // Validate the graphic captcha
-      if (!this.validateInput(this.form.captcha, this.$t('register.inputCaptcha'))) {
-        this.fetchCaptcha();
-        return;
-      }
-
-      // Clear any existing old timer
-      if (this.timer) {
-        clearInterval(this.timer);
-        this.timer = null;
-      }
-
-      // Start the countdown
-      this.countdown = 60;
-      this.timer = setInterval(() => {
-        if (this.countdown > 0) {
-          this.countdown--;
-        } else {
-          clearInterval(this.timer);
-          this.timer = null;
-        }
-      }, 1000);
-
-      // Call the send verification code API
-      Api.user.sendSmsVerification({
-        phone: this.form.areaCode + this.form.mobile,
-        captcha: this.form.captcha,
-        captchaId: this.form.captchaId
-      }, (res) => {
-        showSuccess(this.$t('register.captchaSendSuccess'));
-      }, (err) => {
-        showDanger(err.data.msg || this.$t('register.captchaSendFailed'));
-        this.countdown = 0;
-        this.fetchCaptcha();
-      });
-    },
-
     // Registration logic
     async register() {
-      if (this.enableMobileRegister) {
-        // Mobile registration validation
-        if (!validateMobile(this.form.mobile, this.form.areaCode)) {
-          showDanger(this.$t('register.inputCorrectMobile'));
-          return;
-        }
-        if (!this.form.mobileCaptcha) {
-          showDanger(this.$t('register.requiredMobileCaptcha'));
-          return;
-        }
-      } else {
-        // Username registration validation
-        if (!this.validateInput(this.form.username, this.$t('register.requiredUsername'))) {
-          return;
-        }
+      // Username registration validation
+      if (!this.validateInput(this.form.username, this.$t('register.requiredUsername'))) {
+        return;
       }
 
       // Validate the password
@@ -316,19 +211,11 @@ export default {
         return;
       }
 
-      let plainUsername;
-      if (this.enableMobileRegister) {
-        plainUsername = this.form.areaCode + this.form.mobile;
-      } else {
-        plainUsername = this.form.username;
-      }
-
       // Prepare registration data
       const registerData = {
-        username: plainUsername,
+        username: this.form.username,
         password: encryptedPassword,
-        captchaId: this.form.captchaId,
-        mobileCaptcha: this.form.mobileCaptcha
+        captchaId: this.form.captchaId
       };
 
       Api.user.register(registerData, ({ data }) => {
@@ -344,11 +231,6 @@ export default {
 
     goToLogin() {
       goToPage('/login')
-    }
-  },
-  beforeDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer);
     }
   }
 }

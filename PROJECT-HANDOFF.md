@@ -55,7 +55,7 @@ An **English-first, standalone fork** of the open-source project
   VAD → **Silero** (local), TTS → **Edge TTS** (English voice), Memory → **nomem**, Weather → **Open-Meteo**,
   Web search → **Tavily** (US), News → **BBC RSS** (newsnow plugin disabled).
 - **Removed Chinese egress:** pconline IP geolocation (no client-IP egress), QWeather key, Metaso search default,
-  Chinanews/NewsNow defaults, Aliyun SMS (optional/off).
+  Chinanews/NewsNow defaults, Aliyun SMS (removed 2026-09-15, no phone-number login).
 - **`/generator`** (device-config tool) rebuilt from `xiaozhi-assets-generator` source with **English default locale**.
 - **Remaining Chinese in source:** only functional spoken wake/exit words (`你好小智…`, `退出`, `关闭`).
 

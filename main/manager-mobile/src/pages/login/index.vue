@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import type { LoginData } from '@/api/auth'
 import type { Language } from '@/store/lang'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { login } from '@/api/auth'
 // Import i18n utilities
 import { changeLanguage, getCurrentLanguage, getSupportedLanguages, initI18n, t } from '@/i18n'
@@ -48,73 +48,20 @@ const formData = ref({
   password: '',
   captcha: '',
   captchaId: '',
-  areaCode: '+86',
-  mobile: '',
 })
 
 // Captcha image
 const captchaImage = ref('')
 const loading = ref(false)
 
-// Login method: 'username' | 'mobile'
-const loginType = ref<'username' | 'mobile'>('username')
-
 // Get the config store
 const configStore = useConfigStore()
 const userStore = useUserStore()
-
-// Area code selection
-const showAreaCodeSheet = ref(false)
-const selectedAreaCode = ref('+86')
-const selectedAreaName = ref('Mainland China')
-
-// Computed: whether mobile login is enabled
-const enableMobileLogin = computed(() => {
-  return configStore.config.enableMobileRegister
-})
-
-// Computed: area code list
-const areaCodeList = computed(() => {
-  return configStore.config.mobileAreaList || [{ name: 'Mainland China', key: '+86' }]
-})
-
-// Toggle the login method
-function toggleLoginType() {
-  loginType.value = loginType.value === 'username' ? 'mobile' : 'username'
-  // Clear the input fields
-  formData.value.username = ''
-  formData.value.mobile = ''
-}
-
-// Open the area code selector
-function openAreaCodeSheet() {
-  showAreaCodeSheet.value = true
-}
-
-// Select an area code
-function selectAreaCode(item: { name: string, key: string }) {
-  selectedAreaCode.value = item.key
-  selectedAreaName.value = item.name
-  formData.value.areaCode = item.key
-  showAreaCodeSheet.value = false
-}
-
-// Close the area code selector
-function closeAreaCodeSheet() {
-  showAreaCodeSheet.value = false
-}
 
 // Navigate to the register page
 function goToRegister() {
   uni.navigateTo({
     url: '/pages/register/index',
-  })
-}
-
-// Navigate to the forgot password page
-function goToForgotPassword() {
-  uni.navigateTo({
-    url: '/pages/forgot-password/index',
   })
 }
 
@@ -160,23 +107,9 @@ async function refreshCaptcha() {
 // Login
 async function handleLogin() {
   // Form validation
-  if (loginType.value === 'username') {
-    if (!formData.value.username) {
-      toast.warning(t('login.enterUsername'))
-      return
-    }
-  }
-  else {
-    if (!formData.value.mobile) {
-      toast.warning(t('login.enterPhone'))
-      return
-    }
-    // Validate the phone number format
-    const phoneRegex = /^1[3-9]\d{9}$/
-    if (!phoneRegex.test(formData.value.mobile)) {
-      toast.warning(t('login.enterPhone'))
-      return
-    }
+  if (!formData.value.username) {
+    toast.warning(t('login.enterUsername'))
+    return
   }
   if (!formData.value.password) {
     toast.warning(t('login.enterPassword'))
@@ -212,17 +145,9 @@ async function handleLogin() {
 
     // Build the login data
     const loginData: LoginData = {
-      username: '',
+      username: formData.value.username,
       password: encryptedPassword,
       captchaId: formData.value.captchaId,
-    }
-
-    // For mobile login, concatenate the area code + phone into the username field
-    if (loginType.value === 'mobile') {
-      loginData.username = `${selectedAreaCode.value}${formData.value.mobile}`
-    }
-    else {
-      loginData.username = formData.value.username
     }
 
     const response = await login(loginData)
@@ -310,43 +235,17 @@ onMounted(async () => {
 
     <view class="form-container">
       <view class="form">
-        <!-- Mobile login -->
-        <template v-if="loginType === 'mobile'">
-          <view class="input-group">
-            <view class="input-wrapper mobile-wrapper">
-              <view class="area-code-selector" @click="openAreaCodeSheet">
-                <text class="area-code-text">
-                  {{ selectedAreaCode }}
-                </text>
-                <wd-icon name="arrow-down" custom-class="area-code-arrow" />
-              </view>
-              <view class="mobile-input-wrapper">
-                <wd-input
-                  v-model="formData.mobile"
-                  custom-class="styled-input"
-                  no-border
-                  :placeholder="t('login.enterPhone')"
-                  type="number"
-                  :maxlength="11"
-                />
-              </view>
-            </view>
-          </view>
-        </template>
-
         <!-- Username login -->
-        <template v-else>
-          <view class="input-group">
-            <view class="input-wrapper">
-              <wd-input
-                v-model="formData.username"
-                custom-class="styled-input"
-                no-border
-                :placeholder="t('login.enterUsername')"
-              />
-            </view>
+        <view class="input-group">
+          <view class="input-wrapper">
+            <wd-input
+              v-model="formData.username"
+              custom-class="styled-input"
+              no-border
+              :placeholder="t('login.enterUsername')"
+            />
           </view>
-        </template>
+        </view>
 
         <view class="input-group">
           <view class="input-wrapper">
@@ -389,12 +288,6 @@ onMounted(async () => {
               {{ t('login.noAccount') }}
             </text>
           </view>
-
-          <view class="forgot-password">
-            <text class="forgot-text" @click="goToForgotPassword">
-              {{ t('login.forgotPassword') }}
-            </text>
-          </view>
         </view>
 
         <view class="policy-links">
@@ -409,70 +302,8 @@ onMounted(async () => {
           </text>
         </view>
 
-        <!-- Login method switch -->
-        <view v-if="enableMobileLogin" class="login-type-switch">
-          <view class="switch-tabs">
-            <view
-              class="switch-tab"
-              :class="{ active: loginType === 'username' }"
-              @click="toggleLoginType"
-            >
-              <wd-icon name="user" />
-            </view>
-            <view
-              class="switch-tab"
-              :class="{ active: loginType === 'mobile' }"
-              @click="toggleLoginType"
-            >
-              <wd-icon name="phone" />
-            </view>
-          </view>
-        </view>
       </view>
     </view>
-
-    <!-- Area code selector popup -->
-    <wd-action-sheet
-      v-model="showAreaCodeSheet"
-      :title="t('login.selectCountry')"
-      :close-on-click-modal="true"
-      @close="closeAreaCodeSheet"
-    >
-      <view class="area-code-sheet">
-        <scroll-view scroll-y class="area-code-list">
-          <view
-            v-for="item in areaCodeList"
-            :key="item.key"
-            class="area-code-item"
-            :class="{ selected: selectedAreaCode === item.key }"
-            @click="selectAreaCode(item)"
-          >
-            <view class="area-info">
-              <text class="area-name">
-                {{ item.name }}
-              </text>
-              <text class="area-code">
-                {{ item.key }}
-              </text>
-            </view>
-            <wd-icon
-              v-if="selectedAreaCode === item.key"
-              name="check"
-              custom-class="check-icon"
-            />
-          </view>
-        </scroll-view>
-        <view class="sheet-footer">
-          <wd-button
-            type="primary"
-            custom-class="confirm-btn"
-            @click="closeAreaCodeSheet"
-          >
-            {{ t('login.confirm') }}
-          </wd-button>
-        </view>
-      </view>
-    </wd-action-sheet>
 
     <!-- Language selection popup -->
     <wd-action-sheet

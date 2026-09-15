@@ -21,9 +21,6 @@ public class LoginDTO implements Serializable {
     @NotBlank(message = "{sysuser.password.require}")
     private String password;
 
-    @Schema(description = "Mobile verification code")
-    private String mobileCaptcha;
-
     @Schema(description = "Unique identifier")
     @NotBlank(message = "{sysuser.uuid.require}")
     private String captchaId;

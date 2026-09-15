@@ -119,27 +119,6 @@ public class RedisKeys {
     }
 
     /**
-     * SMS verification code cache key
-     */
-    public static String getSMSValidateCodeKey(String phone) {
-        return "sms:Validate:Code:" + phone;
-    }
-
-    /**
-     * SMS verification code last send time cache key
-     */
-    public static String getSMSLastSendTimeKey(String phone) {
-        return "sms:Validate:Code:" + phone + ":last_send_time";
-    }
-
-    /**
-     * SMS verification code daily send count cache key
-     */
-    public static String getSMSTodayCountKey(String phone) {
-        return "sms:Validate:Code:" + phone + ":today_count";
-    }
-
-    /**
      * Chat history UUID mapping key
      */
     public static String getChatHistoryKey(String uuid) {

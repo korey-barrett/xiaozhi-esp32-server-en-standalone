@@ -20,7 +20,6 @@ public interface ErrorCode {
     int ACCOUNT_DISABLE = 10005;
     int IDENTIFIER_NOT_NULL = 10006;
     int CAPTCHA_ERROR = 10007;
-    int PHONE_NOT_NULL = 10008;
     int PASSWORD_ERROR = 10009;
 
     int SUPERIOR_DEPT_ERROR = 10011;
@@ -61,7 +60,6 @@ public interface ErrorCode {
     int USER_NOT_LOGIN = 10044;
     int WEB_SOCKET_CONNECT_FAILED = 10045;
     int VOICE_PRINT_SAVE_ERROR = 10046;
-    int TODAY_SMS_LIMIT_REACHED = 10047;
     int OLD_PASSWORD_ERROR = 10048;
     int INVALID_LLM_TYPE = 10049;
     int TOKEN_GENERATE_ERROR = 10050;
@@ -71,12 +69,9 @@ public interface ErrorCode {
     int DEFAULT_AGENT_NOT_FOUND = 10052;
     int AGENT_NOT_FOUND = 10053;
     int VOICEPRINT_API_NOT_CONFIGURED = 10054;
-    int SMS_SEND_FAILED = 10055;
-    int SMS_CONNECTION_FAILED = 10056;
     int AGENT_VOICEPRINT_CREATE_FAILED = 10057;
     int AGENT_VOICEPRINT_UPDATE_FAILED = 10058;
     int AGENT_VOICEPRINT_DELETE_FAILED = 10059;
-    int SMS_SEND_TOO_FREQUENTLY = 10060;
     int ACTIVATION_CODE_EMPTY = 10061;
     int ACTIVATION_CODE_ERROR = 10062;
     int DEVICE_ALREADY_ACTIVATED = 10063;
@@ -85,15 +80,9 @@ public interface ErrorCode {
     // Login related error codes
     int ADD_DATA_FAILED = 10065; // Failed to add data
     int UPDATE_DATA_FAILED = 10066; // Failed to update data
-    int SMS_CAPTCHA_ERROR = 10067; // Incorrect SMS verification code
-    int MOBILE_REGISTER_DISABLED = 10068; // Mobile registration is not enabled
-    int USERNAME_NOT_PHONE = 10069; // Username is not a phone number
-    int PHONE_ALREADY_REGISTERED = 10070; // Phone number already registered
-    int PHONE_NOT_REGISTERED = 10071; // Phone number not registered
+    int SMS_CAPTCHA_ERROR = 10067; // Incorrect graphic captcha code (kept for the SM2-encrypted login payload)
+    int ACCOUNT_ALREADY_REGISTERED = 10070; // Account already registered
     int USER_REGISTER_DISABLED = 10072; // User registration is not allowed
-    int RETRIEVE_PASSWORD_DISABLED = 10073; // Password retrieval is not enabled
-    int PHONE_FORMAT_ERROR = 10074; // Incorrect phone number format
-    int SMS_CODE_ERROR = 10075; // Incorrect SMS verification code
 
     // Dictionary type related error codes
     int DICT_TYPE_NOT_EXIST = 10076; // Dictionary type does not exist

@@ -47,13 +47,6 @@ const routes = [
     }
   },
   {
-    path: '/retrieve-password',
-    name: 'RetrievePassword',
-    component: function () {
-      return import('../views/retrievePassword.vue')
-    }
-  },
-  {
     path: '/sso-callback',
     name: 'SsoCallback',
     component: function () {

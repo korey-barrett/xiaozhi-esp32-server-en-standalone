@@ -239,46 +239,6 @@ public interface Constant {
     }
 
     /**
-     * System SMS
-     */
-    enum SysMSMParam {
-        /**
-         * Alibaba Cloud authorization key ID
-         */
-        ALIYUN_SMS_ACCESS_KEY_ID("aliyun.sms.access_key_id"),
-        /**
-         * Alibaba Cloud authorization secret
-         */
-        ALIYUN_SMS_ACCESS_KEY_SECRET("aliyun.sms.access_key_secret"),
-        /**
-         * Alibaba Cloud SMS signature
-         */
-        ALIYUN_SMS_SIGN_NAME("aliyun.sms.sign_name"),
-        /**
-         * Alibaba Cloud SMS template
-         */
-        ALIYUN_SMS_SMS_CODE_TEMPLATE_CODE("aliyun.sms.sms_code_template_code"),
-        /**
-         * Maximum number of SMS messages sent to a single number
-         */
-        SERVER_SMS_MAX_SEND_COUNT("server.sms_max_send_count"),
-        /**
-         * Whether mobile registration is enabled
-         */
-        SERVER_ENABLE_MOBILE_REGISTER("server.enable_mobile_register");
-
-        private String value;
-
-        SysMSMParam(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
-    /**
      * Data operation
      */
     enum DataOperation {
@@ -330,24 +290,4 @@ public interface Constant {
      * Invalid firmware URL
      */
     String INVALID_FIRMWARE_URL = "http://xiaozhi.server.com:8002/xiaozhi/otaMag/download/NOT_ACTIVATED_FIRMWARE_THIS_IS_A_INVALID_URL";
-
-    /**
-     * Dictionary type
-     */
-    enum DictType {
-        /**
-         * Mobile area code
-         */
-        MOBILE_AREA("MOBILE_AREA");
-
-        private String value;
-
-        DictType(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
 }

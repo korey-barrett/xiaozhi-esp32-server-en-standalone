@@ -270,14 +270,13 @@ Here are some common questions for reference:
 2、[How to deploy the MQTT gateway to enable the MQTT+UDP protocol](./mqtt-gateway-integration.md)<br/>
 3、How to integrate with Nginx<br/>
 ## Extension Tutorials
-1、[How to enable phone-number registration for the Console (optional)](./ali-sms-integration.md)<br/>
-2、[How to integrate HomeAssistant for smart home control](./homeassistant-integration.md)<br/>
-3、[How to enable the vision model to identify objects by photo](./mcp-vision-integration.md)<br/>
-4、[How to deploy an MCP access point](./mcp-endpoint-enable.md)<br/>
-5、[How to connect to an MCP access point](./mcp-endpoint-integration.md)<br/>
-6、[How to enable voiceprint recognition](./voiceprint-integration.md)<br/>
-7、[News plugin source configuration guide](./newsnow_plugin_config.md)<br/>
-8、[Weather plugin usage guide](./weather-integration.md)<br/>
+1、[How to integrate HomeAssistant for smart home control](./homeassistant-integration.md)<br/>
+2、[How to enable the vision model to identify objects by photo](./mcp-vision-integration.md)<br/>
+3、[How to deploy an MCP access point](./mcp-endpoint-enable.md)<br/>
+4、[How to connect to an MCP access point](./mcp-endpoint-integration.md)<br/>
+5、[How to enable voiceprint recognition](./voiceprint-integration.md)<br/>
+6、[News plugin source configuration guide](./newsnow_plugin_config.md)<br/>
+7、[Weather plugin usage guide](./weather-integration.md)<br/>
 ## Voice Cloning and Local Voice Deployment Tutorials
 1、[How to clone a voice/timbre in the Console](./huoshan-streamTTS-voice-cloning.md)<br/>
 2、[How to deploy and integrate the index-tts local voice](./index-stream-integration.md)<br/>

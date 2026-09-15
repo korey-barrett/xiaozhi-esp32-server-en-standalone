@@ -42,26 +42,6 @@ export default {
 
             }).send()
     },
-    // Send SMS verification code
-    sendSmsVerification(data, callback, failCallback) {
-        RequestService.sendRequest()
-            .url(`${getServiceUrl()}/user/smsVerification`)
-            .method('POST')
-            .data(data)
-            .success((res) => {
-                RequestService.clearRequestTime()
-                callback(res)
-            })
-            .fail((err) => {
-                RequestService.clearRequestTime()
-                failCallback(err)
-            })
-            .networkFail(() => {
-                RequestService.reAjaxFun(() => {
-                    this.sendSmsVerification(data, callback, failCallback)
-                })
-            }).send()
-    },
     // Register an account
     register(registerForm, callback, failCallback) {
         RequestService.sendRequest()
@@ -174,31 +154,6 @@ export default {
                     this.getPubConfig(callback, failCallback);
                 });
             }).send();
-    },
-    // Retrieve the user password
-    retrievePassword(passwordData, callback, failCallback) {
-        RequestService.sendRequest()
-            .url(`${getServiceUrl()}/user/retrieve-password`)
-            .method('PUT')
-            .data({
-                phone: passwordData.phone,
-                code: passwordData.code,
-                password: passwordData.password,
-                captchaId: passwordData.captchaId
-            })
-            .success((res) => {
-                RequestService.clearRequestTime();
-                callback(res);
-            })
-            .fail((err) => {
-                RequestService.clearRequestTime();
-                failCallback(err);
-            })
-            .networkFail(() => {
-                RequestService.reAjaxFun(() => {
-                    this.retrievePassword(passwordData, callback, failCallback);
-                });
-            }).send()
     },
     // Get the SSO public configuration (enabled providers, passcode required)
     getSsoConfig(callback, failCallback) {

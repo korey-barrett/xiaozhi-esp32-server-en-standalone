@@ -5,11 +5,9 @@ import { getPublicConfig } from '@/api/auth'
 
 // Initial state
 const initialConfigState: PublicConfig = {
-  enableMobileRegister: false,
   version: '',
   year: '',
   allowUserRegister: false,
-  mobileAreaList: [],
   beianIcpNum: '',
   beianGaNum: '',
   sm2PublicKey: '',

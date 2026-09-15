@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { register, sendSmsCode } from '@/api/auth'
+import { register } from '@/api/auth'
 // Import i18n utilities
 import { initI18n, t } from '@/i18n'
 import { useConfigStore } from '@/store'
@@ -48,9 +48,6 @@ interface RegisterData {
   confirmPassword: string
   captcha: string
   captchaId: string
-  areaCode: string
-  mobile: string
-  mobileCaptcha: string
 }
 
 const formData = ref<RegisterData>({
@@ -59,69 +56,19 @@ const formData = ref<RegisterData>({
   confirmPassword: '',
   captcha: '',
   captchaId: '',
-  areaCode: '+86',
-  mobile: '',
-  mobileCaptcha: '',
 })
 
 // Captcha image
 const captchaImage = ref('')
 const loading = ref(false)
-const smsLoading = ref(false)
-const smsCountdown = ref(0)
-
-// Register method: 'username' | 'mobile'
-const registerType = ref<'username' | 'mobile'>('username')
 
 // Get the config store
 const configStore = useConfigStore()
-
-// Area code selection
-const showAreaCodeSheet = ref(false)
-const selectedAreaCode = ref('+86')
-const selectedAreaName = ref('Mainland China')
-
-// Computed: whether mobile registration is enabled
-const enableMobileRegister = computed(() => {
-  return configStore.config.enableMobileRegister
-})
-
-// Computed: area code list
-const areaCodeList = computed(() => {
-  return configStore.config.mobileAreaList || [{ name: 'Mainland China', key: '+86' }]
-})
 
 // SM2 public key
 const sm2PublicKey = computed(() => {
   return configStore.config.sm2PublicKey
 })
-
-// Toggle the register method
-function toggleRegisterType() {
-  registerType.value = registerType.value === 'username' ? 'mobile' : 'username'
-  // Clear the input fields
-  formData.value.username = ''
-  formData.value.mobile = ''
-  formData.value.mobileCaptcha = ''
-}
-
-// Open the area code selector
-function openAreaCodeSheet() {
-  showAreaCodeSheet.value = true
-}
-
-// Select an area code
-function selectAreaCode(item: { name: string, key: string }) {
-  selectedAreaCode.value = item.key
-  selectedAreaName.value = item.name
-  formData.value.areaCode = item.key
-  showAreaCodeSheet.value = false
-}
-
-// Close the area code selector
-function closeAreaCodeSheet() {
-  showAreaCodeSheet.value = false
-}
 
 // Generate a UUID
 function generateUUID() {
@@ -139,82 +86,13 @@ async function refreshCaptcha() {
   captchaImage.value = `${getEnvBaseUrl()}/user/captcha?uuid=${uuid}&t=${Date.now()}`
 }
 
-// Send the SMS verification code
-async function sendSmsVerification() {
-  if (!formData.value.mobile) {
-    toast.warning(t('register.enterPhone'))
-    return
-  }
-  if (!formData.value.captcha) {
-    toast.warning(t('register.enterCode'))
-    return
-  }
-
-  // Validate the phone number format
-  const phoneRegex = /^1[3-9]\d{9}$/
-  if (!phoneRegex.test(formData.value.mobile)) {
-    toast.warning(t('register.enterPhone'))
-    return
-  }
-
-  try {
-    smsLoading.value = true
-    await sendSmsCode({
-      phone: `${selectedAreaCode.value}${formData.value.mobile}`,
-      captcha: formData.value.captcha,
-      captchaId: formData.value.captchaId,
-    })
-
-    toast.success(t('register.captchaSendSuccess'))
-
-    // Start the countdown
-    smsCountdown.value = 60
-    const timer = setInterval(() => {
-      smsCountdown.value--
-      if (smsCountdown.value <= 0) {
-        clearInterval(timer)
-      }
-    }, 1000)
-  }
-  catch (error: any) {
-    // Handle the captcha error - parse the error code from error.message
-    if (error.message.includes('Request error[10067]')) {
-      toast.warning(t('login.captchaError'))
-    }
-    // Refetch the captcha after a send failure
-    refreshCaptcha()
-  }
-  finally {
-    smsLoading.value = false
-  }
-}
-
 // Register
 async function handleRegister() {
   // Form validation
-  if (enableMobileRegister.value) {
-    // Mobile registration validation
-    if (!formData.value.mobile) {
-      toast.warning(t('register.enterPhone'))
-      return
-    }
-    // Validate the phone number format
-    const phoneRegex = /^1[3-9]\d{9}$/
-    if (!phoneRegex.test(formData.value.mobile)) {
-      toast.warning(t('register.enterPhone'))
-      return
-    }
-    if (!formData.value.mobileCaptcha) {
-      toast.warning(t('register.enterCode'))
-      return
-    }
-  }
-  else {
-    // Username registration validation
-    if (!formData.value.username) {
-      toast.warning(t('register.enterUsername'))
-      return
-    }
+  // Username registration validation
+  if (!formData.value.username) {
+    toast.warning(t('register.enterUsername'))
+    return
   }
 
   if (!formData.value.password) {
@@ -261,12 +139,9 @@ async function handleRegister() {
 
     // Build the register data
     const registerData = {
-      username: enableMobileRegister.value ? `${selectedAreaCode.value}${formData.value.mobile}` : formData.value.username,
+      username: formData.value.username,
       password: encryptedPassword,
       captchaId: formData.value.captchaId,
-      areaCode: formData.value.areaCode,
-      mobile: formData.value.mobile,
-      mobileCaptcha: formData.value.mobileCaptcha,
     }
 
     await register(registerData)
@@ -342,43 +217,17 @@ onMounted(async () => {
 
     <view class="form-container">
       <view class="form">
-        <!-- Mobile registration -->
-        <template v-if="enableMobileRegister">
-          <view class="input-group">
-            <view class="input-wrapper mobile-wrapper">
-              <view class="area-code-selector" @click="openAreaCodeSheet">
-                <text class="area-code-text">
-                  {{ selectedAreaCode }}
-                </text>
-                <wd-icon name="arrow-down" custom-class="area-code-arrow" />
-              </view>
-              <view class="mobile-input-wrapper">
-                <wd-input
-                  v-model="formData.mobile"
-                  custom-class="styled-input"
-                  no-border
-                  :placeholder="t('register.enterPhone')"
-                  type="number"
-                  :maxlength="11"
-                />
-              </view>
-            </view>
-          </view>
-        </template>
-
         <!-- Username registration -->
-        <template v-else>
-          <view class="input-group">
-            <view class="input-wrapper">
-              <wd-input
-                v-model="formData.username"
-                custom-class="styled-input"
-                no-border
-                :placeholder="t('register.enterUsername')"
-              />
-            </view>
+        <view class="input-group">
+          <view class="input-wrapper">
+            <wd-input
+              v-model="formData.username"
+              custom-class="styled-input"
+              no-border
+              :placeholder="t('register.enterUsername')"
+            />
           </view>
-        </template>
+        </view>
 
         <view class="input-group">
           <view class="input-wrapper">
@@ -421,28 +270,6 @@ onMounted(async () => {
           </view>
         </view>
 
-        <!-- Mobile verification code input -->
-        <view v-if="enableMobileRegister" class="input-group">
-          <view class="input-wrapper sms-wrapper">
-            <wd-input
-              v-model="formData.mobileCaptcha"
-              custom-class="styled-input"
-              no-border
-              :placeholder="t('register.enterCode')"
-              type="number"
-              :maxlength="6"
-            />
-            <wd-button
-              :loading="smsLoading"
-              :disabled="smsCountdown > 0"
-              custom-class="sms-btn"
-              @click="sendSmsVerification"
-            >
-              {{ smsCountdown > 0 ? `${smsCountdown}s` : t('register.getCode') }}
-            </wd-button>
-          </view>
-        </view>
-
         <view
           class="register-btn"
           type="primary"
@@ -463,48 +290,6 @@ onMounted(async () => {
       </view>
     </view>
 
-    <!-- Area code selector popup -->
-    <wd-action-sheet
-      v-model="showAreaCodeSheet"
-      :title="t('register.selectCountry')"
-      :close-on-click-modal="true"
-      @close="closeAreaCodeSheet"
-    >
-      <view class="area-code-sheet">
-        <scroll-view scroll-y class="area-code-list">
-          <view
-            v-for="item in areaCodeList"
-            :key="item.key"
-            class="area-code-item"
-            :class="{ selected: selectedAreaCode === item.key }"
-            @click="selectAreaCode(item)"
-          >
-            <view class="area-info">
-              <text class="area-name">
-                {{ item.name }}
-              </text>
-              <text class="area-code">
-                {{ item.key }}
-              </text>
-            </view>
-            <wd-icon
-              v-if="selectedAreaCode === item.key"
-              name="check"
-              custom-class="check-icon"
-            />
-          </view>
-        </scroll-view>
-        <view class="sheet-footer">
-          <wd-button
-            type="primary"
-            custom-class="confirm-btn"
-            @click="closeAreaCodeSheet"
-          >
-            {{ t('register.confirm') }}
-          </wd-button>
-        </view>
-      </view>
-    </wd-action-sheet>
   </view>
 </template>
 

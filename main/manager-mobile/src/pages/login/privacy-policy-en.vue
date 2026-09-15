@@ -73,7 +73,7 @@ function goBack() {
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            1.1 Account Registration Information: When you register an account, we collect your phone number or username, password, and other information to create and verify your account.
+            1.1 Account Registration Information: When you register an account, we collect your username, password, and other information to create and verify your account.
           </text>
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
@@ -134,11 +134,6 @@ function goBack() {
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
             1.13 Log Information: When you use the Service, we automatically collect service log information, including but not limited to access time, IP address, browser type, operation records, etc., for service operation and security assurance.
-          </text>
-        </view>
-        <view class="mb-[40rpx] ml-[20rpx]">
-          <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            1.14 Verification Code Information: When you use phone number login, we send verification codes via SMS service for identity verification.
           </text>
         </view>
         <view class="mb-[32rpx]">
@@ -323,7 +318,7 @@ function goBack() {
         </view>
         <view class="mb-[16rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            7.1 When providing intelligent interaction functions, the Service needs to call third-party services, including but not limited to: Voice Activity Detection Service (VAD), Automatic Speech Recognition Service (ASR), Large Language Model Service (LLM), Text-to-Speech Service (TTS), Vision Model Service, SMS Verification Code Service, MQTT Message Broker Service, Database Service.
+            7.1 When providing intelligent interaction functions, the Service needs to call third-party services, including but not limited to: Voice Activity Detection Service (VAD), Automatic Speech Recognition Service (ASR), Large Language Model Service (LLM), Text-to-Speech Service (TTS), Vision Model Service, MQTT Message Broker Service, Database Service.
           </text>
         </view>
         <view class="mb-[40rpx] ml-[20rpx]">

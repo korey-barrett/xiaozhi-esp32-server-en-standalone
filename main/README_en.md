@@ -474,7 +474,7 @@ Configuration is key to customizing system behavior, especially in selecting AI 
 
 2.  **`manager-api` Configuration:**
     *   As a Spring Boot application, its configuration is mainly managed through the `application.properties` or `application.yml` file located in the `src/main/resources` directory.
-    *   Key configuration items include: database connection information (MySQL URL, username, password), Redis server address and port, application service port (default 8002), Apache Shiro security-related settings, and configuration parameters for any integrated third-party services (such as Aliyun SMS).
+    *   Key configuration items include: database connection information (MySQL URL, username, password), Redis server address and port, application service port (default 8002), Apache Shiro security-related settings, and configuration parameters for any integrated third-party services.
 
 3.  **`manager-web` Configuration:**
     *   Environment-specific settings for the Vue.js frontend application are managed through `.env` series files (e.g., `.env`, `.env.development`, `.env.production`) in the project root directory.

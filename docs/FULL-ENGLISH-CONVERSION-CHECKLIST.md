@@ -88,7 +88,6 @@ Every configurable service and the external endpoint it contacts. Marked `[CH]` 
 | Service | Purpose / model type | Endpoint(s) | Config location | Replace with |
 |---|---|---|---|---|
 | Alibaba Cloud / Qwen (`[CH]`) | LLM, ASR (Paraformer), TTS (CosyVoice), VLLM | `dashscope.aliyuncs.com`, `nls-gateway*.aliyuncs.com` | `ai_model_config` seeds | Ollama / OpenAI / Whisper |
-| Alibaba SMS (`[CH]`) | SMS verification (optional login) | `dysmsapi.aliyuncs.com` | `sys_params aliyun.sms.*` | none / Twilio / GSM / email |
 | Volcengine / Doubao (`[CH]`) | LLM, ASR, TTS (`seed-tts-2.0`) | `ark.cn-beijing.volces.com`, `openspeech.bytedance.com` | provider config | OpenAI / Edge TTS |
 | Zhipu / GLM (`[CH]`) | LLM, VLLM | `open.bigmodel.cn` | provider config | Ollama / OpenAI |
 | DeepSeek (`[CH]`) | LLM | `api.deepseek.com` | provider config | OpenAI / Ollama |
@@ -166,14 +165,7 @@ For each capability, recommended English/global + local options. **Free/paid × 
 | Weather free | **Open-Meteo** (open, free); OpenWeatherMap free tier | — |
 | News free | **RSS / GNews** (English sources) | — |
 
-### 4.9 SMS (optional phone login)
-SMS is optional (see `ali-sms-integration.md`). Default = username/password. If needed:
-| | Cloud | Local |
-|---|---|---|
-| Free | Twilio trial credit | GSM/4G modem + SIM; or email-based codes |
-| Paid | Twilio / MessageBird / Vonage | — |
-
-### 4.10 MQTT
+### 4.9 MQTT
 | | Cloud | Local |
 |---|---|---|
 | Free | (any public broker) | **Mosquitto** (self-hosted) |
@@ -188,7 +180,7 @@ SMS is optional (see `ali-sms-integration.md`). Default = username/password. If 
 | News sources | 澎湃新闻, 百度热搜, 财联社… | English RSS (BBC, Reuters, RSSHub) | GNews/NewsAPI | local RSS reader |
 | Weather default city | 广州 | configurable, user-set | Open-Meteo | — |
 | Wake words | 你好小智… | (retain; add English wake word if desired) | — | local Wakenet |
-| SMS | Alibaba Cloud | optional / none | Twilio | GSM modem / email |
+| SMS | — (removed: no phone-number login) | username/password only | — | — |
 
 ---
 
@@ -222,7 +214,7 @@ SMS is optional (see `ali-sms-integration.md`). Default = username/password. If 
 ## 7. Implementation phases
 1. **UI/English pass** — complete any remaining Chinese UI text (page audit §2).
 2. **Provider plumbing** — ensure every provider type supports the free/local options above;
-   add any missing provider implementations (e.g. non-Aliyun SMS, English news/weather).
+   add any missing provider implementations (e.g. English news/weather).
 3. **Default flip** — change seed defaults from Chinese providers to the English/local defaults.
 4. **Data-egress removal** — remove/disable remaining Chinese endpoints; document any optional ones.
 5. **Validation** — run the app fully offline with only local providers; verify no Chinese egress.

@@ -2,7 +2,6 @@ package xiaozhi.common.validator;
 
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -47,31 +46,4 @@ public class ValidatorUtils {
         }
     }
 
-    /**
-     * Regular expression for international phone numbers
-     * Must include the international dialing code, format: +[country code][phone number]
-     * For example:
-     * - +8613800138000
-     * - +12345678900
-     * - +447123456789
-     */
-    private static final String INTERNATIONAL_PHONE_REGEX = "^\\+[1-9]\\d{0,3}[1-9]\\d{4,14}$";
-
-    /**
-     * Validate whether the phone number is valid
-     * Must include the international dialing code, format: +[country code][phone number]
-     * For example: +8613800138000
-     * 
-     * @param phone the phone number
-     * @return boolean
-     */
-    public static boolean isValidPhone(String phone) {
-        if (phone == null || phone.isEmpty()) {
-            return false;
-        }
-
-        // Validate the format of a phone number that must include the international dialing code
-        Pattern pattern = Pattern.compile(INTERNATIONAL_PHONE_REGEX);
-        return pattern.matcher(phone).matches();
-    }
 }

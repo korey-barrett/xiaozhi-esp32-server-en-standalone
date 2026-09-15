@@ -127,15 +127,6 @@
       }
     },
     {
-      "path": "pages/forgot-password/index",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "ForgotPassword"
-      }
-    },
-    {
       "path": "pages/login/index",
       "type": "page",
       "layout": "default",

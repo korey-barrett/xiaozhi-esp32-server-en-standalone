@@ -1,6 +1,5 @@
 package xiaozhi.modules.sys.service.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +87,6 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
     @Transactional(rollbackFor = Exception.class)
     public void update(SysParamsDTO dto) {
         validateParamValue(dto);
-        detectingSMSParameters(dto.getParamCode(), dto.getParamValue());
         SysParamsEntity entity = ConvertUtils.sourceToTarget(dto, SysParamsEntity.class);
         updateById(entity);
 
@@ -236,42 +234,6 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
         }
     }
 
-    /**
-     * Checks whether the SMS parameters meet the requirements
-     * 
-     * @param paramCode  parameter code
-     * @param paramValue parameter value
-     * @return whether it passes
-     */
-    private boolean detectingSMSParameters(String paramCode, String paramValue) {
-        // Determine whether this is the parameter code for enabling mobile registration; if not, no other SMS parameters need to be checked, return true directly
-        if (!Constant.SysMSMParam.SERVER_ENABLE_MOBILE_REGISTER.getValue().equals(paramCode)) {
-            return true;
-        }
-        // Determine whether registration is disabled; if SMS registration is disabled, no other SMS parameters need to be checked, return true directly
-        if ("false".equalsIgnoreCase(paramValue)) {
-            return true;
-        }
-        // Check whether the SMS-related parameters are empty
-        ArrayList<String> list = new ArrayList<String>();
-        list.add(Constant.SysMSMParam.SERVER_SMS_MAX_SEND_COUNT.getValue());
-        list.add(Constant.SysMSMParam.ALIYUN_SMS_ACCESS_KEY_ID.getValue());
-        list.add(Constant.SysMSMParam.ALIYUN_SMS_ACCESS_KEY_SECRET.getValue());
-        list.add(Constant.SysMSMParam.ALIYUN_SMS_SIGN_NAME.getValue());
-        list.add(Constant.SysMSMParam.ALIYUN_SMS_SMS_CODE_TEMPLATE_CODE.getValue());
-        StringBuilder str = new StringBuilder();
-        list.forEach(item -> {
-            if (!StringUtils.isNoneBlank(item)) {
-                str.append(",").append(item);
-            }
-        });
-        if (!str.isEmpty()) {
-            String promptStr = "%sthese parameters cannot be empty";
-            String substring = str.substring(1, str.length());
-            throw new RenException(promptStr.formatted(substring));
-        }
-        return true;
-    }
     @Override
     public String getSystemWebMenu(boolean fromCache) {
         return getValue(Constant.SYSTEM_WEB_MENU, fromCache);

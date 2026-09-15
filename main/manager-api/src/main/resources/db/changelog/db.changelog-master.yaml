@@ -781,3 +781,10 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: classpath:db/changelog/202609141500.sql
+  - changeSet:
+      id: 202609151000
+      author: korey-barrett
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202609151000_remove_sms.sql

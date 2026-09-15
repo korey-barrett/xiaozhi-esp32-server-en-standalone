@@ -126,7 +126,7 @@ function goBack() {
         </view>
         <view class="mb-[24rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            3.2 Account Registration: You may register and log in to this Service using a mobile phone number and verification code, or a username and password. You shall provide true, accurate, and complete registration information and update it in a timely manner.
+            3.2 Account Registration: You may register and log in to this Service using a username and password. You shall provide true, accurate, and complete registration information and update it in a timely manner.
           </text>
         </view>
         <view class="mb-[24rpx] ml-[20rpx]">
@@ -350,7 +350,7 @@ function goBack() {
         </view>
         <view class="mb-[24rpx] ml-[20rpx]">
           <text class="text-[28rpx] text-[#333333] leading-[1.8]">
-            7.1 Information Collection: To provide this Service, the Operator may collect your registration information (such as mobile phone number and username), device information, and usage logs. Please refer to the Privacy Policy for the specific rules on the collection and use of personal information.
+            7.1 Information Collection: To provide this Service, the Operator may collect your registration information (such as username), device information, and usage logs. Please refer to the Privacy Policy for the specific rules on the collection and use of personal information.
           </text>
         </view>
         <view class="mb-[24rpx] ml-[20rpx]">

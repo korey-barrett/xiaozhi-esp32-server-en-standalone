@@ -5,8 +5,6 @@ export interface LoginData {
   username: string
   password: string
   captchaId: string
-  areaCode?: string
-  mobile?: string
 }
 
 // Login response data type
@@ -56,14 +54,9 @@ export interface UserInfo {
 
 // Public config response data type
 export interface PublicConfig {
-  enableMobileRegister: boolean
   version: string
   year: string
   allowUserRegister: boolean
-  mobileAreaList: Array<{
-    name: string
-    key: string
-  }>
   beianIcpNum: string
   beianGaNum: string
   name: string
@@ -95,23 +88,6 @@ export interface RegisterData {
   username: string
   password: string
   captchaId: string
-  areaCode: string
-  mobile: string
-  mobileCaptcha: string
-}
-
-// Send SMS verification code
-export function sendSmsCode(data: {
-  phone: string
-  captcha: string
-  captchaId: string
-}) {
-  return http.Post('/user/smsVerification', data, {
-    meta: {
-      ignoreAuth: true,
-      toast: false,
-    },
-  })
 }
 
 // User registration
@@ -124,20 +100,3 @@ export function register(data: RegisterData) {
   })
 }
 
-// Forgot password data type
-export interface ForgotPasswordData {
-  phone: string
-  code: string
-  password: string
-  captchaId: string
-}
-
-// Forgot password (recover password)
-export function retrievePassword(data: ForgotPasswordData) {
-  return http.Put('/user/retrieve-password', data, {
-    meta: {
-      ignoreAuth: true,
-      toast: true,
-    },
-  })
-}

@@ -72,16 +72,15 @@ VAD:
 3. [How to configure automatic OTA firmware upgrade in a single-module deployment](./ota-upgrade-guide.md)<br/>
 
 ### 9. Extension-related tutorials
-1. [How to enable phone-number registration for the Console (optional)](./ali-sms-integration.md)<br/>
-2. [How to integrate HomeAssistant for smart-home control](./homeassistant-integration.md)<br/>
-3. [How to enable the vision model for photo-based object recognition](./mcp-vision-integration.md)<br/>
-4. [How to deploy an MCP endpoint](./mcp-endpoint-enable.md)<br/>
-5. [How to connect to an MCP endpoint](./mcp-endpoint-integration.md)<br/>
-6. [How MCP methods obtain device information](./mcp-get-device-info.md)<br/>
-7. [How to enable voiceprint recognition](./voiceprint-integration.md)<br/>
-8. [News plugin source configuration guide](./newsnow_plugin_config.md)<br/>
-9. [Knowledge base RAGFlow integration guide](./ragflow-integration.md)<br/>
-10. [How to deploy a context source](./context-provider-integration.md)<br/>
+1. [How to integrate HomeAssistant for smart-home control](./homeassistant-integration.md)<br/>
+2. [How to enable the vision model for photo-based object recognition](./mcp-vision-integration.md)<br/>
+3. [How to deploy an MCP endpoint](./mcp-endpoint-enable.md)<br/>
+4. [How to connect to an MCP endpoint](./mcp-endpoint-integration.md)<br/>
+5. [How MCP methods obtain device information](./mcp-get-device-info.md)<br/>
+6. [How to enable voiceprint recognition](./voiceprint-integration.md)<br/>
+7. [News plugin source configuration guide](./newsnow_plugin_config.md)<br/>
+8. [Knowledge base RAGFlow integration guide](./ragflow-integration.md)<br/>
+9. [How to deploy a context source](./context-provider-integration.md)<br/>
 11. [How to integrate PowerMem smart memory](./powermem-integration.md)<br/>
 12. [How to configure the weather plugin to query the weather](./weather-integration.md)<br/>
 13. [How to enable the device call plugin](./device-call-guide.md)<br/>

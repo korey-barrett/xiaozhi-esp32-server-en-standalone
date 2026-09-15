@@ -193,7 +193,6 @@ The `manager-api` component is a powerful backend service built with Java and th
     *   **Maven:** Used for project build automation and dependency management.
     *   **Lombok:** A Java library that automatically generates boilerplate code such as constructors, getters/setters, equals/hashCode, toString, and more via annotations, reducing redundancy.
     *   **HuTool / Google Guava:** Provide a wealth of utility classes that simplify common programming tasks.
-    *   **Aliyun Dysmsapi:** The Alibaba Cloud SMS service SDK, used to integrate SMS sending functionality (such as verification codes and notifications).
 
 *   **Key Implementation Details:**
 
@@ -576,7 +575,7 @@ Configuration is key to customizing system behavior, especially when it comes to
 
 2.  **`manager-api` Configuration:**
     *   As a Spring Boot application, its configuration is primarily managed through the `application.properties` or `application.yml` files located in the `src/main/resources` directory.
-    *   Key configuration items include: database connection information (MySQL URL, username, password), Redis server address and port, application service port (default 8002), Apache Shiro security-related settings, and configuration parameters for any integrated third-party services (such as Alibaba Cloud SMS).
+    *   Key configuration items include: database connection information (MySQL URL, username, password), Redis server address and port, application service port (default 8002), Apache Shiro security-related settings, and configuration parameters for any integrated third-party services.
 
 3.  **`manager-web` Configuration:**
     *   The Vue.js frontend application's environment-specific settings are managed through the `.env` series of files in the project root directory (for example, `.env`, `.env.development`, `.env.production`).

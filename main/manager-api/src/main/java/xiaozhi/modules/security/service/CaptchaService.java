@@ -25,21 +25,4 @@ public interface CaptchaService {
      * @return true: success false: failure
      */
     boolean validate(String uuid, String code, Boolean delete);
-
-    /**
-     * Send SMS verification code
-     * 
-     * @param phone phone number
-     */
-    void sendSMSValidateCode(String phone);
-
-    /**
-     * Validate SMS verification code
-     * 
-     * @param phone  phone number
-     * @param code   verification code
-     * @param delete whether to delete the verification code
-     * @return true: success false: failure
-     */
-    boolean validateSMSValidateCode(String phone, String code, Boolean delete);
 }

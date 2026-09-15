@@ -63,25 +63,10 @@
           </div>
           <div style="padding: 0 30px">
             <!-- Username login -->
-            <template v-if="!isMobileLogin">
-              <div class="input-box">
-                <img loading="lazy" alt="" class="input-icon" src="@/assets/login/username.png" />
-                <el-input v-model="form.username" :placeholder="$t('login.usernamePlaceholder')" />
-              </div>
-            </template>
-
-            <!-- Mobile number login -->
-            <template v-else>
-              <div class="input-box">
-                <div style="display: flex; align-items: center; width: 100%">
-                  <el-select v-model="form.areaCode" style="width: 220px; margin-right: 10px">
-                    <el-option v-for="item in mobileAreaList" :key="item.key" :label="`${item.name} (${item.key})`"
-                      :value="item.key" />
-                  </el-select>
-                  <el-input v-model="form.mobile" :placeholder="$t('login.mobilePlaceholder')" />
-                </div>
-              </div>
-            </template>
+            <div class="input-box">
+              <img loading="lazy" alt="" class="input-icon" src="@/assets/login/username.png" />
+              <el-input v-model="form.username" :placeholder="$t('login.usernamePlaceholder')" />
+            </div>
 
             <div class="input-box">
               <img loading="lazy" alt="" class="input-icon" src="@/assets/login/password.png" />
@@ -114,9 +99,6 @@
               <div v-if="allowUserRegister" style="cursor: pointer" @click="goToRegister">
                 {{ $t("login.register") }}
               </div>
-              <div style="cursor: pointer" @click="goToForgetPassword" v-if="enableMobileRegister">
-                {{ $t("login.forgetPassword") }}
-              </div>
             </div>
           </div>
           <div class="login-btn" @click="login">{{ $t("login.login") }}</div>
@@ -135,19 +117,6 @@
             </div>
           </div>
 
-          <!-- Login type switch buttons -->
-          <div class="login-type-container" v-if="enableMobileRegister">
-            <div style="display: flex; gap: 10px">
-              <el-tooltip :content="$t('login.mobileLogin')" placement="bottom">
-                <el-button :type="isMobileLogin ? 'primary' : 'default'" icon="el-icon-mobile" circle
-                  @click="switchLoginType('mobile')"></el-button>
-              </el-tooltip>
-              <el-tooltip :content="$t('login.usernameLogin')" placement="bottom">
-                <el-button :type="!isMobileLogin ? 'primary' : 'default'" icon="el-icon-user" circle
-                  @click="switchLoginType('username')"></el-button>
-              </el-tooltip>
-            </div>
-          </div>
           <div style="font-size: 14px; color: #979db1">
             {{ $t("login.agreeTo") }}
             <div style="display: inline-block; color: #5778ff; cursor: pointer" @click="openPage('/user-agreement.html')">
@@ -171,7 +140,7 @@
 import Api from "@/apis/api";
 import VersionFooter from "@/components/VersionFooter.vue";
 import i18n, { changeLanguage } from "@/i18n";
-import { getUUID, goToPage, showDanger, showSuccess, sm2Encrypt, validateMobile } from "@/utils";
+import { getUUID, goToPage, showDanger, showSuccess, sm2Encrypt } from "@/utils";
 import { mapState } from "vuex";
 import featureManager from "@/utils/featureManager";
 
@@ -183,8 +152,6 @@ export default {
   computed: {
     ...mapState({
       allowUserRegister: (state) => state.pubConfig.allowUserRegister,
-      enableMobileRegister: (state) => state.pubConfig.enableMobileRegister,
-      mobileAreaList: (state) => state.pubConfig.mobileAreaList,
       sm2PublicKey: (state) => state.pubConfig.sm2PublicKey,
     }),
     // Get the current language
@@ -238,12 +205,9 @@ export default {
         password: "",
         captcha: "",
         captchaId: "",
-        areaCode: "+86",
-        mobile: "",
       },
       captchaUuid: "",
       captchaUrl: "",
-      isMobileLogin: false,
       languageDropdownVisible: false,
       ssoEnabled: false,
       ssoProviders: [],
@@ -251,10 +215,7 @@ export default {
   },
   mounted() {
     this.fetchCaptcha();
-    this.$store.dispatch("fetchPubConfig").then(() => {
-      // Determine the default login method based on the config
-      this.isMobileLogin = this.enableMobileRegister;
-    });
+    this.$store.dispatch("fetchPubConfig");
     this.fetchSsoConfig();
   },
   methods: {
@@ -301,17 +262,6 @@ export default {
       });
     },
 
-    // Switch login method
-    switchLoginType(type) {
-      this.isMobileLogin = type === "mobile";
-      // Clear the form
-      this.form.username = "";
-      this.form.mobile = "";
-      this.form.password = "";
-      this.form.captcha = "";
-      this.fetchCaptcha();
-    },
-
     // Encapsulate the input validation logic
     validateInput(input, messageKey) {
       if (!input.trim()) {
@@ -333,19 +283,9 @@ export default {
     },
 
     async login() {
-      if (this.isMobileLogin) {
-        // Mobile number login validation
-        if (!validateMobile(this.form.mobile, this.form.areaCode)) {
-          showDanger(this.$t('login.requiredMobile'));
-          return;
-        }
-        // Concatenate the mobile number as the username
-        this.form.username = this.form.areaCode + this.form.mobile;
-      } else {
-        // Username login validation
-        if (!this.validateInput(this.form.username, 'login.requiredUsername')) {
-          return;
-        }
+      // Username login validation
+      if (!this.validateInput(this.form.username, 'login.requiredUsername')) {
+        return;
       }
 
       // Validate password
@@ -402,9 +342,6 @@ export default {
 
     goToRegister() {
       goToPage("/register");
-    },
-    goToForgetPassword() {
-      goToPage("/retrieve-password");
     },
     // Fetch the SSO public configuration (enabled providers)
     fetchSsoConfig() {
